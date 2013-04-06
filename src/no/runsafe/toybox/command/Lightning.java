@@ -12,7 +12,7 @@ public class Lightning extends ExecutableCommand
 {
 	public Lightning()
 	{
-		super("lightning", "Fires lightning at a player or a coordinate", "runsafe.toybox.lightning");
+		super("lightning", "Fires lightning at a player, the location you are looking, or a coordinate", "runsafe.toybox.lightning");
 	}
 
 	@Override
@@ -30,12 +30,25 @@ public class Lightning extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] arguments)
 	{
+		if (arguments.length == 0)
+			return StrikeTarget(executor);
 		if (arguments.length == 1)
 			return StrikePlayer(arguments[0]);
 		if (arguments.length == 3)
 			return StrikeCoordinates(executor, arguments[0], arguments[1], arguments[2]);
 
 		return getUsage();
+	}
+
+	private String StrikeTarget(ICommandExecutor executor)
+	{
+		if (executor instanceof RunsafePlayer)
+		{
+			RunsafePlayer player = (RunsafePlayer) executor;
+			player.getWorld().strikeLightning(player.getTarget().getLocation());
+			return null;
+		}
+		return "No block in sight";
 	}
 
 	private String StrikeCoordinates(ICommandExecutor executor, String argument, String argument1, String argument2)
