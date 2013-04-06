@@ -5,6 +5,15 @@ authors: []
 depend: []
 description:
 commands:
-  something:
-    description:
-    aliases: []
+  bomb:
+    description: Fires a wither bomb
+  dynamite:
+    description: Fires a primed TNT
+  fireball:
+    description: Fires a fireball
+  firework:
+    description: Sets off a firework
+  lightning:
+    description: Strikes lightning on a player or coordinate
+  spawnmob:
+    description: Spawns a mob
