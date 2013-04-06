@@ -14,5 +14,6 @@ public class Plugin extends RunsafePlugin
 		addComponent(Firework.class);
 		addComponent(Lightning.class);
 		addComponent(SpawnMob.class);
+		addComponent(Ride.class);
 	}
 }

@@ -17,3 +17,5 @@ commands:
     description: Strikes lightning on a player or coordinate
   spawnmob:
     description: Spawns a mob
+  ride:
+    description: Spawns a mob and mounts you to it
