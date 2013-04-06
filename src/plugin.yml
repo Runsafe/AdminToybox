@@ -1,12 +1,15 @@
 name: AdminToybox
 main: no.runsafe.toybox.Plugin
 version: 1.0.@BUILD@
-authors: []
-depend: []
-description:
+author: mortenn
+description: A collection of toys for admins
 commands:
+  bazooka:
+    description: Launches and detonates some entity
   bomb:
     description: Fires a wither bomb
+  dismount:
+    description: Ejects you from your vehicle
   dynamite:
     description: Fires a primed TNT
   fireball:
@@ -15,11 +18,9 @@ commands:
     description: Sets off a firework
   lightning:
     description: Strikes lightning on a player or coordinate
+  mount:
+    description: Mounts you on a player or entity
   spawnmob:
     description: Spawns a mob
   ride:
     description: Spawns a mob and mounts you to it
-  mount:
-    description: Mounts you on a player or entity
-  dismount:
-    description: Ejects you from your vehicle
