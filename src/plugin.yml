@@ -19,3 +19,7 @@ commands:
     description: Spawns a mob
   ride:
     description: Spawns a mob and mounts you to it
+  mount:
+    description: Mounts you on a player or entity
+  dismount:
+    description: Ejects you from your vehicle

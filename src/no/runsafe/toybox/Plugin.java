@@ -9,10 +9,12 @@ public class Plugin extends RunsafePlugin
 	protected void PluginSetup()
 	{
 		addComponent(Bomb.class);
+		addComponent(Dismount.class);
 		addComponent(Dynamite.class);
 		addComponent(Fireball.class);
 		addComponent(Firework.class);
 		addComponent(Lightning.class);
+		addComponent(Mount.class);
 		addComponent(SpawnMob.class);
 		addComponent(Ride.class);
 	}
