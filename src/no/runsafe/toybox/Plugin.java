@@ -8,6 +8,7 @@ public class Plugin extends RunsafePlugin
 	@Override
 	protected void PluginSetup()
 	{
+		addComponent(Bazooka.class);
 		addComponent(Bomb.class);
 		addComponent(Dismount.class);
 		addComponent(Dynamite.class);
