@@ -15,7 +15,7 @@ public class Dynamite extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		executor.Fire("PrimedTnt");
+		executor.Launch("PrimedTnt");
 		return null;
 	}
 }
