@@ -24,3 +24,5 @@ commands:
     description: Spawns a mob
   ride:
     description: Spawns a mob and mounts you to it
+  createhead:
+    description: Creates a players head
