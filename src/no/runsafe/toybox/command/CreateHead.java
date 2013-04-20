@@ -19,9 +19,10 @@ public class CreateHead extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafeItemStack heads = new RunsafeItemStack(new RunsafeMaterial(Material.SKULL_ITEM), 1);
+		RunsafeItemStack heads = new RunsafeItemStack(Material.SKULL_ITEM.getId(), 1, (short) 3);
 		RunsafeSkullMeta meta = (RunsafeSkullMeta) heads.getItemMeta();
 		meta.setOwner(parameters.get("player"));
+		executor.sendMessage("Creating head of player " + parameters.get("player"));
 		heads.setItemMeta(meta);
 		executor.give(heads);
 
