@@ -26,13 +26,13 @@ public class Mode extends PlayerCommand
 				String mode = parameters.get("mode");
 
 				if (mode.equalsIgnoreCase("survival") || mode.equalsIgnoreCase("s"))
-					executor.setGameMode(GameMode.SURVIVAL);
+					target.setGameMode(GameMode.SURVIVAL);
 
 				if (mode.equalsIgnoreCase("creative") || mode.equalsIgnoreCase("c"))
-					executor.setGameMode(GameMode.CREATIVE);
+					target.setGameMode(GameMode.CREATIVE);
 
 				if (mode.equalsIgnoreCase("adventure") || mode.equalsIgnoreCase("a"))
-					executor.setGameMode(GameMode.ADVENTURE);
+					target.setGameMode(GameMode.ADVENTURE);
 
 				this.sendGameModeUpdateMessage(executor, target);
 			}
