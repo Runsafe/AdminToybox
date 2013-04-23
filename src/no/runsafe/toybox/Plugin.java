@@ -19,5 +19,6 @@ public class Plugin extends RunsafePlugin
 		addComponent(SpawnMob.class);
 		addComponent(Ride.class);
 		addComponent(CreateHead.class);
+		addComponent(Mode.class); // TODO: Move this to another more suiting plug-in.
 	}
 }
