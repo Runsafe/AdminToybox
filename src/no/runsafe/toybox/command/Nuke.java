@@ -38,11 +38,11 @@ public class Nuke extends PlayerCommand
 				TNTPrimed tnt = world.spawn(location, TNTPrimed.class);
 				tnt.setIsIncendiary(true);
 				tnt.setYield(power);
-				location.incrementY(1);
+				location.incrementZ(1);
 				subCurrent++;
 			}
 			location.incrementX(1);
-			location.decrementY(radius);
+			location.decrementZ(radius);
 			current++;
 		}
 
