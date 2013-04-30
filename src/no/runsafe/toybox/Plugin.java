@@ -5,6 +5,7 @@ import no.runsafe.toybox.command.*;
 import no.runsafe.toybox.events.ChangeBlockEvent;
 import no.runsafe.toybox.events.InventoryClose;
 import no.runsafe.toybox.handlers.CarePackageHandler;
+import no.runsafe.toybox.handlers.MobDropHandler;
 
 public class Plugin extends RunsafePlugin
 {
@@ -25,9 +26,11 @@ public class Plugin extends RunsafePlugin
 		addComponent(CreateHead.class);
 		addComponent(Mode.class); // TODO: Move this to another more suiting plug-in.
 		addComponent(CarePackage.class);
+		addComponent(MobDrop.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
+		addComponent(MobDropHandler.class);
 
 		// Events
 		addComponent(InventoryClose.class);

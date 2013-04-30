@@ -5,13 +5,6 @@ import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Stanley
- * Date: 30/04/13
- * Time: 04:52
- * To change this template use File | Settings | File Templates.
- */
 public class InventoryClose implements IInventoryClosed
 {
 	public InventoryClose(CarePackageHandler handler)

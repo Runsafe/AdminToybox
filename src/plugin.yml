@@ -30,3 +30,5 @@ commands:
     description: Allows you to change the players game mode
   carepackage:
     description: Drops a care-package from the sky
+  mobdrop:
+    description: Drops a block of mobs from the sky

@@ -1,18 +1,18 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.entity.IEntityChangeBlockEvent;
-import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.event.entity.RunsafeEntityChangeBlockEvent;
 import no.runsafe.toybox.handlers.CarePackageHandler;
+import no.runsafe.toybox.handlers.MobDropHandler;
 import org.bukkit.Material;
 
 public class ChangeBlockEvent implements IEntityChangeBlockEvent
 {
-	public ChangeBlockEvent(CarePackageHandler handler)
+	public ChangeBlockEvent(CarePackageHandler handler, MobDropHandler mobDropHandler)
 	{
 		this.handler = handler;
+		this.mobDropHandler = mobDropHandler;
 	}
 
 	@Override
@@ -29,7 +29,10 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 			event.setCancelled(true);
 		}
 
+		if (this.mobDropHandler.entityIsMobDropper(entityID))
+			this.mobDropHandler.processMobDropper(entityID, event.getBlock().getLocation());
 	}
 
 	private CarePackageHandler handler;
+	private MobDropHandler mobDropHandler;
 }
