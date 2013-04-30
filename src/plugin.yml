@@ -32,5 +32,5 @@ commands:
     description: Drops a care-package from the sky
   mobdrop:
     description: Drops a block of mobs from the sky
- nuke:
+  nuke:
     description: Drops a nuke with the provided parameters.
