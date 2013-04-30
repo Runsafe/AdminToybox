@@ -17,13 +17,17 @@ public class InventoryClick implements IInventoryClick
 			RunsafeItemMeta meta = item.getItemMeta();
 			if (meta != null)
 			{
-				if (meta.getDisplayName().startsWith("Infinite:"))
+				String name = meta.getDisplayName();
+				if (name != null)
 				{
-					RunsafePlayer player = event.getWhoClicked();
-					if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
+					if (meta.getDisplayName().startsWith("Infinite:"))
 					{
-						player.sendColouredMessage("&cYou do not have permission to make those.");
-						event.setCancelled(true);
+						RunsafePlayer player = event.getWhoClicked();
+						if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
+						{
+							player.sendColouredMessage("&cYou do not have permission to make those.");
+							event.setCancelled(true);
+						}
 					}
 				}
 			}
