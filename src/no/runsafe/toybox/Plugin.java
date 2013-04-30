@@ -2,6 +2,7 @@ package no.runsafe.toybox;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.toybox.command.*;
+import no.runsafe.toybox.events.ChestClose;
 import no.runsafe.toybox.events.EntityBlockFormEvent;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
@@ -30,5 +31,6 @@ public class Plugin extends RunsafePlugin
 
 		// Events
 		addComponent(EntityBlockFormEvent.class);
+		addComponent(ChestClose.class);
 	}
 }

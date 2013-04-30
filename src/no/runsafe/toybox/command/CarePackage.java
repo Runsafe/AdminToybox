@@ -17,7 +17,7 @@ public class CarePackage extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		this.handler.DropPackage(executor);
+		this.handler.CreateCarePackage(executor);
 		return null;
 	}
 
