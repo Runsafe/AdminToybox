@@ -2,10 +2,7 @@ package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.entity.IEntityChangeBlockEvent;
 import no.runsafe.framework.output.IOutput;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.entity.RunsafeLivingEntity;
 import no.runsafe.framework.server.event.entity.RunsafeEntityChangeBlockEvent;
-import no.runsafe.framework.server.material.RunsafeMaterial;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
 public class ChangeBlockEvent implements IEntityChangeBlockEvent

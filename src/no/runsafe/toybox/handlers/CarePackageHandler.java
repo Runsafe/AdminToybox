@@ -70,10 +70,14 @@ public class CarePackageHandler
 		List<RunsafeItemStack> items = this.GetFallingInventory(entityID).getContents();
 		this.RemoveFallingInventory(entityID);
 
-		RunsafeInventory chestInventory = ((RunsafeChest) block.getBlockState()).getInventory();
+		if (block.getBlockState() instanceof RunsafeChest)
+		{
+			RunsafeChest chest = (RunsafeChest) block.getBlockState();
+			RunsafeInventory chestInventory = chest.getInventory();
 
-		for (RunsafeItemStack item : items)
-			chestInventory.addItems(item);
+			for (RunsafeItemStack item : items)
+				chestInventory.addItems(item);
+		}
 	}
 
 	private HashMap<String, RunsafeInventory> awaitingDrops;
