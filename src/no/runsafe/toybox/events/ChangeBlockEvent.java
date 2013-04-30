@@ -18,13 +18,11 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 	@Override
 	public void OnEntityChangeBlockEvent(RunsafeLivingEntity entity, RunsafeBlock block, RunsafeMaterial material)
 	{
-		this.output.write("Block change event fired: " + block.getTypeId());
+		this.output.write("Entity change event detected");
 		Integer entityID = entity.getEntityId();
+
 		if (this.handler.CheckDrop(entityID))
-		{
-			this.output.write("CHEST DETECTED");
 			this.handler.ProcessDrop(entityID, block);
-		}
 	}
 
 	private CarePackageHandler handler;
