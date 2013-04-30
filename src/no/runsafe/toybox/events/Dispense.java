@@ -1,14 +1,11 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.block.IBlockDispense;
-import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeDispenser;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.material.RunsafeMaterialData;
-import org.bukkit.material.MaterialData;
 
 public class Dispense implements IBlockDispense
 {
@@ -31,7 +28,7 @@ public class Dispense implements IBlockDispense
 					RunsafeItemStack items = new RunsafeItemStack(itemID, 64, (short) 0);
 
 					if (data.length > 2)
-						items.setData(new RunsafeMaterialData(itemID, Byte.valueOf(data[2])));
+						items.setDurability(Short.valueOf(data[2]));
 
 					inventory.addItems(items);
 				}
