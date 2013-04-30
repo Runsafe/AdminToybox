@@ -4,6 +4,7 @@ import no.runsafe.framework.event.entity.IEntityChangeBlockEvent;
 import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.entity.RunsafeLivingEntity;
+import no.runsafe.framework.server.event.entity.RunsafeEntityChangeBlockEvent;
 import no.runsafe.framework.server.material.RunsafeMaterial;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
@@ -16,13 +17,13 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 	}
 
 	@Override
-	public void OnEntityChangeBlockEvent(RunsafeLivingEntity entity, RunsafeBlock block, RunsafeMaterial material)
+	public void OnEntityChangeBlockEvent(RunsafeEntityChangeBlockEvent event)
 	{
 		this.output.write("Entity change event detected");
-		Integer entityID = entity.getEntityId();
+		Integer entityID = event.getEntity().getEntityId();
 
 		if (this.handler.CheckDrop(entityID))
-			this.handler.ProcessDrop(entityID, block);
+			this.handler.ProcessDrop(entityID, event.getBlock());
 	}
 
 	private CarePackageHandler handler;
