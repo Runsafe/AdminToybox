@@ -23,28 +23,28 @@ public class Nuke extends PlayerCommand
 		int power = Integer.valueOf(parameters.get("power"));
 		RunsafeLocation location = executor.getLocation();
 
-		double maxX = location.getX() + radius;
-		double maxZ = location.getZ() + radius;
-
 		location.decrementX(radius);
 		location.decrementZ(radius);
 
-		double currentX = location.getX();
+		radius = radius * 2;
+		
+		int current = 0;
 
-		while (currentX < maxX)
+		while (current < radius)
 		{
-			double currentZ = location.getZ();
-			while (currentZ < maxZ)
+			int subCurrent = 0;
+			while (subCurrent < radius)
 			{
 				TNTPrimed tnt = world.spawn(location, TNTPrimed.class);
 				tnt.setIsIncendiary(true);
 				tnt.setYield(power);
-				location.incrementZ(radius);
-				currentZ = location.getZ();
+				location.incrementY(1);
 			}
-			location.incrementX(radius);
-			currentX = location.getX();
+			location.incrementX(1);
+			location.decrementY(radius);
+			current++;
 		}
+
 		return null;
 	}
 }
