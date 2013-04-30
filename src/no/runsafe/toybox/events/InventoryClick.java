@@ -1,28 +1,32 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.inventory.IInventoryClick;
-import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.event.inventory.RunsafeInventoryClickEvent;
+import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
+import no.runsafe.framework.server.player.RunsafePlayer;
 
 public class InventoryClick implements IInventoryClick
 {
-	public InventoryClick(IOutput output)
-	{
-		this.output = output;
-	}
-
 	@Override
 	public void OnInventoryClickEvent(RunsafeInventoryClickEvent event)
 	{
-		try
+		RunsafeItemStack item = event.getCurrentItem();
+		if (item != null)
 		{
-			this.output.write("Enchant detected: " + event.getCurrentItem().getItemMeta().getDisplayName());
-		}
-		catch (NullPointerException e)
-		{
-			// Do fuck all.
+			RunsafeItemMeta meta = item.getItemMeta();
+			if (meta != null)
+			{
+				if (meta.getDisplayName().startsWith("Infinite:"))
+				{
+					RunsafePlayer player = event.getWhoClicked();
+					if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
+					{
+						player.sendColouredMessage("&cYou do not have permission to make those.");
+						event.setCancelled(true);
+					}
+				}
+			}
 		}
 	}
-
-	private IOutput output;
 }
