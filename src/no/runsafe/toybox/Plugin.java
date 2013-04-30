@@ -38,5 +38,6 @@ public class Plugin extends RunsafePlugin
 		addComponent(Dispense.class);
 		addComponent(BlockPlace.class);
 		addComponent(InventoryClick.class);
+		addComponent(PlayerMove.class);
 	}
 }
