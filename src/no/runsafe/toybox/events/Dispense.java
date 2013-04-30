@@ -33,7 +33,8 @@ public class Dispense implements IBlockDispense
 
 	private void check(RunsafeBlock block, RunsafeLocation location, int x, int y, int z)
 	{
-		location.add(x, y, z);
+		//location.add(x, y, z);
+		location.offset(x, y, z);
 		RunsafeBlockState blockState = location.getBlock().getBlockState();
 		this.output.write(String.format("Checking sign at %s, %s, %s", x, y, z));
 		if (blockState instanceof RunsafeSign)
