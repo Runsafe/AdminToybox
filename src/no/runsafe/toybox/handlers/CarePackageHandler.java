@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CarePackageHandler
 {
-	public void CarePacketHandler()
+	public CarePackageHandler()
 	{
 		this.awaitingDrops = new HashMap<String, RunsafeInventory>();
 		this.fallingDrops = new HashMap<Integer, RunsafeInventory>();
