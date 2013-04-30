@@ -37,6 +37,5 @@ public class Plugin extends RunsafePlugin
 		addComponent(ChangeBlockEvent.class);
 		addComponent(Dispense.class);
 		addComponent(BlockPlace.class);
-		addComponent(EnchantItemEvent.class);
 	}
 }
