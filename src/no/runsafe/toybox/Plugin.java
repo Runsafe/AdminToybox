@@ -2,8 +2,8 @@ package no.runsafe.toybox;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.toybox.command.*;
-import no.runsafe.toybox.events.ChestClose;
 import no.runsafe.toybox.events.EntityBlockFormEvent;
+import no.runsafe.toybox.events.InventoryClose;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
 public class Plugin extends RunsafePlugin
@@ -30,7 +30,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(CarePackageHandler.class);
 
 		// Events
+		addComponent(InventoryClose.class);
 		addComponent(EntityBlockFormEvent.class);
-		addComponent(ChestClose.class);
 	}
 }
