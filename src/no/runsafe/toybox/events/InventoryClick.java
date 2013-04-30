@@ -14,7 +14,14 @@ public class InventoryClick implements IInventoryClick
 	@Override
 	public void OnInventoryClickEvent(RunsafeInventoryClickEvent event)
 	{
-		this.output.write("Enchant detected: " + event.getCurrentItem().getItemMeta().getDisplayName());
+		try
+		{
+			this.output.write("Enchant detected: " + event.getCurrentItem().getItemMeta().getDisplayName());
+		}
+		catch (NullPointerException e)
+		{
+			// Do fuck all.
+		}
 	}
 
 	private IOutput output;
