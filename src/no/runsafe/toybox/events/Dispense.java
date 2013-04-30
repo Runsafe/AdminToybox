@@ -23,18 +23,17 @@ public class Dispense implements IBlockDispense
 		RunsafeLocation location = block.getLocation();
 		this.check(block, location, 0, 1, 0);
 		this.check(block, location, 0, -1, 0);
-		this.check(block, location, 1, 0, 1);
-		this.check(block, location, -1, 0, -1);
-		this.check(block, location, -1, 0, 1);
-		this.check(block, location, 1, 0, -1);
+		this.check(block, location, 1, 0, 0);
+		this.check(block, location, 0, 0, 1);
+		this.check(block, location, 0, 0, -1);
+		this.check(block, location, -1, 0, 0);
 
 		return true;
 	}
 
 	private void check(RunsafeBlock block, RunsafeLocation location, int x, int y, int z)
 	{
-		//location.add(x, y, z);
-		location.offset(x, y, z);
+		location.add(x, y, z);
 		RunsafeBlockState blockState = location.getBlock().getBlockState();
 		this.output.write(String.format("Checking sign at %s, %s, %s", x, y, z));
 		if (blockState instanceof RunsafeSign)
