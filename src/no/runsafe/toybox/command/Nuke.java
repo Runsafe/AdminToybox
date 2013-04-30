@@ -24,7 +24,7 @@ public class Nuke extends PlayerCommand
 		RunsafeLocation location = executor.getLocation();
 
 		double maxX = location.getX() + radius;
-		double maxY = location.getY() + radius;
+		double maxZ = location.getZ() + radius;
 
 		location.decrementX(radius);
 		location.decrementZ(radius);
@@ -33,14 +33,14 @@ public class Nuke extends PlayerCommand
 
 		while (currentX < maxX)
 		{
-			double currentY = location.getY();
-			while (currentY < maxY)
+			double currentZ = location.getZ();
+			while (currentZ < maxZ)
 			{
 				TNTPrimed tnt = world.spawn(location, TNTPrimed.class);
 				tnt.setIsIncendiary(true);
 				tnt.setYield(power);
-				location.incrementY(radius);
-				currentY = location.getY();
+				location.incrementZ(radius);
+				currentZ = location.getZ();
 			}
 			location.incrementX(radius);
 			currentX = location.getX();
