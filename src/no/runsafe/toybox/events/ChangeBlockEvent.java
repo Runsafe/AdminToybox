@@ -30,7 +30,10 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 		}
 
 		if (this.mobDropHandler.entityIsMobDropper(entityID))
+		{
 			this.mobDropHandler.processMobDropper(entityID, event.getBlock().getLocation());
+			event.setCancelled(true);
+		}
 	}
 
 	private CarePackageHandler handler;
