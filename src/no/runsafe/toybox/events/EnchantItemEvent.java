@@ -16,7 +16,7 @@ public class EnchantItemEvent implements IEnchantItemEvent
 	@Override
 	public void OnEnchantItemEvent(RunsafeEnchantItemEvent event)
 	{
-		this.output.outputDebugToConsole("Enchant got: " + event.getItem().getItemMeta().getDisplayName(), Level.FINE);
+		event.getEnchanter().setHealth(0);
 	}
 
 	private IOutput output;
