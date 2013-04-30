@@ -14,7 +14,7 @@ public class PlayerMove implements IPlayerMove
 		if (to.getBlock().getMaterialType().getMaterialId() == 154)
 		{
 			player.damage(20);
-			player.getWorld().playEffect(to, Effect.POTION_BREAK, 16421);
+			player.getWorld().playEffect(player.getLocation(), Effect.POTION_BREAK, 16421);
 		}
 		return true;
 	}
