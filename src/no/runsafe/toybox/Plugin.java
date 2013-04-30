@@ -39,6 +39,5 @@ public class Plugin extends RunsafePlugin
 		addComponent(BlockPlace.class);
 		addComponent(InventoryClick.class);
 		addComponent(PlayerMove.class);
-		addComponent(BlockRedstone.class);
 	}
 }
