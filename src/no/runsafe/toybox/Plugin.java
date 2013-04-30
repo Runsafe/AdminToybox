@@ -27,6 +27,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Mode.class); // TODO: Move this to another more suiting plug-in.
 		addComponent(CarePackage.class);
 		addComponent(MobDrop.class);
+		addComponent(Nuke.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
