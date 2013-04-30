@@ -28,3 +28,5 @@ commands:
     description: Creates a players head
   mode:
     description: Allows you to change the players game mode
+  carepackage:
+    description: Drops a care-package from the sky
