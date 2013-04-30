@@ -17,7 +17,7 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 	public void OnEntityChangeBlockEvent(RunsafeEntityChangeBlockEvent event)
 	{
 		this.output.write("Entity change event detected: " + event.getBlock().getTypeId());
-		this.output.write("Entity class: " + event.getEntity().getClass().getName());
+		this.output.write("Block type: " + event.getBlock().getClass().getName());
 		Integer entityID = event.getEntity().getEntityId();
 
 		if (this.handler.CheckDrop(entityID))
