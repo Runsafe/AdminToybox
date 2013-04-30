@@ -8,9 +8,10 @@ import no.runsafe.toybox.handlers.CarePackageHandler;
 
 public class ChangeBlockEvent implements IEntityChangeBlockEvent
 {
-	public ChangeBlockEvent(CarePackageHandler handler)
+	public ChangeBlockEvent(CarePackageHandler handler, IOutput output)
 	{
 		this.handler = handler;
+		this.output = output;
 	}
 
 	@Override
@@ -20,9 +21,13 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 		RunsafeBlock chest = changedBlock.getWorld().getBlockAt(changedBlock.getLocation());
 		Integer entityID = event.getEntity().getEntityId();
 
+		this.output.write("Block type: " + chest.getTypeId());
+		this.output.write("Block class: " + chest.getClass().getName());
+
 		if (this.handler.CheckDrop(entityID))
 			this.handler.ProcessDrop(entityID, chest);
 	}
 
 	private CarePackageHandler handler;
+	private IOutput output;
 }
