@@ -27,7 +27,7 @@ public class Nuke extends PlayerCommand
 		location.decrementZ(radius);
 
 		radius = radius * 2;
-		
+
 		int current = 0;
 
 		while (current < radius)
@@ -39,6 +39,7 @@ public class Nuke extends PlayerCommand
 				tnt.setIsIncendiary(true);
 				tnt.setYield(power);
 				location.incrementY(1);
+				subCurrent++;
 			}
 			location.incrementX(1);
 			location.decrementY(radius);
