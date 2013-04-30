@@ -2,7 +2,9 @@ package no.runsafe.toybox;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.toybox.command.*;
+import no.runsafe.toybox.events.BlockPlace;
 import no.runsafe.toybox.events.ChangeBlockEvent;
+import no.runsafe.toybox.events.Dispense;
 import no.runsafe.toybox.events.InventoryClose;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 import no.runsafe.toybox.handlers.MobDropHandler;
@@ -36,5 +38,7 @@ public class Plugin extends RunsafePlugin
 		// Events
 		addComponent(InventoryClose.class);
 		addComponent(ChangeBlockEvent.class);
+		addComponent(Dispense.class);
+		addComponent(BlockPlace.class);
 	}
 }
