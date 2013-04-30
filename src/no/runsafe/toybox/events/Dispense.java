@@ -8,7 +8,6 @@ import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeDispenser;
 import no.runsafe.framework.server.block.RunsafeSign;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import org.bukkit.Material;
 
 public class Dispense implements IBlockDispense
 {
@@ -24,10 +23,6 @@ public class Dispense implements IBlockDispense
 		RunsafeLocation location = block.getLocation();
 		this.check(block, location, 0, 1, 0);
 		this.check(block, location, 0, -1, 0);
-		this.check(block, location, 1, 0, 0);
-		this.check(block, location, 0, 0, 1);
-		this.check(block, location, 0, 0, -1);
-		this.check(block, location, -1, 0, 0);
 
 		return true;
 	}
@@ -35,7 +30,6 @@ public class Dispense implements IBlockDispense
 	private void check(RunsafeBlock block, RunsafeLocation location, int x, int y, int z)
 	{
 		location.offset(x, y, z);
-		location.getBlock().setTypeId(Material.OBSIDIAN.getId());
 		RunsafeBlockState blockState = location.getBlock().getBlockState();
 		this.output.write(String.format("Checking sign at %s, %s, %s", x, y, z));
 		if (blockState instanceof RunsafeSign)
