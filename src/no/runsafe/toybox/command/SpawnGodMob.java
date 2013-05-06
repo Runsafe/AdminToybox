@@ -49,23 +49,22 @@ public class SpawnGodMob extends PlayerCommand
 	private RunsafeItemStack makeGodArmor(int itemID)
 	{
 		RunsafeItemStack item = new RunsafeItemStack(itemID);
-		item.addEnchantment(RunsafeEnchantment.DURABILITY, 5);
-		item.addEnchantment(RunsafeEnchantment.PROTECTION_ENVIRONMENTAL, 5);
-		item.addEnchantment(RunsafeEnchantment.PROTECTION_FALL, 5);
-		item.addEnchantment(RunsafeEnchantment.PROTECTION_FIRE, 5);
-		item.addEnchantment(RunsafeEnchantment.PROTECTION_PROJECTILE, 5);
-		item.addEnchantment(RunsafeEnchantment.THORNS, 5);
+		item.addEnchantment(RunsafeEnchantment.DURABILITY, 3);
+		item.addEnchantment(RunsafeEnchantment.PROTECTION_ENVIRONMENTAL, 4);
+		item.addEnchantment(RunsafeEnchantment.PROTECTION_FALL, 4);
+		item.addEnchantment(RunsafeEnchantment.PROTECTION_FIRE, 4);
+		item.addEnchantment(RunsafeEnchantment.PROTECTION_PROJECTILE, 4);
+		item.addEnchantment(RunsafeEnchantment.THORNS, 3);
 		return item;
 	}
 
 	private RunsafeItemStack makeGodSword(int itemID)
 	{
 		RunsafeItemStack item = new RunsafeItemStack(itemID);
-		item.addEnchantment(RunsafeEnchantment.FIRE_ASPECT, 5);
+		item.addEnchantment(RunsafeEnchantment.FIRE_ASPECT, 2);
 		item.addEnchantment(RunsafeEnchantment.DAMAGE_ALL, 5);
-		item.addEnchantment(RunsafeEnchantment.DURABILITY, 5);
-		item.addEnchantment(RunsafeEnchantment.KNOCKBACK, 5);
-		item.addEnchantment(RunsafeEnchantment.DAMAGE_ALL, 5);
+		item.addEnchantment(RunsafeEnchantment.DURABILITY, 3);
+		item.addEnchantment(RunsafeEnchantment.KNOCKBACK, 2);
 		return item;
 	}
 }
