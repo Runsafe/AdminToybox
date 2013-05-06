@@ -25,7 +25,7 @@ public class SpawnGodMob extends PlayerCommand
 
 		for (int i = 0; i < n; ++i)
 		{
-			RunsafeEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("name"));
+			RunsafeEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("mobName"));
 			if (entity instanceof RunsafeLivingEntity)
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
