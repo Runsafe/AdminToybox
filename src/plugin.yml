@@ -34,3 +34,5 @@ commands:
     description: Drops a block of mobs from the sky
   nuke:
     description: Drops a nuke with the provided parameters.
+  spawngodmob:
+    description: Spawns a god mob

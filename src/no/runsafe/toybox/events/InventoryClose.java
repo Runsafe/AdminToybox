@@ -2,7 +2,6 @@ package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.inventory.IInventoryClosed;
 import no.runsafe.framework.server.event.inventory.RunsafeInventoryCloseEvent;
-import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
@@ -20,6 +19,6 @@ public class InventoryClose implements IInventoryClosed
 		if (this.handler.PlayerHasOpenCarePackage(player))
 			this.handler.DropPackage(player);
 	}
-	
+
 	private CarePackageHandler handler;
 }

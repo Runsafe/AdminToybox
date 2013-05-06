@@ -27,6 +27,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(CarePackage.class);
 		addComponent(MobDrop.class);
 		addComponent(Nuke.class);
+		addComponent(SpawnGodMob.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
