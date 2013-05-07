@@ -40,3 +40,6 @@ commands:
     description: Enchants an item.
   renameitem:
     description: Renames an item in your hand.
+  give:
+    description: Gives a player the items specificed.
+    aliases: [item, i]
