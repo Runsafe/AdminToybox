@@ -36,15 +36,21 @@ public class EnchantItem extends PlayerCommand
 		}
 		else
 		{
-			RunsafeEnchantmentType type = RunsafeEnchantmentType.valueOf(enchantName);
-			if (type == null)
-				return "&cThat enchant cannot be applied to that item.";
+			for (RunsafeEnchantmentType enchantType : RunsafeEnchantmentType.values())
+			{
+				if (enchantType.name().equalsIgnoreCase(enchantName))
+				{
+					RunsafeEnchantment enchant = new RunsafeEnchantment(enchantType);
+					if (!enchant.canEnchantItem(item))
+						return "&cThat enchant cannot be applied to that item.";
 
-			RunsafeEnchantment enchant = new RunsafeEnchantment(type);
-			int power = (arguments.length > 0 ? Integer.valueOf(arguments[0]) : enchant.getMaxLevel());
-			item.addEnchantment(enchant, power);
+					int power = (arguments.length > 0 ? Integer.valueOf(arguments[0]) : enchant.getMaxLevel());
+					item.addEnchantment(enchant, power);
 
-			return "&2Your item has been enchanted.";
+					return "&2Your item has been enchanted.";
+				}
+			}
+			return "&cThe enchantment you are looking for does not exist.";
 		}
 	}
 
