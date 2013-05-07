@@ -63,9 +63,15 @@ public class GiveItem extends ExecutableCommand
 	private RunsafeItemStack getItemId(String itemName)
 	{
 		for (Material material : Material.values())
-			if (material.name().replace("_", "").equalsIgnoreCase(itemName) || material.getId() == Integer.valueOf(itemName))
+		{
+			if (material.name().replace("_", "").equalsIgnoreCase(itemName))
 				return new RunsafeItemStack(material.getId());
 
+			if (itemName.matches("-?\\d+(\\.\\d+)?"))
+				if (material.getId() == Integer.valueOf(itemName))
+					return new RunsafeItemStack(material.getId());
+
+		}
 		return null;
 	}
 
