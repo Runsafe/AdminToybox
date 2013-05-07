@@ -7,6 +7,7 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.Enchanter;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 public class EnchantItem extends PlayerCommand
@@ -38,15 +39,22 @@ public class EnchantItem extends PlayerCommand
 			}
 			else
 			{
-				RunsafeEnchantment enchant = new RunsafeEnchantment(
-						(RunsafeEnchantmentType) RunsafeEnchantmentType.class.getDeclaredField(enchantName.toUpperCase()).get(RunsafeEnchantmentType.class)
-				);
+				Field[] fields = RunsafeEnchantmentType.class.getDeclaredFields();
 
-				if (enchant.canEnchantItem(item))
+				for (Field field : fields)
 				{
-					int power = (arguments.length > 0 ? Integer.valueOf(arguments[0]) : enchant.getMaxLevel());
-					item.addEnchantment(enchant, power);
-					return "&2Your item has been enchanted.";
+					if (field.getName().equalsIgnoreCase(enchantName.toUpperCase()))
+					{
+						RunsafeEnchantmentType type = (RunsafeEnchantmentType) field.get(RunsafeEnchantmentType.class);
+						RunsafeEnchantment enchant = new RunsafeEnchantment(type);
+
+						if (enchant.canEnchantItem(item))
+						{
+							int power = (arguments.length > 0 ? Integer.valueOf(arguments[0]) : enchant.getMaxLevel());
+							item.addEnchantment(enchant, power);
+							return "&2Your item has been enchanted.";
+						}
+					}
 				}
 			}
 			return "&cThat enchant cannot be applied to that item.";
