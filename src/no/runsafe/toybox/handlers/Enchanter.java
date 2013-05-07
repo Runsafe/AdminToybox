@@ -15,7 +15,7 @@ public class Enchanter
 
 	public void applyAllEnchants(RunsafeItemStack item)
 	{
-		for (int enchantID : RunsafeEnchantmentType.enchants)
+		for (RunsafeEnchantmentType enchantID : RunsafeEnchantmentType.values())
 		{
 			RunsafeEnchantment enchant = new RunsafeEnchantment(enchantID);
 			if (enchant.canEnchantItem(item))
