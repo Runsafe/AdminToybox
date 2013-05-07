@@ -2,22 +2,23 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.server.RunsafeEntityEquipment;
-import no.runsafe.framework.server.enchantment.RunsafeEnchantment;
 import no.runsafe.framework.server.entity.RunsafeEntity;
 import no.runsafe.framework.server.entity.RunsafeLivingEntity;
-import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.framework.server.potion.RunsafePotionEffect;
 import no.runsafe.framework.server.potion.RunsafePotionEffectType;
+import no.runsafe.toybox.handlers.Enchanter;
 
 import java.util.HashMap;
 
 public class SpawnGodMob extends PlayerCommand
 {
-	public SpawnGodMob()
+	public SpawnGodMob(Enchanter enchanter)
 	{
 		super("spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob", "mobName", "amount");
+		this.enchanter = enchanter;
 	}
+
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
@@ -25,17 +26,22 @@ public class SpawnGodMob extends PlayerCommand
 
 		for (int i = 0; i < n; ++i)
 		{
-			RunsafeEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("mobName"));
+			String mobName = parameters.get("mobName");
+			RunsafeEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), mobName);
 			if (entity instanceof RunsafeLivingEntity)
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
 				RunsafeEntityEquipment equipment = livingEntity.getEquipment();
 
-				equipment.setBoots(this.makeGodArmor(313));
-				equipment.setChestplate(this.makeGodArmor(311));
-				equipment.setHelmet(this.makeGodArmor(310));
-				equipment.setLeggings(this.makeGodArmor(312));
-				equipment.setItemInHand(this.makeGodSword(276));
+				equipment.setBoots(this.enchanter.createFullyEnchanted(313));
+				equipment.setChestplate(this.enchanter.createFullyEnchanted(311));
+				equipment.setHelmet(this.enchanter.createFullyEnchanted(310));
+				equipment.setLeggings(this.enchanter.createFullyEnchanted(312));
+
+				if (mobName.equalsIgnoreCase("skeleton"))
+					equipment.setItemInHand(this.enchanter.createFullyEnchanted(261));
+				else
+					equipment.setItemInHand(this.enchanter.createFullyEnchanted(276));
 
 				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.INCREASE_DAMAGE, 1200, 5));
 				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.FIRE_RESISTANCE, 1200, 5));
@@ -46,22 +52,5 @@ public class SpawnGodMob extends PlayerCommand
 		return null;
 	}
 
-	private RunsafeItemStack makeGodArmor(int itemID)
-	{
-		RunsafeItemStack item = new RunsafeItemStack(itemID);
-		item.addEnchantment(RunsafeEnchantment.DURABILITY, 3);
-		item.addEnchantment(RunsafeEnchantment.PROTECTION_ENVIRONMENTAL, 4);
-		item.addEnchantment(RunsafeEnchantment.THORNS, 3);
-		return item;
-	}
-
-	private RunsafeItemStack makeGodSword(int itemID)
-	{
-		RunsafeItemStack item = new RunsafeItemStack(itemID);
-		item.addEnchantment(RunsafeEnchantment.FIRE_ASPECT, 2);
-		item.addEnchantment(RunsafeEnchantment.DAMAGE_ALL, 5);
-		item.addEnchantment(RunsafeEnchantment.DURABILITY, 3);
-		item.addEnchantment(RunsafeEnchantment.KNOCKBACK, 2);
-		return item;
-	}
+	private Enchanter enchanter;
 }

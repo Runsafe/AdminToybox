@@ -4,6 +4,7 @@ import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.toybox.command.*;
 import no.runsafe.toybox.events.*;
 import no.runsafe.toybox.handlers.CarePackageHandler;
+import no.runsafe.toybox.handlers.Enchanter;
 import no.runsafe.toybox.handlers.MobDropHandler;
 
 public class Plugin extends RunsafePlugin
@@ -28,10 +29,12 @@ public class Plugin extends RunsafePlugin
 		addComponent(MobDrop.class);
 		addComponent(Nuke.class);
 		addComponent(SpawnGodMob.class);
+		addComponent(EnchantItem.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
 		addComponent(MobDropHandler.class);
+		addComponent(Enchanter.class);
 
 		// Events
 		addComponent(InventoryClose.class);

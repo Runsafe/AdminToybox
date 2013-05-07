@@ -36,3 +36,5 @@ commands:
     description: Drops a nuke with the provided parameters.
   spawngodmob:
     description: Spawns a god mob
+  enchant:
+    description: Enchants an item.
