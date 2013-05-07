@@ -26,8 +26,10 @@ public class GiveItem extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] arguments)
 	{
-		boolean shortHand = !(arguments.length > 2);
+		if (arguments.length < 2)
+			return "&fUsage: /&3give &f[&eplayer&f] <&eitem&f> <&eamount&f>";
 
+		boolean shortHand = !(arguments.length > 2);
 		RunsafePlayer player;
 
 		if (shortHand)
