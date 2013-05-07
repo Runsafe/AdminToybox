@@ -30,6 +30,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Nuke.class);
 		addComponent(SpawnGodMob.class);
 		addComponent(EnchantItem.class);
+		addComponent(RenameItem.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);

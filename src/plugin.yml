@@ -38,3 +38,5 @@ commands:
     description: Spawns a god mob
   enchant:
     description: Enchants an item.
+  renameitem:
+    description: Renames an item in your hand.
