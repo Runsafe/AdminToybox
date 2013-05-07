@@ -45,6 +45,8 @@ public class EnchantItem extends PlayerCommand
 						return "&cThat enchant cannot be applied to that item.";
 
 					int power = (arguments.length > 0 ? Integer.valueOf(arguments[0]) : enchant.getMaxLevel());
+					if (power > enchant.getMaxLevel()) power = enchant.getMaxLevel();
+
 					item.addEnchantment(enchant, power);
 
 					return "&2Your item has been enchanted.";
