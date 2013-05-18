@@ -34,7 +34,7 @@ public class Kill extends ExecutableCommand
 			RunsafePlayer executingPlayer = (RunsafePlayer) executor;
 			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others") || arguments.length == 0)
 			{
-				executingPlayer.setFireTicks(5000);
+				executingPlayer.explode(20, false, false);
 				return "&fWell, if you insist.";
 			}
 		}
