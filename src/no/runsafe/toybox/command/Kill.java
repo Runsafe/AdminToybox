@@ -34,7 +34,8 @@ public class Kill extends ExecutableCommand
 			RunsafePlayer executingPlayer = (RunsafePlayer) executor;
 			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others") || arguments.length == 0)
 			{
-				executingPlayer.explode(20, false, false);
+				executingPlayer.explode(0, false, false);
+				executingPlayer.damage(500);
 				return "&fWell, if you insist.";
 			}
 		}
@@ -53,7 +54,10 @@ public class Kill extends ExecutableCommand
 				return target.toString();
 
 			if (target.isOnline())
+			{
+				target.explode(0, false, false);
 				target.damage(500);
+			}
 		}
 		return "&cDeath shall find those you seek quickly.";
 	}
