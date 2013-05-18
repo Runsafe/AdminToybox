@@ -32,6 +32,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(EnchantItem.class);
 		addComponent(RenameItem.class);
 		addComponent(GiveItem.class);
+		addComponent(Kill.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);

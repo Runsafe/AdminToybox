@@ -43,3 +43,5 @@ commands:
   give:
     description: Gives a player the items specificed.
     aliases: [item, i]
+  kill:
+    description: Kills a specific player or yourself
