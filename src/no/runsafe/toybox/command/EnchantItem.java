@@ -42,7 +42,12 @@ public class EnchantItem extends PlayerCommand
 				StringBuilder enchantmentName = new StringBuilder();
 
 				if (itemHeld.getItemId() != 0)
-					enchantmentName.append((new RunsafeEnchantment(enchant).canEnchantItem(itemHeld) ? "&a" : "&c"));
+				{
+					if (new RunsafeEnchantment(enchant).canEnchantItem(itemHeld))
+						enchantmentName.append("&a");
+					else
+						enchantmentName.append("&c");
+				}
 
 				enchantmentName.append(enchantNames.add(enchant.name().toLowerCase()));
 				enchantNames.add(enchantmentName.toString());
