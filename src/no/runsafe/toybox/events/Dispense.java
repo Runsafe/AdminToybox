@@ -19,20 +19,8 @@ public class Dispense implements IBlockDispense
 			RunsafeInventory inventory = dispenser.getInventory();
 			String title = inventory.getTitle();
 
-			if (title.startsWith("Infinite:"))
-			{
-				String[] data = title.split(":");
-				if (data.length > 1)
-				{
-					int itemID = Integer.valueOf(data[1]);
-					RunsafeItemStack items = new RunsafeItemStack(itemID, 64, (short) 0);
-
-					if (data.length > 2)
-						items.setDurability(Short.valueOf(data[2]));
-
-					inventory.addItems(items);
-				}
-			}
+			if (title.equalsIgnoreCase("Infinite"))
+				inventory.addItems(item.clone());
 		}
 		return true;
 	}

@@ -20,7 +20,7 @@ public class InventoryClick implements IInventoryClick
 				String name = meta.getDisplayName();
 				if (name != null)
 				{
-					if (meta.getDisplayName().startsWith("Infinite:"))
+					if (meta.getDisplayName().equalsIgnoreCase("Infinite"))
 					{
 						RunsafePlayer player = event.getWhoClicked();
 						if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
