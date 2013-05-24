@@ -6,8 +6,11 @@ import no.runsafe.framework.server.enchantment.RunsafeEnchantmentType;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.Enchanter;
+import org.apache.commons.lang.StringUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class EnchantItem extends PlayerCommand
 {
@@ -29,7 +32,15 @@ public class EnchantItem extends PlayerCommand
 		RunsafeItemStack item = executor.getItemInHand();
 		String enchantName = parameters.get("enchant");
 
-		if (enchantName.equalsIgnoreCase("all"))
+		if (enchantName.equalsIgnoreCase("help"))
+		{
+			List<String> enchantNames = new ArrayList<String>();
+			for (RunsafeEnchantmentType enchant : RunsafeEnchantmentType.values())
+				enchantNames.add(enchant.name().toLowerCase());
+
+			return "&3" + StringUtils.join(enchantNames, ", ");
+		}
+		else if (enchantName.equalsIgnoreCase("all"))
 		{
 			this.enchanter.applyAllEnchants(item);
 			return "&2Applied all available enchants to your item.";
@@ -52,7 +63,7 @@ public class EnchantItem extends PlayerCommand
 					return "&2Your item has been enchanted.";
 				}
 			}
-			return "&cThe enchantment you are looking for does not exist.";
+			return "&cThe enchantment you are looking for does not exist. Use '/enchant help' for help.";
 		}
 	}
 
