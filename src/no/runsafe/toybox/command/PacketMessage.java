@@ -17,7 +17,7 @@ public class PacketMessage extends PlayerCommand
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
 		RunsafePacketSender packetSender = new RunsafePacketSender(executor);
-		packetSender.sendChatPacket(parameters.get("message"));
+		packetSender.sendNamedEntitySpawnPacket(executor);
 		return "&2The server has sent you a chat packet";
 	}
 }
