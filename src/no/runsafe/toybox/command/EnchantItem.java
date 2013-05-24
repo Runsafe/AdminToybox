@@ -34,11 +34,21 @@ public class EnchantItem extends PlayerCommand
 
 		if (enchantName.equalsIgnoreCase("help"))
 		{
+			RunsafeItemStack itemHeld = executor.getItemInHand();
+
 			List<String> enchantNames = new ArrayList<String>();
 			for (RunsafeEnchantmentType enchant : RunsafeEnchantmentType.values())
-				enchantNames.add(enchant.name().toLowerCase());
+			{
+				StringBuilder enchantmentName = new StringBuilder();
 
-			return "&3" + StringUtils.join(enchantNames, ", ");
+				if (itemHeld != null)
+					enchantmentName.append((new RunsafeEnchantment(enchant).canEnchantItem(itemHeld) ? "&a" : "&c"));
+
+				enchantmentName.append(enchantNames.add(enchant.name().toLowerCase()));
+				enchantNames.add(enchantmentName.toString());
+			}
+
+			return "&3" + StringUtils.join(enchantNames, "&3, ");
 		}
 		else if (enchantName.equalsIgnoreCase("all"))
 		{
