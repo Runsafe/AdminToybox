@@ -34,6 +34,9 @@ public class Plugin extends RunsafePlugin
 		addComponent(GiveItem.class);
 		addComponent(Kill.class);
 
+		// TEMP
+		addComponent(PacketMessage.class);
+
 		// Handlers
 		addComponent(CarePackageHandler.class);
 		addComponent(MobDropHandler.class);
