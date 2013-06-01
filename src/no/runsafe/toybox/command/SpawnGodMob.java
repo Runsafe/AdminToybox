@@ -1,22 +1,22 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
+import no.runsafe.framework.enchant.Enchant;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.RunsafeEntityEquipment;
 import no.runsafe.framework.server.entity.RunsafeEntity;
 import no.runsafe.framework.server.entity.RunsafeLivingEntity;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.framework.server.potion.RunsafePotionEffect;
 import no.runsafe.framework.server.potion.RunsafePotionEffectType;
-import no.runsafe.toybox.handlers.Enchanter;
 
 import java.util.HashMap;
 
 public class SpawnGodMob extends PlayerCommand
 {
-	public SpawnGodMob(Enchanter enchanter)
+	public SpawnGodMob()
 	{
 		super("spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob", "mobName", "amount");
-		this.enchanter = enchanter;
 	}
 
 	@Override
@@ -33,15 +33,15 @@ public class SpawnGodMob extends PlayerCommand
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
 				RunsafeEntityEquipment equipment = livingEntity.getEquipment();
 
-				equipment.setBoots(this.enchanter.createFullyEnchanted(313));
-				equipment.setChestplate(this.enchanter.createFullyEnchanted(311));
-				equipment.setHelmet(this.enchanter.createFullyEnchanted(310));
-				equipment.setLeggings(this.enchanter.createFullyEnchanted(312));
+				equipment.setBoots(Item.Combat.Boots.Diamond.enchant(Enchant.All).getItem());
+				equipment.setChestplate(Item.Combat.Chestplate.Diamond.enchant(Enchant.All).getItem());
+				equipment.setHelmet(Item.Combat.Helmet.Diamond.enchant(Enchant.All).getItem());
+				equipment.setLeggings(Item.Combat.Leggings.Diamond.enchant(Enchant.All).getItem());
 
 				if (mobName.equalsIgnoreCase("skeleton"))
-					equipment.setItemInHand(this.enchanter.createFullyEnchanted(261));
+					equipment.setItemInHand(Item.Combat.Bow.enchant(Enchant.All).getItem());
 				else
-					equipment.setItemInHand(this.enchanter.createFullyEnchanted(276));
+					equipment.setItemInHand(Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem());
 
 				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.INCREASE_DAMAGE, 1200, 5));
 				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.FIRE_RESISTANCE, 1200, 5));
@@ -51,6 +51,4 @@ public class SpawnGodMob extends PlayerCommand
 
 		return null;
 	}
-
-	private Enchanter enchanter;
 }
