@@ -3,9 +3,9 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.enchant.Enchant;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.RunsafeEntityEquipment;
 import no.runsafe.framework.server.entity.RunsafeEntity;
 import no.runsafe.framework.server.entity.RunsafeLivingEntity;
+import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.framework.server.potion.RunsafePotionEffect;
 import no.runsafe.framework.server.potion.RunsafePotionEffectType;
@@ -31,17 +31,19 @@ public class SpawnGodMob extends PlayerCommand
 			if (entity instanceof RunsafeLivingEntity)
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
-				RunsafeEntityEquipment equipment = livingEntity.getEquipment();
 
-				equipment.setBoots(Item.Combat.Boots.Diamond.enchant(Enchant.All).getItem());
-				equipment.setChestplate(Item.Combat.Chestplate.Diamond.enchant(Enchant.All).getItem());
-				equipment.setHelmet(Item.Combat.Helmet.Diamond.enchant(Enchant.All).getItem());
-				equipment.setLeggings(Item.Combat.Leggings.Diamond.enchant(Enchant.All).getItem());
-
+				RunsafeItemStack weapon;
 				if (mobName.equalsIgnoreCase("skeleton"))
-					equipment.setItemInHand(Item.Combat.Bow.enchant(Enchant.All).getItem());
+					weapon = Item.Combat.Bow.enchant(Enchant.All).getItem();
 				else
-					equipment.setItemInHand(Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem());
+					weapon = Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem();
+
+				livingEntity.getEquipment()
+					.setBoots(Item.Combat.Boots.Diamond.enchant(Enchant.All).getItem())
+					.setChestplate(Item.Combat.Chestplate.Diamond.enchant(Enchant.All).getItem())
+					.setHelmet(Item.Combat.Helmet.Diamond.enchant(Enchant.All).getItem())
+					.setLeggings(Item.Combat.Leggings.Diamond.enchant(Enchant.All).getItem())
+					.setItemInHand(weapon);
 
 				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.INCREASE_DAMAGE, 1200, 5));
 				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.FIRE_RESISTANCE, 1200, 5));
