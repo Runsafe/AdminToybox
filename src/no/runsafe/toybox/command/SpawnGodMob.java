@@ -2,13 +2,12 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.enchant.Enchant;
+import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.entity.RunsafeEntity;
 import no.runsafe.framework.server.entity.RunsafeLivingEntity;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.framework.server.potion.RunsafePotionEffect;
-import no.runsafe.framework.server.potion.RunsafePotionEffectType;
 
 import java.util.HashMap;
 
@@ -45,9 +44,9 @@ public class SpawnGodMob extends PlayerCommand
 					.setLeggings(Item.Combat.Leggings.Diamond.enchant(Enchant.All).getItem())
 					.setItemInHand(weapon);
 
-				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.INCREASE_DAMAGE, 1200, 5));
-				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.FIRE_RESISTANCE, 1200, 5));
-				livingEntity.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.DAMAGE_RESISTANCE, 1200, 5));
+				Buff.Combat.Damage.Increase.duration(1200).amplification(5).applyTo(livingEntity);
+				Buff.Resistance.Fire.duration(1200).amplification(5).applyTo(livingEntity);
+				Buff.Resistance.Damage.duration(1200).amplification(5).applyTo(livingEntity);
 			}
 		}
 
