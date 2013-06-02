@@ -6,7 +6,6 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeLeatherArmorMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
-import java.awt.*;
 import java.util.HashMap;
 
 public class Colour extends PlayerCommand
@@ -24,7 +23,13 @@ public class Colour extends PlayerCommand
 		if (item.is(Item.Combat.Leggings.Leather) || item.is(Item.Combat.Boots.Leather)	|| item.is(Item.Combat.Chestplate.Leather) || item.is(Item.Combat.Helmet.Leather))
 		{
 			RunsafeLeatherArmorMeta meta = (RunsafeLeatherArmorMeta) item.getItemMeta();
-			meta.setColor(Color.decode(parameters.get("hex")).getRGB());
+			String hex = parameters.get("hex");
+
+			meta.setColor(
+					Integer.valueOf(hex.substring(0, 2), 16),
+					Integer.valueOf(hex.substring(2, 4), 16),
+					Integer.valueOf(hex.substring(4, 6), 16)
+			);
 		}
 		return "&cYou cannot colour that item.";
 	}
