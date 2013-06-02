@@ -45,8 +45,6 @@ commands:
     aliases: [item, i]
   kill:
     description: Kills a specific player or yourself
-  packetmessage:
-    description: Testing command for packets
   buff:
     description: Apply a buff to a player with the desired duration and amplification
     aliases: [effect, potion]
