@@ -1,11 +1,10 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.server.enchantment.RunsafeEnchantment;
-import no.runsafe.framework.server.enchantment.RunsafeEnchantmentType;
+import no.runsafe.framework.enchant.Enchant;
+import no.runsafe.framework.enchant.IEnchant;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.toybox.handlers.Enchanter;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
@@ -14,10 +13,9 @@ import java.util.List;
 
 public class EnchantItem extends PlayerCommand
 {
-	public EnchantItem(Enchanter enchanter)
+	public EnchantItem()
 	{
 		super("enchant", "Enchants an item", "runsafe.toybox.enchant", "enchant");
-		this.enchanter = enchanter;
 	}
 
 	@Override
@@ -35,47 +33,40 @@ public class EnchantItem extends PlayerCommand
 		if (enchantName.equalsIgnoreCase("help"))
 		{
 			RunsafeItemStack itemHeld = executor.getItemInHand();
-
 			List<String> enchantNames = new ArrayList<String>();
-			for (RunsafeEnchantmentType enchant : RunsafeEnchantmentType.values())
+			for (IEnchant enchant : Enchant.All)
 			{
-				StringBuilder enchantmentName = new StringBuilder();
-
-				if (itemHeld.getItemId() != 0)
-					enchantmentName.append((new RunsafeEnchantment(enchant).canEnchantItem(itemHeld) ? "&a" : "&c"));
-
-				enchantmentName.append(enchant.name().toLowerCase());
-				enchantNames.add(enchantmentName.toString());
+				enchantNames.add(
+					String.format(
+						itemHeld.getItemId() > 0 ? "%s%s" : "%2$s",
+						enchant.canEnchant(itemHeld) ? "&a" : "&c",
+						enchant.getName().toLowerCase()
+					)
+				);
 			}
-
 			return "&3" + StringUtils.join(enchantNames, "&3, ");
 		}
 		else if (enchantName.equalsIgnoreCase("all"))
 		{
-			this.enchanter.applyAllEnchants(item);
+			item.enchant(Enchant.All);
 			return "&2Applied all available enchants to your item.";
 		}
 		else
 		{
-			for (RunsafeEnchantmentType enchantType : RunsafeEnchantmentType.values())
-			{
-				if (enchantType.name().equalsIgnoreCase(enchantName))
-				{
-					RunsafeEnchantment enchant = new RunsafeEnchantment(enchantType);
-					if (!enchant.canEnchantItem(item))
-						return "&cThat enchant cannot be applied to that item.";
+			IEnchant enchant = Enchant.getByName(enchantName);
 
-					int power = (arguments.length > 0 ? Integer.valueOf(arguments[0]) : enchant.getMaxLevel());
-					if (power > enchant.getMaxLevel()) power = enchant.getMaxLevel();
+			if (enchant == null)
+				return "&cThe enchantment you are looking for does not exist. Use '/enchant help' for help.";
 
-					item.addEnchantment(enchant, power);
+			if (!enchant.canEnchant(item))
+				return "&cThat enchant cannot be applied to that item.";
 
-					return "&2Your item has been enchanted.";
-				}
-			}
-			return "&cThe enchantment you are looking for does not exist. Use '/enchant help' for help.";
+			if (arguments.length > 0)
+				enchant.power(Integer.valueOf(arguments[0])).applyTo(item);
+			else
+				enchant.max().applyTo(item);
+
+			return "&2Your item has been enchanted.";
 		}
 	}
-
-	private Enchanter enchanter;
 }
