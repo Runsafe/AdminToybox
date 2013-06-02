@@ -30,6 +30,8 @@ public class Colour extends PlayerCommand
 					Integer.valueOf(hex.substring(2, 4), 16),
 					Integer.valueOf(hex.substring(4, 6), 16)
 			);
+			item.setItemMeta(meta);
+			return "&2Coloured!";
 		}
 		return "&cYou cannot colour that item.";
 	}
