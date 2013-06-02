@@ -1,55 +1,55 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.command.player.PlayerCommand;
+import no.runsafe.framework.command.ExecutableCommand;
+import no.runsafe.framework.server.ICommandExecutor;
 import no.runsafe.framework.server.RunsafeServer;
+import no.runsafe.framework.server.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import org.bukkit.GameMode;
 
 import java.util.HashMap;
 
-public class Mode extends PlayerCommand
+public class Mode extends ExecutableCommand
 {
 	public Mode()
 	{
-		super("mode", "Changes the game-mode of the player", "runsafe.toybox.mode", "player", "mode");
+		super("mode", "Changes the game-mode of the player", "runsafe.toybox.mode", "mode");
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
 	{
-		RunsafePlayer target = RunsafeServer.Instance.getPlayer(parameters.get("player"));
-
-		if (target != null)
-		{
-			if (target.isOnline())
-			{
-				String mode = parameters.get("mode");
-
-				if (mode.equalsIgnoreCase("survival") || mode.equalsIgnoreCase("s"))
-					target.setGameMode(GameMode.SURVIVAL);
-
-				if (mode.equalsIgnoreCase("creative") || mode.equalsIgnoreCase("c"))
-					target.setGameMode(GameMode.CREATIVE);
-
-				if (mode.equalsIgnoreCase("adventure") || mode.equalsIgnoreCase("a"))
-					target.setGameMode(GameMode.ADVENTURE);
-
-				this.sendGameModeUpdateMessage(executor, target);
-			}
-			else
-			{
-				executor.sendMessage(String.format("The player %s is offline. Can't touch that.", target.getPrettyName()));
-			}
-		}
-		else
-		{
-			executor.sendColouredMessage(String.format("The player %s does not exist, you moron.", parameters.get("player")));
-		}
-
 		return null;
 	}
 
-	private void sendGameModeUpdateMessage(RunsafePlayer player, RunsafePlayer target)
+	@Override
+	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] arguments)
+	{
+		if (!(executor instanceof RunsafePlayer) && arguments.length == 0)
+			return "&cYou need to supply a player for this command.";
+
+		RunsafePlayer target = (arguments.length > 0 ? RunsafeServer.Instance.getPlayer(arguments[0]) : (RunsafePlayer) executor);
+		if (target instanceof RunsafeAmbiguousPlayer)
+			return target.toString();
+
+		if (!target.isOnline())
+			return String.format("&cThe player %s is offline.", target.getName());
+
+		String mode = parameters.get("mode");
+
+		if (mode.equalsIgnoreCase("survival") || mode.equalsIgnoreCase("s"))
+			target.setGameMode(GameMode.SURVIVAL);
+
+		if (mode.equalsIgnoreCase("creative") || mode.equalsIgnoreCase("c"))
+			target.setGameMode(GameMode.CREATIVE);
+
+		if (mode.equalsIgnoreCase("adventure") || mode.equalsIgnoreCase("a"))
+			target.setGameMode(GameMode.ADVENTURE);
+
+		return this.getGameModeUpdateMessage(target);
+	}
+
+	private String getGameModeUpdateMessage(RunsafePlayer target)
 	{
 		String gameModeName = "unknown";
 
@@ -62,7 +62,7 @@ public class Mode extends PlayerCommand
 		if (target.getGameMode() == GameMode.ADVENTURE)
 			gameModeName = "adventure";
 
-		player.sendColouredMessage("%s now has the game mode %s.", target.getPrettyName(), gameModeName);
+		return String.format("%s now has the game mode %s.", target.getPrettyName(), gameModeName);
 	}
 }
 
