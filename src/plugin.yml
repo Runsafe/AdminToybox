@@ -51,3 +51,5 @@ commands:
   colour:
     description: Colours a leather armour item with the supplied hex code
     aliases: [dye]
+  author:
+    description: Changes the author of a book
