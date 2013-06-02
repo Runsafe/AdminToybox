@@ -32,6 +32,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(RenameItem.class);
 		addComponent(GiveItem.class);
 		addComponent(Kill.class);
+		addComponent(BuffCommand.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
