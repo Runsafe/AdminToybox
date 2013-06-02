@@ -32,11 +32,24 @@ public class Kill extends ExecutableCommand
 		if (executor instanceof RunsafePlayer)
 		{
 			RunsafePlayer executingPlayer = (RunsafePlayer) executor;
-			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others") || arguments.length == 0)
+			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others"))
 			{
-				executingPlayer.explode(0, false, false);
-				executingPlayer.damage(500);
-				return "&fWell, if you insist.";
+				if (arguments.length == 0)
+				{
+					executingPlayer.explode(0, false, false);
+					executingPlayer.damage(500);
+					return "&fWell, if you insist.";
+				}
+				return "&cYou do not have permission to kill other players like this.";
+			}
+			else
+			{
+				if (arguments.length == 0)
+				{
+					executingPlayer.explode(0, false, false);
+					executingPlayer.damage(500);
+					return "&fWell, if you insist.";
+				}
 			}
 		}
 		else
