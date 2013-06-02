@@ -27,7 +27,7 @@ public class BuffCommand extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] arguments)
 	{
 		String buffName = parameters.get("effect");
-		if (BuffCommand.buffs.containsKey(buffName))
+		if (!BuffCommand.buffs.containsKey(buffName))
 			return "&cAvailable effects: " + StringUtils.join(BuffCommand.buffs.keySet(), ", ");
 
 		RunsafePlayer target;
