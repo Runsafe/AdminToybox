@@ -48,3 +48,6 @@ commands:
   buff:
     description: Apply a buff to a player with the desired duration and amplification
     aliases: [effect, potion]
+  colour:
+    description: Colours a leather armour item with the supplied hex code
+    aliases: [dye]

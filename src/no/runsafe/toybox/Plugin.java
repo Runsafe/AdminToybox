@@ -33,6 +33,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(GiveItem.class);
 		addComponent(Kill.class);
 		addComponent(BuffCommand.class);
+		addComponent(Colour.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
