@@ -25,8 +25,10 @@ public class CreateHead extends PlayerCommand
 			return player.toString();
 
 		RunsafeItemStack heads = Item.Decoration.Head.Human.getItem();
+		heads.setAmount(1);
 		RunsafeSkullMeta meta = (RunsafeSkullMeta) heads.getItemMeta();
 		meta.setOwner(player.getName());
+		heads.setItemMeta(meta);
 		executor.give(heads);
 
 		return "Creating the head of " + player.getName();
