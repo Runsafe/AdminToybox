@@ -20,7 +20,7 @@ public class CreateHead extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafePlayer player = RunsafeServer.Instance.getPlayer(parameters.get("player")));
+		RunsafePlayer player = RunsafeServer.Instance.getPlayer(parameters.get("player"));
 		if (player instanceof RunsafeAmbiguousPlayer)
 			return player.toString();
 
