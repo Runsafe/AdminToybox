@@ -65,11 +65,20 @@ public class SongHandler
 								final int note = key % 12;
 								int velocity = shortMessage.getData2();
 
+								final int pitch;
+
+								if (octave == 2)
+									pitch = NOTE_PITCH_O1[note];
+								else if (octave == 3)
+									pitch = NOTE_PITCH_O2[note];
+								else
+									pitch = NOTE_PITCH_O1[note]; // Hurr?
+
 								this.scheduler.startSyncTask(new Runnable() {
 									@Override
 									public void run()
 									{
-										world.playSound(location, Sound.NOTE_PIANO, volume, (float) Math.pow(2.0, ((double) NOTE_PITCH[note] - 12.0) / 12.0));
+										world.playSound(location, Sound.NOTE_PIANO, volume, (float) Math.pow(2.0, ((double) pitch - 12.0) / 12.0));
 									}
 								}, tick / 30);
 
@@ -106,6 +115,7 @@ public class SongHandler
 	private IOutput output;
 	private static final int NOTE_ON = 0x90;
 	private static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
-	private static final int[] NOTE_PITCH = {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+	private static final int[] NOTE_PITCH_O1 = {6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5};
+	private static final int[] NOTE_PITCH_O2 = {18, 19, 20, 21, 22, 23, 24, 13, 14, 15, 16, 17};
 	private IScheduler scheduler;
 }
