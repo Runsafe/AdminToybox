@@ -49,26 +49,29 @@ public class SongHandler
 							ShortMessage shortMessage = (ShortMessage) message;
 							output.append("Channel: ").append(shortMessage.getChannel()).append(" ");
 
-							int command = shortMessage.getCommand();
-
-							if (command == NOTE_ON || command == NOTE_OFF)
+							if (shortMessage.getCommand() == NOTE_ON)
 							{
-								int key = shortMessage.getData1();
-								int octave = (key / 12) - 1;
-								int note = key % 12;
-								int velocity = shortMessage.getData2();
-
-								output
-									.append((command == NOTE_ON ? "Note on," : "Note off,"))
-									.append(NOTE_NAMES[note]).append(octave)
-									.append(" key=").append(key)
-									.append(" velocity=").append(velocity);
+								output.append("Note on, ");
+							}
+							else if (shortMessage.getCommand() == NOTE_OFF)
+							{
+								output.append("Note off, ");
 							}
 							else
 							{
 								output.append("Command: ").append(shortMessage.getCommand());
 								continue;
 							}
+
+							int key = shortMessage.getData1();
+							int octave = (key / 12) - 1;
+							int note = key % 12;
+							int velocity = shortMessage.getData2();
+
+							output
+								.append(NOTE_NAMES[note]).append(octave)
+								.append(" key=").append(key)
+								.append(" velocity=").append(velocity);
 						}
 						else
 						{
