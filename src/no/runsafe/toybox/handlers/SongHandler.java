@@ -11,7 +11,7 @@ public class SongHandler
 	public SongHandler(Plugin adminToybox, IOutput output)
 	{
 		this.output = output;
-		this.path = String.format("plugins/%s/scripts/", adminToybox.getName());
+		this.path = String.format("plugins/%s/songs/", adminToybox.getName());
 
 		if (!new File(this.path).mkdirs())
 			this.output.warning("Failed to create song directory at: " + this.path);
