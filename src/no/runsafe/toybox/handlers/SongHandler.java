@@ -78,7 +78,7 @@ public class SongHandler
 									@Override
 									public void run()
 									{
-										world.playSound(location, Sound.NOTE_PIANO, volume, (float) Math.pow(2.0, ((double) pitch - 12.0) / 12.0));
+										world.playSound(location, Sound.Note.Piano, volume, (float) Math.pow(2.0, ((double) pitch - 12.0) / 12.0));
 									}
 								}, tick / 30);
 

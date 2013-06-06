@@ -19,7 +19,7 @@ public class PlaySound extends PlayerCommand
 		float volume = Float.valueOf(parameters.get("volume"));
 		float pitch = Float.valueOf(parameters.get("pitch"));
 
-		Sound sound = Sound.valueOf(parameters.get("sound"));
+		Sound sound = Sound.Get(parameters.get("sound"));
 		if (sound == null)
 			return "&cThat sound does not exist.";
 
