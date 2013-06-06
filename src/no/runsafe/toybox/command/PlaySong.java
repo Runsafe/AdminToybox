@@ -17,7 +17,13 @@ public class PlaySong extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		return (this.songHandler.playSong(parameters.get("song"), executor.getLocation(), Float.valueOf(parameters.get("radius"))) ? "&2Playing song." : "&cSong not found.");
+		return (
+				this.songHandler.playSong(
+						parameters.get("song"),
+						executor.getLocation(),
+						Float.valueOf(parameters.get("radius"))
+				) ? "&2Playing song." : "&cSong not found."
+		);
 	}
 
 	private SongHandler songHandler;
