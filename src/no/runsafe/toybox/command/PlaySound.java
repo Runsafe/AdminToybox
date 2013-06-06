@@ -1,8 +1,8 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
+import no.runsafe.framework.minecraft.Sound;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import org.bukkit.Sound;
 
 import java.util.HashMap;
 
