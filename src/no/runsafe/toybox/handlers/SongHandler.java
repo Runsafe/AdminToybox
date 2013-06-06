@@ -67,12 +67,12 @@ public class SongHandler
 
 								final int pitch;
 
-								if (octave == 2)
+								if (octave <= 2)
 									pitch = NOTE_PITCH_O1[note];
-								else if (octave == 3)
+								else if (octave > 2)
 									pitch = NOTE_PITCH_O2[note];
 								else
-									pitch = NOTE_PITCH_O1[note]; // Hurr?
+									pitch = NOTE_PITCH_O1[note];
 
 								this.scheduler.startSyncTask(new Runnable() {
 									@Override
