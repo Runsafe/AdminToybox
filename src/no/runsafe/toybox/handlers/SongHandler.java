@@ -1,6 +1,10 @@
 package no.runsafe.toybox.handlers;
 
+import no.runsafe.framework.minecraft.Sound;
 import no.runsafe.framework.output.IOutput;
+import no.runsafe.framework.server.RunsafeLocation;
+import no.runsafe.framework.server.RunsafeWorld;
+import no.runsafe.framework.timer.IScheduler;
 import no.runsafe.toybox.Plugin;
 
 import javax.sound.midi.*;
@@ -8,9 +12,10 @@ import java.io.File;
 
 public class SongHandler
 {
-	public SongHandler(Plugin adminToybox, IOutput output)
+	public SongHandler(Plugin adminToybox, IOutput output, IScheduler scheduler)
 	{
 		this.output = output;
+		this.scheduler = scheduler;
 		this.path = String.format("plugins/%s/songs/", adminToybox.getName());
 
 		if (!new File(this.path).mkdirs())
@@ -22,12 +27,13 @@ public class SongHandler
 		return new File(this.path + song).exists();
 	}
 
-	public boolean playSong(String song)
+	public boolean playSong(String song, final RunsafeLocation location, final float volume)
 	{
 		if (this.songExists(song))
 		{
 			try
 			{
+				final RunsafeWorld world = location.getWorld();
 				Sequence sequence = MidiSystem.getSequence(new File(this.path + song));
 
 				int trackNumber = 0;
@@ -42,7 +48,8 @@ public class SongHandler
 						MidiEvent event = track.get(i);
 						MidiMessage message = event.getMessage();
 
-						output.append("@").append(event.getTick()).append(" ");
+						long tick = event.getTick();
+						output.append("@").append(tick).append(" ");
 
 						if (message instanceof ShortMessage)
 						{
@@ -53,27 +60,30 @@ public class SongHandler
 
 							if (shortMessage.getCommand() == NOTE_ON)
 							{
+								int key = shortMessage.getData1();
+								int octave = (key / 12) - 1;
+								final int note = key % 12;
+								int velocity = shortMessage.getData2();
+
+								this.scheduler.startSyncTask(new Runnable() {
+									@Override
+									public void run()
+									{
+										world.playSound(location, Sound.NOTE_PIANO, volume, (float) Math.pow(2.0, ((double) NOTE_PITCH[note] - 12.0) / 12.0));
+									}
+								}, tick / 10);
+
 								output.append("Note on, ");
-							}
-							else if (shortMessage.getCommand() == NOTE_OFF)
-							{
-								output.append("Note off, ");
+								output
+										.append(NOTE_NAMES[note]).append(octave)
+										.append(" key=").append(key)
+										.append(" velocity=").append(velocity);
 							}
 							else
 							{
 								output.append("Command: ").append(shortMessage.getCommand());
 								continue;
 							}
-
-							int key = shortMessage.getData1();
-							int octave = (key / 12) - 1;
-							int note = key % 12;
-							int velocity = shortMessage.getData2();
-
-							output
-								.append(NOTE_NAMES[note]).append(octave)
-								.append(" key=").append(key)
-								.append(" velocity=").append(velocity);
 						}
 						else
 						{
@@ -95,6 +105,7 @@ public class SongHandler
 	private String path;
 	private IOutput output;
 	private static final int NOTE_ON = 0x90;
-	private static final int NOTE_OFF = 0x80;
 	private static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
+	private static final int[] NOTE_PITCH = {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+	private IScheduler scheduler;
 }
