@@ -71,7 +71,7 @@ public class SongHandler
 									{
 										world.playSound(location, Sound.NOTE_PIANO, volume, (float) Math.pow(2.0, ((double) NOTE_PITCH[note] - 12.0) / 12.0));
 									}
-								}, tick / 100);
+								}, tick / 30);
 
 								output.append("Note on, ");
 								output
