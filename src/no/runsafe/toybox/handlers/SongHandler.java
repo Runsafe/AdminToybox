@@ -37,10 +37,9 @@ public class SongHandler
 				Sequence sequence = MidiSystem.getSequence(new File(this.path + song));
 
 				Patch[] patches = sequence.getPatchList();
+				this.output.write("Patches: " + patches.length);
 				for (Patch patch : patches)
-				{
 					this.output.write("Patch - Bank: " + patch.getBank() + " Program: " + patch.getProgram());
-				}
 
 				int trackNumber = 0;
 				for (Track track : sequence.getTracks())
@@ -61,8 +60,6 @@ public class SongHandler
 						{
 							ShortMessage shortMessage = (ShortMessage) message;
 							output.append("Channel: ").append(shortMessage.getChannel()).append(" ");
-
-							output.append(shortMessage.getCommand()).append(" - ");
 
 							if (shortMessage.getCommand() == NOTE_ON)
 							{
