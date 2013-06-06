@@ -36,6 +36,12 @@ public class SongHandler
 				final RunsafeWorld world = location.getWorld();
 				Sequence sequence = MidiSystem.getSequence(new File(this.path + song));
 
+				Patch[] patches = sequence.getPatchList();
+				for (Patch patch : patches)
+				{
+					this.output.write("Patch - Bank: " + patch.getBank() + " Program: " + patch.getProgram());
+				}
+
 				int trackNumber = 0;
 				for (Track track : sequence.getTracks())
 				{
