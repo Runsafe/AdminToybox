@@ -53,3 +53,6 @@ commands:
     aliases: [dye]
   author:
     description: Changes the author of a book
+  playsound:
+    description: Plays a sound
+    aliases: [ps]
