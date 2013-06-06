@@ -10,7 +10,7 @@ public class PlaySound extends PlayerCommand
 {
 	public PlaySound()
 	{
-		super("playsound", "runsafe.toybox.playsound", "sound", "volume", "pitch");
+		super("playsound", "Plays a sound", "runsafe.toybox.playsound", "sound", "volume", "pitch");
 	}
 
 	@Override
