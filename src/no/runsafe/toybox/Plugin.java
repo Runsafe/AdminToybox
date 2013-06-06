@@ -35,6 +35,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(BuffCommand.class);
 		addComponent(Colour.class);
 		addComponent(Author.class);
+		addComponent(PlaySound.class);
 
 		// Handlers
 		addComponent(CarePackageHandler.class);
