@@ -49,6 +49,8 @@ public class SongHandler
 							ShortMessage shortMessage = (ShortMessage) message;
 							output.append("Channel: ").append(shortMessage.getChannel()).append(" ");
 
+							output.append(shortMessage.getCommand()).append(" - ");
+
 							if (shortMessage.getCommand() == NOTE_ON)
 							{
 								output.append("Note on, ");
