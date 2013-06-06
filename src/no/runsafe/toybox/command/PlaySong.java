@@ -10,7 +10,7 @@ public class PlaySong extends PlayerCommand
 {
 	public PlaySong(SongHandler songHandler)
 	{
-		super("playsong", "Plays a song at your location", "runsafe.toybox.playsong", "song", "radius");
+		super("playsong", "Plays a song at your location", "runsafe.toybox.playsong", "song", "radius", "speed");
 		this.songHandler = songHandler;
 	}
 
@@ -21,7 +21,8 @@ public class PlaySong extends PlayerCommand
 				this.songHandler.playSong(
 						parameters.get("song"),
 						executor.getLocation(),
-						Float.valueOf(parameters.get("radius"))
+						Float.valueOf(parameters.get("radius")),
+						Integer.valueOf(parameters.get("speed"))
 				) ? "&2Playing song." : "&cSong not found."
 		);
 	}

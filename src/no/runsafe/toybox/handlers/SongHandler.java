@@ -27,7 +27,7 @@ public class SongHandler
 		return new File(this.path + song).exists();
 	}
 
-	public boolean playSong(String song, final RunsafeLocation location, final float volume)
+	public boolean playSong(String song, final RunsafeLocation location, final float volume, int speed)
 	{
 		if (this.songExists(song))
 		{
@@ -80,7 +80,7 @@ public class SongHandler
 									{
 										world.playSound(location, Sound.Note.Piano, volume, (float) Math.pow(2.0, ((double) pitch - 12.0) / 12.0));
 									}
-								}, tick / 30);
+								}, tick / speed);
 
 								output.append("Note on, ");
 								output
