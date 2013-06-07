@@ -5,7 +5,6 @@ import no.runsafe.toybox.command.*;
 import no.runsafe.toybox.events.*;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 import no.runsafe.toybox.handlers.MobDropHandler;
-import no.runsafe.toybox.handlers.SongHandler;
 
 public class Plugin extends RunsafePlugin
 {
@@ -15,7 +14,6 @@ public class Plugin extends RunsafePlugin
 		// Handlers
 		addComponent(CarePackageHandler.class);
 		addComponent(MobDropHandler.class);
-		addComponent(SongHandler.class);
 
 		// Commands
 		addComponent(Bazooka.class);
@@ -42,7 +40,6 @@ public class Plugin extends RunsafePlugin
 		addComponent(Colour.class);
 		addComponent(Author.class);
 		addComponent(PlaySound.class);
-		addComponent(PlaySong.class);
 
 		// Events
 		addComponent(InventoryClose.class);

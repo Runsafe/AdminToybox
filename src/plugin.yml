@@ -56,6 +56,3 @@ commands:
   playsound:
     description: Plays a sound
     aliases: [ps]
-  playsong:
-    description: Plays a song
-    aliases: [song]
