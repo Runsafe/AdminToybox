@@ -24,6 +24,9 @@ public class CreateHead extends PlayerCommand
 		if (player instanceof RunsafeAmbiguousPlayer)
 			return player.toString();
 
+		if(player == null)
+			return "Unable to find a player named " + parameters.get("player");
+
 		RunsafeItemStack heads = Item.Decoration.Head.Human.getItem();
 		heads.setAmount(1);
 		RunsafeSkullMeta meta = (RunsafeSkullMeta) heads.getItemMeta();
