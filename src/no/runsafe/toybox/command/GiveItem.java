@@ -1,6 +1,7 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.ExecutableCommand;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.ICommandExecutor;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.item.RunsafeItemStack;
@@ -65,12 +66,11 @@ public class GiveItem extends ExecutableCommand
 		for (Material material : Material.values())
 		{
 			if (material.name().replace("_", "").equalsIgnoreCase(itemName))
-				return new RunsafeItemStack(material.getId());
+				return Item.get(material, (byte) 0).getItem();
 
 			if (itemName.matches("-?\\d+(\\.\\d+)?"))
 				if (material.getId() == Integer.valueOf(itemName))
-					return new RunsafeItemStack(material.getId());
-
+					return Item.get(material, (byte) 0).getItem();
 		}
 		return null;
 	}
