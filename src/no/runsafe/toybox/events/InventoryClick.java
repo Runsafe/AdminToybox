@@ -14,7 +14,7 @@ public class InventoryClick implements IInventoryClick
 		RunsafeItemStack item = event.getCurrentItem();
 		if (item != null && item instanceof RunsafeMeta)
 		{
-			String name = ((RunsafeMeta)item).getDisplayName();
+			String name = ((RunsafeMeta) item).getDisplayName();
 			if (name != null)
 			{
 				if (name.equalsIgnoreCase("Infinite"))
