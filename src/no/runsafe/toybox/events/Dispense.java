@@ -6,6 +6,7 @@ import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeDispenser;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import org.bukkit.block.Dropper;
 
 public class Dispense implements IBlockDispense
 {
@@ -17,6 +18,15 @@ public class Dispense implements IBlockDispense
 		{
 			RunsafeDispenser dispenser = (RunsafeDispenser) blockState;
 			RunsafeInventory inventory = dispenser.getInventory();
+			String title = inventory.getTitle();
+
+			if (title.equalsIgnoreCase("Infinite"))
+				inventory.addItems(item.clone());
+		}
+		else if (blockState.getRaw() instanceof Dropper)
+		{
+			Dropper dropper = (Dropper) blockState.getRaw();
+			RunsafeInventory inventory = new RunsafeInventory(dropper.getInventory());
 			String title = inventory.getTitle();
 
 			if (title.equalsIgnoreCase("Infinite"))
