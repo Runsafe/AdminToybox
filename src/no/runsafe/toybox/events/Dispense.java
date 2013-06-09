@@ -17,6 +17,8 @@ public class Dispense implements IBlockDispense
 		RunsafeBlockState blockState = block.getBlockState();
 		RunsafeInventory inventory = null;
 
+		RunsafeServer.Instance.broadcastMessage(blockState.getClass().getName());
+
 		if (blockState instanceof RunsafeDispenser)
 		{
 			inventory = ((RunsafeDispenser) blockState).getInventory();
