@@ -3,6 +3,7 @@ package no.runsafe.toybox.events;
 import no.runsafe.framework.event.inventory.IInventoryClick;
 import no.runsafe.framework.server.event.inventory.RunsafeInventoryClickEvent;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 public class InventoryClick implements IInventoryClick
@@ -13,7 +14,9 @@ public class InventoryClick implements IInventoryClick
 		RunsafeItemStack item = event.getCurrentItem();
 		if (item != null)
 		{
-			String name = item.getDisplayName();
+			//String name = item.getDisplayName();
+			RunsafeItemMeta meta = item.getItemMeta();
+			String name = meta.getDisplayName();
 			if (name != null)
 			{
 				if (name.equalsIgnoreCase("Infinite"))
