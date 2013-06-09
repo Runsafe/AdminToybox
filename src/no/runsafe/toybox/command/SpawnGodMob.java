@@ -6,7 +6,7 @@ import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.entity.RunsafeEntity;
 import no.runsafe.framework.server.entity.RunsafeLivingEntity;
-import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class SpawnGodMob extends PlayerCommand
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
 
-				RunsafeItemStack weapon;
+				RunsafeMeta weapon;
 				if (mobName.equalsIgnoreCase("skeleton"))
 					weapon = Item.Combat.Bow.enchant(Enchant.All).getItem();
 				else
