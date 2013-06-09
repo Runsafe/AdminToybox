@@ -19,18 +19,10 @@ public class RenameItem extends PlayerCommand
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
-
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
-		RunsafeItemMeta meta = item.getItemMeta();
-
-		if (meta == null)
-			return "&cThat item cannot be renamed.";
-
-		meta.setDisplayName(parameters.get("name"));
-		item.setItemMeta(meta);
-
+		item.setDisplayName(parameters.get("name"));
 		return "&2The item you hold has been renamed.";
 	}
 }

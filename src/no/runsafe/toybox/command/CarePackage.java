@@ -21,5 +21,5 @@ public class CarePackage extends PlayerCommand
 		return null;
 	}
 
-	private CarePackageHandler handler;
+	private final CarePackageHandler handler;
 }

@@ -3,7 +3,6 @@ package no.runsafe.toybox.events;
 import no.runsafe.framework.event.inventory.IInventoryClick;
 import no.runsafe.framework.server.event.inventory.RunsafeInventoryClickEvent;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 public class InventoryClick implements IInventoryClick
@@ -14,20 +13,16 @@ public class InventoryClick implements IInventoryClick
 		RunsafeItemStack item = event.getCurrentItem();
 		if (item != null)
 		{
-			RunsafeItemMeta meta = item.getItemMeta();
-			if (meta != null)
+			String name = item.getDisplayName();
+			if (name != null)
 			{
-				String name = meta.getDisplayName();
-				if (name != null)
+				if (name.equalsIgnoreCase("Infinite"))
 				{
-					if (meta.getDisplayName().equalsIgnoreCase("Infinite"))
+					RunsafePlayer player = event.getWhoClicked();
+					if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
 					{
-						RunsafePlayer player = event.getWhoClicked();
-						if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
-						{
-							player.sendColouredMessage("&cYou do not have permission to make those.");
-							event.setCancelled(true);
-						}
+						player.sendColouredMessage("&cYou do not have permission to make those.");
+						event.setCancelled(true);
 					}
 				}
 			}

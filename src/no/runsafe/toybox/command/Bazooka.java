@@ -41,5 +41,5 @@ public class Bazooka extends PlayerCommand
 		return null;
 	}
 
-	private IScheduler scheduler;
+	private final IScheduler scheduler;
 }

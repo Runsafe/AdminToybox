@@ -2,8 +2,8 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Item;
+import no.runsafe.framework.server.item.RunsafeBook;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeBookMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.HashMap;
@@ -21,10 +21,8 @@ public class Author extends PlayerCommand
 		RunsafeItemStack item = executor.getItemInHand();
 		if (item.is(Item.Special.Crafted.WrittenBook))
 		{
-			RunsafeBookMeta meta = (RunsafeBookMeta) item.getItemMeta();
 			String playerName = parameters.get("player");
-			meta.setAuthor(playerName);
-			item.setItemMeta(meta);
+			((RunsafeBook) item).setAuthor(playerName);
 			return "&2Author changed to " + playerName;
 		}
 		return "&cYou cannot change the author of that item.";
