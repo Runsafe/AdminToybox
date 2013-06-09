@@ -1,7 +1,6 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.block.IBlockDispense;
-import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeDispenser;
