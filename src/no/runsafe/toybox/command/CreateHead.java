@@ -3,8 +3,7 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.RunsafeServer;
-import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
+import no.runsafe.framework.server.item.meta.RunsafeSkull;
 import no.runsafe.framework.server.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
@@ -24,14 +23,12 @@ public class CreateHead extends PlayerCommand
 		if (player instanceof RunsafeAmbiguousPlayer)
 			return player.toString();
 
-		if(player == null)
+		if (player == null)
 			return "Unable to find a player named " + parameters.get("player");
 
-		RunsafeItemStack heads = Item.Decoration.Head.Human.getItem();
+		RunsafeSkull heads = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
 		heads.setAmount(1);
-		RunsafeSkullMeta meta = (RunsafeSkullMeta) heads.getItemMeta();
-		meta.setOwner(player.getName());
-		heads.setItemMeta(meta);
+		heads.setPlayer(player);
 		executor.give(heads);
 
 		return "Creating the head of " + player.getName();
