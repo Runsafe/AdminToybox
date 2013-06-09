@@ -1,6 +1,7 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.event.block.IBlockDispense;
+import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeDispenser;
@@ -17,9 +18,15 @@ public class Dispense implements IBlockDispense
 		RunsafeInventory inventory = null;
 
 		if (blockState instanceof RunsafeDispenser)
+		{
 			inventory = ((RunsafeDispenser) blockState).getInventory();
+			RunsafeServer.Instance.broadcastMessage("Dispenser detected");
+		}
 		else if (blockState instanceof RunsafeDropper)
+		{
 			inventory = ((RunsafeDropper) blockState).getInventory();
+			RunsafeServer.Instance.broadcastMessage("Dropper detected");
+		}
 
 		if (inventory != null)
 			if (inventory.getTitle().equalsIgnoreCase("Infinite"))
