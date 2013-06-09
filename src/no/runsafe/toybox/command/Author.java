@@ -2,8 +2,8 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.item.RunsafeBook;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeBook;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.HashMap;
