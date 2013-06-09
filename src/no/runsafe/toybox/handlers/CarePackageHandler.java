@@ -5,7 +5,7 @@ import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeChest;
 import no.runsafe.framework.server.entity.RunsafeFallingBlock;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import org.bukkit.Material;
 
@@ -54,7 +54,7 @@ public class CarePackageHandler
 
 	public void DropPackage(RunsafePlayer player)
 	{
-		RunsafeFallingBlock block = player.getWorld().spawnFallingBlock(player.getLocation(), Material.CHEST,  (byte) 0);
+		RunsafeFallingBlock block = player.getWorld().spawnFallingBlock(player.getLocation(), Material.CHEST, (byte) 0);
 		block.setDropItem(false);
 		this.fallingDrops.put(block.getEntityId(), this.GetAwaitingInventory(player));
 		this.RemoveAwaitingInventory(player);
@@ -67,7 +67,7 @@ public class CarePackageHandler
 
 	public void ProcessDrop(Integer entityID, RunsafeBlock block)
 	{
-		List<RunsafeItemStack> items = this.GetFallingInventory(entityID).getContents();
+		List<RunsafeMeta> items = this.GetFallingInventory(entityID).getContents();
 		this.RemoveFallingInventory(entityID);
 
 		if (block.getBlockState() instanceof RunsafeChest)
@@ -75,7 +75,7 @@ public class CarePackageHandler
 			RunsafeChest chest = (RunsafeChest) block.getBlockState();
 			RunsafeInventory chestInventory = chest.getInventory();
 
-			for (RunsafeItemStack item : items)
+			for (RunsafeMeta item : items)
 				chestInventory.addItems(item);
 		}
 	}

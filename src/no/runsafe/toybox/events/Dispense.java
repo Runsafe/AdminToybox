@@ -5,13 +5,13 @@ import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeDispenser;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import org.bukkit.block.Dropper;
 
 public class Dispense implements IBlockDispense
 {
 	@Override
-	public boolean OnBlockDispense(RunsafeBlock block, RunsafeItemStack item)
+	public boolean OnBlockDispense(RunsafeBlock block, RunsafeMeta item)
 	{
 		RunsafeBlockState blockState = block.getBlockState();
 		if (blockState instanceof RunsafeDispenser)
