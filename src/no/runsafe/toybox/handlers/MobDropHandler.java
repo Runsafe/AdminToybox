@@ -41,5 +41,5 @@ public class MobDropHandler
 		this.fallingMobDrops.remove(entityID);
 	}
 
-	private final HashMap<Integer, MobDropData> fallingMobDrops;
+	private HashMap<Integer, MobDropData> fallingMobDrops;
 }

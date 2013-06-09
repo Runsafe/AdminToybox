@@ -20,5 +20,5 @@ public class InventoryClose implements IInventoryClosed
 			this.handler.DropPackage(player);
 	}
 
-	private final CarePackageHandler handler;
+	private CarePackageHandler handler;
 }

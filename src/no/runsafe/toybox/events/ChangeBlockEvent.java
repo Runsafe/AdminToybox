@@ -36,6 +36,6 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 		}
 	}
 
-	private final CarePackageHandler handler;
-	private final MobDropHandler mobDropHandler;
+	private CarePackageHandler handler;
+	private MobDropHandler mobDropHandler;
 }

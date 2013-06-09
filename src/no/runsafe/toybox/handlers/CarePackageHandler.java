@@ -80,6 +80,6 @@ public class CarePackageHandler
 		}
 	}
 
-	private final HashMap<String, RunsafeInventory> awaitingDrops;
-	private final HashMap<Integer, RunsafeInventory> fallingDrops;
+	private HashMap<String, RunsafeInventory> awaitingDrops;
+	private HashMap<Integer, RunsafeInventory> fallingDrops;
 }

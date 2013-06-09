@@ -74,7 +74,7 @@ public class BuffCommand extends ExecutableCommand
 		return null; // Remove
 	}
 
-	private static final HashMap<String, Buff> buffs = new HashMap<String, Buff>();
+	private static HashMap<String, Buff> buffs = new HashMap<String, Buff>();
 
 	static
 	{
