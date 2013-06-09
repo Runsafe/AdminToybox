@@ -45,6 +45,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(InventoryClose.class);
 		addComponent(ChangeBlockEvent.class);
 		addComponent(Dispense.class);
+		addComponent(InventoryMoveItem.class);
 		addComponent(BlockPlace.class);
 		addComponent(InventoryClick.class);
 		addComponent(PlayerMove.class);
