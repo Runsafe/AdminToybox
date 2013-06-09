@@ -21,5 +21,5 @@ public class MobDrop extends PlayerCommand
 		return null;
 	}
 
-	private MobDropHandler handler;
+	private final MobDropHandler handler;
 }

@@ -41,7 +41,7 @@ commands:
   renameitem:
     description: Renames an item in your hand.
   give:
-    description: Gives a player the items specificed.
+    description: Gives a player the items specified.
     aliases: [item, i, give]
   kill:
     description: Kills a specific player or yourself
