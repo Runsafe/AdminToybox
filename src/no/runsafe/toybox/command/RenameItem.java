@@ -2,7 +2,7 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.command.player.PlayerCommand;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.HashMap;
@@ -22,7 +22,12 @@ public class RenameItem extends PlayerCommand
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
-		item.setDisplayName(parameters.get("name"));
-		return "&2The item you hold has been renamed.";
+		if (item instanceof RunsafeMeta)
+		{
+			((RunsafeMeta) item).setDisplayName(parameters.get("name"));
+			return "&2The item you hold has been renamed.";
+		}
+
+		return "&cThat item cannot be renamed.";
 	}
 }
