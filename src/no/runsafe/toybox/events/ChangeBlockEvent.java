@@ -1,8 +1,8 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.entity.IEntityChangeBlockEvent;
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.event.entity.RunsafeEntityChangeBlockEvent;
+import no.runsafe.framework.api.event.entity.IEntityChangeBlockEvent;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.event.entity.RunsafeEntityChangeBlockEvent;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 import no.runsafe.toybox.handlers.MobDropHandler;
 import org.bukkit.Material;

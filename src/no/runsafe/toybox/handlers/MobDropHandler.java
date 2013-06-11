@@ -1,7 +1,7 @@
 package no.runsafe.toybox.handlers;
 
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.entity.RunsafeEntity;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 import no.runsafe.toybox.MobDropData;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

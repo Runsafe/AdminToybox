@@ -1,10 +1,10 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.block.IBlockPlace;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.block.RunsafeBlockState;
-import no.runsafe.framework.server.block.RunsafeSign;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.event.block.IBlockPlace;
+import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.block.RunsafeBlockState;
+import no.runsafe.framework.minecraft.block.RunsafeSign;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public class BlockPlace implements IBlockPlace
 {

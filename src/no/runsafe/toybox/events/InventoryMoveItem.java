@@ -1,7 +1,7 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.inventory.IInventoryMoveItem;
-import no.runsafe.framework.server.event.inventory.RunsafeInventoryMoveItemEvent;
+import no.runsafe.framework.api.event.inventory.IInventoryMoveItem;
+import no.runsafe.framework.minecraft.event.inventory.RunsafeInventoryMoveItemEvent;
 
 public class InventoryMoveItem implements IInventoryMoveItem
 {

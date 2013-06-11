@@ -1,9 +1,9 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.player.IPlayerMove;
+import no.runsafe.framework.api.event.player.IPlayerMove;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.Effect;
 
 public class PlayerMove implements IPlayerMove

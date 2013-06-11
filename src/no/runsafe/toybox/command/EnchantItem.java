@@ -1,10 +1,10 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.enchant.Enchant;
-import no.runsafe.framework.enchant.IEnchant;
-import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.minecraft.IEnchant;
+import no.runsafe.framework.minecraft.Enchant;
+import no.runsafe.framework.minecraft.item.RunsafeItemStack;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;

@@ -1,12 +1,12 @@
 package no.runsafe.toybox.handlers;
 
-import no.runsafe.framework.server.RunsafeServer;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.block.RunsafeChest;
-import no.runsafe.framework.server.entity.RunsafeFallingBlock;
-import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.RunsafeServer;
+import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.block.RunsafeChest;
+import no.runsafe.framework.minecraft.entity.RunsafeFallingBlock;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.Material;
 
 import java.util.HashMap;

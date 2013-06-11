@@ -1,9 +1,8 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.HashMap;
 
@@ -18,15 +17,14 @@ public class RenameItem extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		RunsafeItemStack item = executor.getItemInHand();
+		RunsafeMeta item = executor.getItemInHand();
 		if (item == null)
 			return "&cYou need to be holding an item.";
 
-		if (item instanceof RunsafeMeta)
-		{
-			((RunsafeMeta) item).setDisplayName(parameters.get("name"));
+		String name = parameters.get("name");
+		item.setDisplayName(name);
+		if (name.equals(item.getDisplayName()))
 			return "&2The item you hold has been renamed.";
-		}
 
 		return "&cThat item cannot be renamed.";
 	}

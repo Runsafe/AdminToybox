@@ -1,12 +1,12 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.block.IBlockDispense;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.block.RunsafeBlockState;
-import no.runsafe.framework.server.block.RunsafeDispenser;
-import no.runsafe.framework.server.block.RunsafeDropper;
-import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
+import no.runsafe.framework.api.event.block.IBlockDispense;
+import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.block.RunsafeBlockState;
+import no.runsafe.framework.minecraft.block.RunsafeDispenser;
+import no.runsafe.framework.minecraft.block.RunsafeDropper;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 public class Dispense implements IBlockDispense
 {

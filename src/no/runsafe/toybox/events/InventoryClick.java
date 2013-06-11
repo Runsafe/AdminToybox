@@ -1,20 +1,19 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.inventory.IInventoryClick;
-import no.runsafe.framework.server.event.inventory.RunsafeInventoryClickEvent;
-import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.event.inventory.IInventoryClick;
+import no.runsafe.framework.minecraft.event.inventory.RunsafeInventoryClickEvent;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public class InventoryClick implements IInventoryClick
 {
 	@Override
 	public void OnInventoryClickEvent(RunsafeInventoryClickEvent event)
 	{
-		RunsafeItemStack item = event.getCurrentItem();
-		if (item != null && item instanceof RunsafeMeta)
+		RunsafeMeta item = event.getCurrentItem();
+		if (item != null)
 		{
-			String name = ((RunsafeMeta) item).getDisplayName();
+			String name = item.getDisplayName();
 			if (name != null)
 			{
 				if (name.equalsIgnoreCase("Infinite"))

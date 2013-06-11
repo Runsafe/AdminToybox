@@ -1,8 +1,8 @@
 package no.runsafe.toybox.events;
 
-import no.runsafe.framework.event.inventory.IInventoryClosed;
-import no.runsafe.framework.server.event.inventory.RunsafeInventoryCloseEvent;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.event.inventory.IInventoryClosed;
+import no.runsafe.framework.minecraft.event.inventory.RunsafeInventoryCloseEvent;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
 public class InventoryClose implements IInventoryClosed

@@ -1,13 +1,13 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.enchant.Enchant;
+import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Buff;
+import no.runsafe.framework.minecraft.Enchant;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.entity.RunsafeEntity;
-import no.runsafe.framework.server.entity.RunsafeLivingEntity;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.entity.RunsafeEntity;
+import no.runsafe.framework.minecraft.entity.RunsafeLivingEntity;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.HashMap;
 
