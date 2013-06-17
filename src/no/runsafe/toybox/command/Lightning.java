@@ -1,7 +1,7 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.ExecutableCommand;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -37,7 +37,7 @@ public class Lightning extends ExecutableCommand
 		if (arguments.length == 3)
 			return StrikeCoordinates(executor, arguments[0], arguments[1], arguments[2]);
 
-		return getUsage();
+		return getUsage(executor);
 	}
 
 	private String StrikeTarget(ICommandExecutor executor)
