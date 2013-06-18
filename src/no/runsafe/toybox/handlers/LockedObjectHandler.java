@@ -1,17 +1,19 @@
 package no.runsafe.toybox.handlers;
 
-import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.event.block.IBlockBreakEvent;
+import no.runsafe.framework.api.event.plugin.IPluginDisabled;
+import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class LockedObjectHandler implements IConfigurationChanged
+public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreakEvent
 {
 	public LockedObjectHandler(LockedObjectRepository repository)
 	{
@@ -74,7 +76,23 @@ public class LockedObjectHandler implements IConfigurationChanged
 	}
 
 	@Override
-	public void OnConfigurationChanged(IConfiguration configuration)
+	public void OnBlockBreakEvent(RunsafeBlockBreakEvent event)
+	{
+		RunsafeBlock block = event.getBlock();
+
+		if (block != null)
+		{
+			if (this.isLockedBlock(block))
+			{
+				event.setCancelled(true);
+				if (event.getPlayer() != null)
+					event.getPlayer().sendColouredMessage("&cThe block is impenetrable to your attempts.");
+			}
+		}
+	}
+
+	@Override
+	public void OnPluginEnabled()
 	{
 		List<RunsafeLocation> locations = this.repository.getLockedObjects();
 		for (RunsafeLocation location : locations)
@@ -85,6 +103,12 @@ public class LockedObjectHandler implements IConfigurationChanged
 
 			this.lockedObjects.get(worldName).add(location);
 		}
+	}
+
+	@Override
+	public void OnPluginDisabled()
+	{
+		this.lockedObjects.clear(); // Dump any objects we have in memory.
 	}
 
 	private HashMap<String, List<RunsafeLocation>> lockedObjects = new HashMap<String, List<RunsafeLocation>>();
