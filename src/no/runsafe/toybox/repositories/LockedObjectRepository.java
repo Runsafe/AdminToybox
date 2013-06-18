@@ -32,7 +32,7 @@ public class LockedObjectRepository extends Repository
 	public void removeLockedObject(RunsafeLocation location)
 	{
 		this.database.Execute(
-				"DELETE FROM toybox_locked_objects WHERE world = ?, x = ?, y =?, z = ?",
+				"DELETE FROM toybox_locked_objects WHERE world = '?', x = ?, y =?, z = ?",
 				location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ()
 		);
 	}
