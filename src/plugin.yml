@@ -56,3 +56,5 @@ commands:
   playsound:
     description: Plays a sound
     aliases: [ps]
+  lock:
+    description: Enables locking and unlocking of objets.

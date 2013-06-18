@@ -4,14 +4,20 @@ import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.toybox.command.*;
 import no.runsafe.toybox.events.*;
 import no.runsafe.toybox.handlers.CarePackageHandler;
+import no.runsafe.toybox.handlers.LockedObjectHandler;
 import no.runsafe.toybox.handlers.MobDropHandler;
+import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 public class Plugin extends RunsafePlugin
 {
 	@Override
 	protected void PluginSetup()
 	{
+		// Repositories
+		addComponent(LockedObjectRepository.class);
+
 		// Handlers
+		addComponent(LockedObjectHandler.class);
 		addComponent(CarePackageHandler.class);
 		addComponent(MobDropHandler.class);
 
@@ -40,6 +46,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Colour.class);
 		addComponent(Author.class);
 		addComponent(PlaySound.class);
+		addComponent(Lock.class);
 
 		// Events
 		addComponent(InventoryClose.class);
