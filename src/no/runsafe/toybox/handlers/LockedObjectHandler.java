@@ -1,23 +1,25 @@
 package no.runsafe.toybox.handlers;
 
-import no.runsafe.framework.api.event.block.IBlockBreakEvent;
+import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.event.block.IBlockBreak;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.block.RunsafeBlock;
-import no.runsafe.framework.minecraft.event.block.RunsafeBlockBreakEvent;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreakEvent
+public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreak
 {
-	public LockedObjectHandler(LockedObjectRepository repository)
+	public LockedObjectHandler(LockedObjectRepository repository, IOutput output)
 	{
 		this.repository = repository;
+		this.output = output;
 	}
 
 	public boolean isLockedBlock(RunsafeBlock block)
@@ -76,19 +78,19 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	}
 
 	@Override
-	public void OnBlockBreakEvent(RunsafeBlockBreakEvent event)
+	public boolean OnBlockBreak(RunsafePlayer player, RunsafeBlock block)
 	{
-		RunsafeBlock block = event.getBlock();
-
 		if (block != null)
 		{
 			if (this.isLockedBlock(block))
 			{
-				event.setCancelled(true);
-				if (event.getPlayer() != null)
-					event.getPlayer().sendColouredMessage("&cThe block is impenetrable to your attempts.");
+				if (player != null)
+					player.sendColouredMessage("&cThe block is impenetrable to your attempts.");
+
+				return false;
 			}
 		}
+		return true;
 	}
 
 	@Override
@@ -97,11 +99,19 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		List<RunsafeLocation> locations = this.repository.getLockedObjects();
 		for (RunsafeLocation location : locations)
 		{
-			String worldName = location.getWorld().getName();
-			if (!this.lockedObjects.containsKey(worldName))
-				this.lockedObjects.put(worldName, new ArrayList<RunsafeLocation>());
+			if (this.canLockBlock(location.getBlock()))
+			{
+				String worldName = location.getWorld().getName();
+				if (!this.lockedObjects.containsKey(worldName))
+					this.lockedObjects.put(worldName, new ArrayList<RunsafeLocation>());
 
-			this.lockedObjects.get(worldName).add(location);
+				this.lockedObjects.get(worldName).add(location);
+			}
+			else
+			{
+				this.repository.removeLockedObject(location);
+				this.output.logError("Invalid locked object, removing: " + location.toString());
+			}
 		}
 	}
 
@@ -113,6 +123,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 	private HashMap<String, List<RunsafeLocation>> lockedObjects = new HashMap<String, List<RunsafeLocation>>();
 	private LockedObjectRepository repository;
+	private IOutput output;
 	private static List<Item> lockableItems = new ArrayList<Item>();
 	static
 	{
