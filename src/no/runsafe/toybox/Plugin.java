@@ -47,6 +47,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Author.class);
 		addComponent(PlaySound.class);
 		addComponent(Lock.class);
+		addComponent(SpawnHorse.class);
 
 		// Events
 		addComponent(InventoryClose.class);

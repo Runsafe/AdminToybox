@@ -22,6 +22,8 @@ commands:
     description: Mounts you on a player or entity
   spawnmob:
     description: Spawns a mob
+  spawnhorse:
+    description: Spawns a horse
   ride:
     description: Spawns a mob and mounts you to it
   createhead:

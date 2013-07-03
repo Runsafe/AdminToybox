@@ -16,8 +16,12 @@ public class SpawnMob extends PlayerCommand
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
 		int n = Integer.parseInt(parameters.get("count"));
+		String name = parameters.get("name");
+
+		if (name.equalsIgnoreCase("horse"))
+			return "&cPlease use /spawnhorse for that.";
 		for (int i = 0; i < n; ++i)
-			executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("name"));
+			executor.getWorld().spawnCreature(executor.getLocation(), name);
 		return null;
 	}
 }
