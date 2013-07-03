@@ -31,6 +31,9 @@ public class SpawnHorse extends PlayerCommand
 		int variant = (arguments.length > 1) ? Integer.valueOf(arguments[1]) : this.random.nextInt(7);
 		int markings = (arguments.length > 2) ? Integer.valueOf(arguments[2]) : this.random.nextInt(5);
 
+		if (type > 0)
+			variant = markings = 0;
+
 		if (type < 0 || type > 4)
 			return "&cInvalid horse type: " + type;
 
