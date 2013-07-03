@@ -10,6 +10,6 @@ public class SpawnableHorse extends net.minecraft.server.v1_6_R1.EntityHorse
 		this.p(type.ordinal());
 
 		if (type == SpawnableHorseType.NORMAL)
-			this.q(variant.ordinal());
+			this.q(variant.getNbtValue());
 	}
 }
