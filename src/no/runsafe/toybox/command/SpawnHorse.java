@@ -1,10 +1,11 @@
 package no.runsafe.toybox.command;
 
-import net.minecraft.server.v1_6_R1.EntityCow;
 import net.minecraft.server.v1_6_R1.World;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.horses.SpawnableHorse;
+import no.runsafe.toybox.horses.SpawnableHorseType;
+import no.runsafe.toybox.horses.SpawnableHorseVariant;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
 
@@ -27,21 +28,14 @@ public class SpawnHorse extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters, String[] arguments)
 	{
-		int type = (arguments.length > 0) ? Integer.valueOf(arguments[0]) : this.random.nextInt(5);
-		int variant = (arguments.length > 1) ? Integer.valueOf(arguments[1]) : this.random.nextInt(7);
-		int markings = (arguments.length > 2) ? Integer.valueOf(arguments[2]) : this.random.nextInt(5);
+		SpawnableHorseType type = (arguments.length > 0 ? SpawnableHorseType.valueOf(arguments[0]) : this.getRandomHorseType());
+		SpawnableHorseVariant variant = (arguments.length > 1 ? SpawnableHorseVariant.valueOf(arguments[1]) : this.getRandomHorseVariant());
 
-		if (type > 0)
-			variant = markings = 0;
+		if (type == null)
+			return "&cInvalid horse type.";
 
-		if (type < 0 || type > 4)
-			return "&cInvalid horse type: " + type;
-
-		if (variant < 0 || variant > 6)
-			return "&cInvalid variant value: " + variant;
-
-		if (markings < 0 || markings > 4)
-			return "&cInvalid markings values: " + markings;
+		if (variant == null)
+			return "&cInvalid horse variant.";
 
 		int count = Integer.valueOf(parameters.get("count"));
 
@@ -49,10 +43,22 @@ public class SpawnHorse extends PlayerCommand
 		Location playerLocation = executor.getLocation().getRaw();
 		for (int i = 0; i < count; ++i)
 		{
-			SpawnableHorse horse = new SpawnableHorse(world, type, variant, markings);
+			SpawnableHorse horse = new SpawnableHorse(world, type, variant);
 			horse.teleportTo(playerLocation, false);
 		}
 		return null;
+	}
+
+	public SpawnableHorseType getRandomHorseType()
+	{
+		SpawnableHorseType[] values = SpawnableHorseType.values();
+		return values[this.random.nextInt(values.length)];
+	}
+
+	public SpawnableHorseVariant getRandomHorseVariant()
+	{
+		SpawnableHorseVariant[] values = SpawnableHorseVariant.values();
+		return values[this.random.nextInt(values.length)];
 	}
 
 	private Random random = new Random();

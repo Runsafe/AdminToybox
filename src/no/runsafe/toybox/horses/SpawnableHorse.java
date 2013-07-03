@@ -4,13 +4,12 @@ import net.minecraft.server.v1_6_R1.World;
 
 public class SpawnableHorse extends net.minecraft.server.v1_6_R1.EntityHorse
 {
-	public SpawnableHorse(World world, int type, int variant, int markings)
+	public SpawnableHorse(World world, SpawnableHorseType type, SpawnableHorseVariant variant)
 	{
 		super(world);
+		this.p(type.ordinal());
 
-		this.p(type);
-
-		if (type == 0)
-			this.q((markings * 256) + variant);
+		if (type == SpawnableHorseType.NORMAL)
+			this.q(variant.ordinal());
 	}
 }
