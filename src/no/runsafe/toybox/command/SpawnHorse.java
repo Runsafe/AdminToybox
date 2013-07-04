@@ -1,24 +1,20 @@
 package no.runsafe.toybox.command;
 
-import net.minecraft.server.v1_6_R1.Entity;
-import net.minecraft.server.v1_6_R1.EntityTypes;
-import net.minecraft.server.v1_6_R1.World;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
-import no.runsafe.toybox.horses.SpawnableHorse;
+import no.runsafe.toybox.horses.HorseSpawner;
 import no.runsafe.toybox.horses.SpawnableHorseType;
 import no.runsafe.toybox.horses.SpawnableHorseVariant;
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class SpawnHorse extends PlayerCommand
 {
-	public SpawnHorse()
+	public SpawnHorse(HorseSpawner horseSpawner)
 	{
 		super("spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob", "count");
+		this.horseSpawner = horseSpawner;
 	}
 
 	@Override
@@ -41,17 +37,9 @@ public class SpawnHorse extends PlayerCommand
 
 		int count = Integer.valueOf(parameters.get("count"));
 
-		World world = ((CraftWorld) executor.getWorld().getRaw()).getHandle();
-		Location playerLocation = executor.getLocation().getRaw();
 		for (int i = 0; i < count; ++i)
-		{
-			//SpawnableHorse horse = new SpawnableHorse(world, type, variant);
-			//horse.setLocation(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
-			//world.addEntity(horse);
-			//horse.teleportTo(playerLocation, false);
-			Entity entity = EntityTypes.createEntityByName("EntityHorse", world);
-			entity.teleportTo(playerLocation, false);
-		}
+			this.horseSpawner.spawnHorse(executor.getLocation(), type, variant);
+
 		return null;
 	}
 
@@ -68,4 +56,5 @@ public class SpawnHorse extends PlayerCommand
 	}
 
 	private Random random = new Random();
+	private HorseSpawner horseSpawner;
 }
