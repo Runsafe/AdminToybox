@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import net.minecraft.server.v1_6_R1.EntityHorse;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.horses.HorseSpawner;
@@ -13,7 +14,7 @@ public class SpawnHorse extends PlayerCommand
 {
 	public SpawnHorse(HorseSpawner horseSpawner)
 	{
-		super("spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob", "count");
+		super("spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob", "count", "tame");
 		this.horseSpawner = horseSpawner;
 	}
 
@@ -38,7 +39,11 @@ public class SpawnHorse extends PlayerCommand
 		int count = Integer.valueOf(parameters.get("count"));
 
 		for (int i = 0; i < count; ++i)
-			this.horseSpawner.spawnHorse(executor.getLocation(), type, variant);
+		{
+			EntityHorse horse = this.horseSpawner.spawnHorse(executor.getLocation(), type, variant);
+			if (parameters.get("tame").equals("1"))
+				this.horseSpawner.tameHorse(horse);
+		}
 
 		return null;
 	}

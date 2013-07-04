@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
 
 public class HorseSpawner
 {
-	public void spawnHorse(RunsafeLocation location, SpawnableHorseType type, SpawnableHorseVariant variant)
+	public EntityHorse spawnHorse(RunsafeLocation location, SpawnableHorseType type, SpawnableHorseVariant variant)
 	{
 		World world = ((CraftWorld) location.getWorld().getRaw()).getHandle();
 		EntityHorse horse = (EntityHorse) EntityTypes.createEntityByName("EntityHorse", world);
@@ -18,5 +18,11 @@ public class HorseSpawner
 			horse.q(variant.getNbtValue());
 
 		horse.teleportTo(location.getRaw(), false);
+		return horse;
+	}
+
+	public void tameHorse(EntityHorse horse)
+	{
+		horse.j(true);
 	}
 }
