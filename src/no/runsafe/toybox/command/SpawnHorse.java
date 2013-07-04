@@ -1,5 +1,7 @@
 package no.runsafe.toybox.command;
 
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityTypes;
 import net.minecraft.server.v1_6_R1.World;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -43,10 +45,12 @@ public class SpawnHorse extends PlayerCommand
 		Location playerLocation = executor.getLocation().getRaw();
 		for (int i = 0; i < count; ++i)
 		{
-			SpawnableHorse horse = new SpawnableHorse(world, type, variant);
-			horse.setLocation(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
-			world.addEntity(horse);
+			//SpawnableHorse horse = new SpawnableHorse(world, type, variant);
+			//horse.setLocation(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
+			//world.addEntity(horse);
 			//horse.teleportTo(playerLocation, false);
+			Entity entity = EntityTypes.createEntityByName("EntityHorse", world);
+			entity.teleportTo(playerLocation, false);
 		}
 		return null;
 	}
