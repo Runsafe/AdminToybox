@@ -44,7 +44,9 @@ public class SpawnHorse extends PlayerCommand
 		for (int i = 0; i < count; ++i)
 		{
 			SpawnableHorse horse = new SpawnableHorse(world, type, variant);
-			horse.teleportTo(playerLocation, false);
+			horse.setLocation(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
+			world.addEntity(horse);
+			//horse.teleportTo(playerLocation, false);
 		}
 		return null;
 	}
