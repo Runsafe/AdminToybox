@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
 
 public class HorseSpawner
 {
-	public EntityHorse spawnHorse(RunsafeLocation location, SpawnableHorseType type, SpawnableHorseVariant variant)
+	public void spawnHorse(RunsafeLocation location, SpawnableHorseType type, SpawnableHorseVariant variant, boolean tamed)
 	{
 		World world = ((CraftWorld) location.getWorld().getRaw()).getHandle();
 		EntityHorse horse = (EntityHorse) EntityTypes.createEntityByName("EntityHorse", world);
@@ -18,23 +18,11 @@ public class HorseSpawner
 		if (type == SpawnableHorseType.NORMAL)
 			horse.q(variant.getNbtValue());
 
-		horse.teleportTo(location.getRaw(), false);
-		return horse;
-	}
+		NBTTagCompound tags = new NBTTagCompound();
+		horse.b(tags);
+		tags.setBoolean("Tame", tamed);
+		horse.a(tags);
 
-	public void tameHorse(EntityHorse horse)
-	{
-		//horse.g(((CraftHumanEntity) player.getRaw()).getHandle());
-		try
-		{
-			NBTTagCompound tags = new NBTTagCompound();
-			horse.b(tags);
-			tags.setBoolean("Tame", true);
-			horse.a(tags);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		horse.teleportTo(location.getRaw(), false);
 	}
 }
