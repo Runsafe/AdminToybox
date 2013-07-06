@@ -29,16 +29,14 @@ public class HorseSpawner
 		//horse.g(((CraftHumanEntity) player.getRaw()).getHandle());
 		try
 		{
-			NBTTagCompound nbtTags = (NBTTagCompound) Class.forName(this.packageName + ".NBTTagCompound").newInstance();
-			RunsafeServer.Instance.getLogger().info("NBTTag Tamed: " + nbtTags.getBoolean("Tame"));
-			nbtTags.setBoolean("Tame", true);
-			horse.a(nbtTags);
+			NBTTagCompound tags = new NBTTagCompound();
+			horse.b(tags);
+			tags.setBoolean("Tame", true);
+			horse.a(tags);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-
-	private String packageName = "net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 }
