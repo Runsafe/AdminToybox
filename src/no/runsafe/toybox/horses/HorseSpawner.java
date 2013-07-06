@@ -4,7 +4,9 @@ import net.minecraft.server.v1_6_R1.EntityHorse;
 import net.minecraft.server.v1_6_R1.EntityTypes;
 import net.minecraft.server.v1_6_R1.World;
 import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftHumanEntity;
 
 public class HorseSpawner
 {
@@ -21,8 +23,8 @@ public class HorseSpawner
 		return horse;
 	}
 
-	public void tameHorse(EntityHorse horse)
+	public void tameHorse(RunsafePlayer player, EntityHorse horse)
 	{
-		horse.j(true);
+		horse.g(((CraftHumanEntity) player.getRaw()).getHandle());
 	}
 }
