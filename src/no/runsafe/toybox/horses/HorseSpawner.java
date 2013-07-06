@@ -5,8 +5,6 @@ import net.minecraft.server.v1_6_R1.EntityTypes;
 import net.minecraft.server.v1_6_R1.NBTTagCompound;
 import net.minecraft.server.v1_6_R1.World;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.RunsafeServer;
-import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
 
 public class HorseSpawner
