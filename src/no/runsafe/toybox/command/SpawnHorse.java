@@ -42,7 +42,7 @@ public class SpawnHorse extends PlayerCommand
 		{
 			EntityHorse horse = this.horseSpawner.spawnHorse(executor.getLocation(), type, variant);
 			if (parameters.get("tame").equals("1"))
-				this.horseSpawner.tameHorse(executor, horse);
+				this.horseSpawner.tameHorse(horse);
 		}
 
 		return null;

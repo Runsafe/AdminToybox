@@ -2,11 +2,11 @@ package no.runsafe.toybox.horses;
 
 import net.minecraft.server.v1_6_R1.EntityHorse;
 import net.minecraft.server.v1_6_R1.EntityTypes;
+import net.minecraft.server.v1_6_R1.NBTTagCompound;
 import net.minecraft.server.v1_6_R1.World;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_6_R1.entity.CraftHumanEntity;
 
 public class HorseSpawner
 {
@@ -23,9 +23,20 @@ public class HorseSpawner
 		return horse;
 	}
 
-	public void tameHorse(RunsafePlayer player, EntityHorse horse)
+	public void tameHorse(EntityHorse horse)
 	{
-		horse.g(((CraftHumanEntity) player.getRaw()).getHandle());
-		player.sendColouredMessage("Taming the horse for you...");
+		//horse.g(((CraftHumanEntity) player.getRaw()).getHandle());
+		try
+		{
+			NBTTagCompound nbtTags = (NBTTagCompound) Class.forName(this.packageName + ".NBTTagCompound").newInstance();
+			nbtTags.setBoolean("Tame", true);
+			horse.a(nbtTags);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
+
+	private String packageName = "net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 }
