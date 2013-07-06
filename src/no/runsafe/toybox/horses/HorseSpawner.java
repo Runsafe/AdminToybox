@@ -26,5 +26,6 @@ public class HorseSpawner
 	public void tameHorse(RunsafePlayer player, EntityHorse horse)
 	{
 		horse.g(((CraftHumanEntity) player.getRaw()).getHandle());
+		player.sendColouredMessage("Taming the horse for you...");
 	}
 }
