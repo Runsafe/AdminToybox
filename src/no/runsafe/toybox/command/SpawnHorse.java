@@ -27,8 +27,8 @@ public class SpawnHorse extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters, String[] arguments)
 	{
-		SpawnableHorseType type = (arguments.length > 0 ? SpawnableHorseType.valueOf(arguments[0]) : this.getRandomHorseType());
-		SpawnableHorseVariant variant = (arguments.length > 1 ? SpawnableHorseVariant.valueOf(arguments[1]) : this.getRandomHorseVariant());
+		SpawnableHorseType type = (arguments.length > 0 ? SpawnableHorseType.valueOf(arguments[0].toUpperCase()) : this.getRandomHorseType());
+		SpawnableHorseVariant variant = (arguments.length > 1 ? SpawnableHorseVariant.valueOf(arguments[1].toUpperCase()) : this.getRandomHorseVariant());
 
 		if (type == null)
 			return "&cInvalid horse type.";
