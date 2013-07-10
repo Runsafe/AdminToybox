@@ -1,11 +1,11 @@
 package no.runsafe.toybox.horses;
 
-import net.minecraft.server.v1_6_R1.EntityHorse;
-import net.minecraft.server.v1_6_R1.EntityTypes;
-import net.minecraft.server.v1_6_R1.NBTTagCompound;
-import net.minecraft.server.v1_6_R1.World;
+import net.minecraft.server.v1_6_R2.EntityHorse;
+import net.minecraft.server.v1_6_R2.EntityTypes;
+import net.minecraft.server.v1_6_R2.NBTTagCompound;
+import net.minecraft.server.v1_6_R2.World;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 
 public class HorseSpawner
 {
@@ -13,10 +13,10 @@ public class HorseSpawner
 	{
 		World world = ((CraftWorld) location.getWorld().getRaw()).getHandle();
 		EntityHorse horse = (EntityHorse) EntityTypes.createEntityByName("EntityHorse", world);
-		horse.p(type.ordinal());
+		horse.setType(type.ordinal());
 
 		if (type == SpawnableHorseType.NORMAL)
-			horse.q(variant.getNbtValue());
+			horse.setVariant(variant.getNbtValue());
 
 		NBTTagCompound tags = new NBTTagCompound();
 		horse.b(tags);
