@@ -60,4 +60,4 @@ commands:
     description: Plays a sound
     aliases: [ps]
   lock:
-    description: Enables locking and unlocking of objets.
+    description: Enables locking and unlocking of objects.
