@@ -28,6 +28,7 @@ commands:
     description: Spawns a mob and mounts you to it
   createhead:
     description: Creates a players head
+    aliases: [head]
   mode:
     description: Allows you to change the players game mode
   carepackage:
