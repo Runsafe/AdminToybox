@@ -13,7 +13,7 @@ public class InventoryMoveItem implements IInventoryMoveItem
 		if (sourceTitle.equalsIgnoreCase("Infinite"))
 		{
 			event.getDestination().addItems(event.getItem().clone());
-			event.setCancelled(true);
+			event.cancel();
 		}
 	}
 }

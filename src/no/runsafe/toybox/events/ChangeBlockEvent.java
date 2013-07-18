@@ -26,13 +26,13 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 			blockLocation.getBlock().setTypeId(Material.CHEST.getId());
 
 			this.handler.ProcessDrop(entityID, blockLocation.getBlock());
-			event.setCancelled(true);
+			event.cancel();
 		}
 
 		if (this.mobDropHandler.entityIsMobDropper(entityID))
 		{
 			this.mobDropHandler.processMobDropper(entityID, event.getBlock().getLocation());
-			event.setCancelled(true);
+			event.cancel();
 		}
 	}
 

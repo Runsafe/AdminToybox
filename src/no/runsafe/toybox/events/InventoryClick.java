@@ -22,7 +22,7 @@ public class InventoryClick implements IInventoryClick
 					if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
 					{
 						player.sendColouredMessage("&cYou do not have permission to make those.");
-						event.setCancelled(true);
+						event.cancel();
 					}
 				}
 			}
