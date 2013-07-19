@@ -3,7 +3,7 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class SpawnMob extends PlayerCommand
 {
@@ -13,7 +13,7 @@ public class SpawnMob extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		int n = Integer.parseInt(parameters.get("count"));
 		String name = parameters.get("name");

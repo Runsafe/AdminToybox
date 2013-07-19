@@ -1,15 +1,15 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.ExecutableCommand;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Kill extends ExecutableCommand
 {
@@ -19,13 +19,13 @@ public class Kill extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
 		return null;
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] arguments)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
 	{
 		List<String> hitList = new ArrayList<String>();
 
@@ -37,7 +37,7 @@ public class Kill extends ExecutableCommand
 				if (arguments.length == 0)
 				{
 					executingPlayer.explode(0, false, false);
-					executingPlayer.damage(500);
+					executingPlayer.damage(500.0D);
 					return "&fWell, if you insist.";
 				}
 				return "&cYou do not have permission to kill other players like this.";
@@ -47,7 +47,7 @@ public class Kill extends ExecutableCommand
 				if (arguments.length == 0)
 				{
 					executingPlayer.explode(0, false, false);
-					executingPlayer.damage(500);
+					executingPlayer.damage(500.0D);
 					return "&fWell, if you insist.";
 				}
 			}
@@ -69,7 +69,7 @@ public class Kill extends ExecutableCommand
 			if (target.isOnline())
 			{
 				target.explode(0, false, false);
-				target.damage(500);
+				target.damage(500.0D);
 			}
 		}
 		return "&cDeath shall find those you seek quickly.";

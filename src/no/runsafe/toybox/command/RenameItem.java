@@ -4,7 +4,7 @@ import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class RenameItem extends PlayerCommand
 {
@@ -15,7 +15,7 @@ public class RenameItem extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		RunsafeMeta item = executor.getItemInHand();
 		if (item == null)

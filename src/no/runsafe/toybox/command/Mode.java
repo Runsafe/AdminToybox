@@ -1,13 +1,13 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.ExecutableCommand;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.GameMode;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Mode extends ExecutableCommand
 {
@@ -17,13 +17,13 @@ public class Mode extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
 		return null;
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] arguments)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
 	{
 		if (!(executor instanceof RunsafePlayer) && arguments.length == 0)
 			return "&cYou need to supply a player for this command.";

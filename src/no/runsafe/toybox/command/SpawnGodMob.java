@@ -9,7 +9,7 @@ import no.runsafe.framework.minecraft.entity.RunsafeLivingEntity;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class SpawnGodMob extends PlayerCommand
 {
@@ -19,7 +19,7 @@ public class SpawnGodMob extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		int n = Integer.parseInt(parameters.get("amount"));
 

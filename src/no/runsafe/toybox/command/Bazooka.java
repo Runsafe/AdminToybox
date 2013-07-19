@@ -6,7 +6,7 @@ import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Bazooka extends PlayerCommand
 {
@@ -17,7 +17,7 @@ public class Bazooka extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		final int delay = Integer.parseInt(parameters.get("delay"));
 		final float strength = Float.parseFloat(parameters.get("strength"));

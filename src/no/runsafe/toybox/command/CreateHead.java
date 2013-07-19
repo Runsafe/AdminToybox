@@ -7,7 +7,7 @@ import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class CreateHead extends PlayerCommand
 {
@@ -17,7 +17,7 @@ public class CreateHead extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		RunsafePlayer player = RunsafeServer.Instance.getPlayer(parameters.get("player"));
 		if (player instanceof RunsafeAmbiguousPlayer)

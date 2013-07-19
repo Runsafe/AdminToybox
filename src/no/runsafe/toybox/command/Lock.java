@@ -8,8 +8,8 @@ import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.LockedObjectHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lock extends PlayerCommand implements IPlayerInteractEvent
 {
@@ -20,7 +20,7 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		String playerName = executor.getName();
 		if (this.lockingPlayers.contains(playerName))

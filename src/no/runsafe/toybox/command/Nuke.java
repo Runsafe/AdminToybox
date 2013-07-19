@@ -6,7 +6,7 @@ import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.entity.TNTPrimed;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Nuke extends PlayerCommand
 {
@@ -16,7 +16,7 @@ public class Nuke extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		RunsafeWorld world = executor.getWorld();
 		int radius = Integer.valueOf(parameters.get("radius"));

@@ -8,8 +8,8 @@ import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EnchantItem extends PlayerCommand
 {
@@ -19,13 +19,13 @@ public class EnchantItem extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		return null;
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters, String[] arguments)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters, String[] arguments)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
 		String enchantName = parameters.get("enchant");

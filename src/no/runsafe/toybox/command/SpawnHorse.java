@@ -6,7 +6,7 @@ import no.runsafe.toybox.horses.HorseSpawner;
 import no.runsafe.toybox.horses.SpawnableHorseType;
 import no.runsafe.toybox.horses.SpawnableHorseVariant;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class SpawnHorse extends PlayerCommand
@@ -18,13 +18,13 @@ public class SpawnHorse extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		return null;
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters, String[] arguments)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters, String[] arguments)
 	{
 		try
 		{
