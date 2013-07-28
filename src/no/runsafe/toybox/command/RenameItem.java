@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -10,8 +11,7 @@ public class RenameItem extends PlayerCommand
 {
 	public RenameItem()
 	{
-		super("renameitem", "Renames the item you are holding", "runsafe.toybox.rename", "name");
-		this.captureTail();
+		super("renameitem", "Renames the item you are holding", "runsafe.toybox.rename", new TrailingArgument("name"));
 	}
 
 	@Override

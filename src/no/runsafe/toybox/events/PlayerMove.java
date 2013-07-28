@@ -13,7 +13,7 @@ public class PlayerMove implements IPlayerMove
 	{
 		if (to.getBlock().is(Item.Redstone.Device.Hopper))
 		{
-			player.damage(20);
+			player.damage(20.0);
 			player.getWorld().playEffect(player.getLocation(), Effect.POTION_BREAK, 16421);
 		}
 		return true;

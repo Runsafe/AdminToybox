@@ -1,5 +1,7 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.OptionalArgument;
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.minecraft.IEnchant;
 import no.runsafe.framework.minecraft.Enchant;
@@ -15,17 +17,14 @@ public class EnchantItem extends PlayerCommand
 {
 	public EnchantItem()
 	{
-		super("enchant", "Enchants an item", "runsafe.toybox.enchant", "enchant");
+		super(
+			"enchant", "Enchants an item", "runsafe.toybox.enchant",
+			new RequiredArgument("enchant"), new OptionalArgument("power")
+		);
 	}
 
 	@Override
 	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
-	{
-		return null;
-	}
-
-	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters, String[] arguments)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
 		String enchantName = parameters.get("enchant");
@@ -61,8 +60,8 @@ public class EnchantItem extends PlayerCommand
 			if (!enchant.canEnchant(item))
 				return "&cThat enchant cannot be applied to that item.";
 
-			if (arguments.length > 0)
-				enchant.power(Integer.valueOf(arguments[0])).applyTo(item);
+			if (parameters.containsKey("power"))
+				enchant.power(Integer.valueOf(parameters.get("power"))).applyTo(item);
 			else
 				enchant.max().applyTo(item);
 

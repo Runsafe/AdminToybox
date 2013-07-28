@@ -2,6 +2,8 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -13,22 +15,21 @@ public class Mode extends ExecutableCommand
 {
 	public Mode()
 	{
-		super("mode", "Changes the game-mode of the player", "runsafe.toybox.mode", "mode");
+		super(
+			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
+			new EnumArgument("mode", GameMode.values(), true), new PlayerArgument(false)
+		);
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		return null;
-	}
+		if (!(executor instanceof RunsafePlayer) && !parameters.containsKey("player"))
+			return "&cYou need to supply a player for this command when called from the console.";
 
-	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
-	{
-		if (!(executor instanceof RunsafePlayer) && arguments.length == 0)
-			return "&cYou need to supply a player for this command.";
-
-		RunsafePlayer target = (arguments.length > 0 ? RunsafeServer.Instance.getPlayer(arguments[0]) : (RunsafePlayer) executor);
+		RunsafePlayer target = (parameters.containsKey("player") ? RunsafeServer.Instance.getPlayer(parameters.get("player")) : (RunsafePlayer) executor);
+		if (target == null)
+			return "Player not found";
 		if (target instanceof RunsafeAmbiguousPlayer)
 			return target.toString();
 

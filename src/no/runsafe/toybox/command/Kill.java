@@ -2,6 +2,7 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.PlayerListArgument;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -15,17 +16,11 @@ public class Kill extends ExecutableCommand
 {
 	public Kill()
 	{
-		super("kill", "Kills the targeted player", "runsafe.toybox.kill");
+		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new PlayerListArgument(false));
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
-	{
-		return null;
-	}
-
-	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
 	{
 		List<String> hitList = new ArrayList<String>();
 
@@ -34,7 +29,7 @@ public class Kill extends ExecutableCommand
 			RunsafePlayer executingPlayer = (RunsafePlayer) executor;
 			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others"))
 			{
-				if (arguments.length == 0)
+				if (!parameters.containsKey("players"))
 				{
 					executingPlayer.explode(0, false, false);
 					executingPlayer.damage(500.0D);
@@ -44,7 +39,7 @@ public class Kill extends ExecutableCommand
 			}
 			else
 			{
-				if (arguments.length == 0)
+				if (!parameters.containsKey("players"))
 				{
 					executingPlayer.explode(0, false, false);
 					executingPlayer.damage(500.0D);
@@ -54,14 +49,17 @@ public class Kill extends ExecutableCommand
 		}
 		else
 		{
-			if (arguments.length == 0)
+			if (!parameters.containsKey("players"))
 				return "&cPlease provide some players you wish to kill.";
 		}
-		Collections.addAll(hitList, arguments);
+		Collections.addAll(hitList, parameters.get("players").split("\\s+"));
 
 		for (String targetName : hitList)
 		{
 			RunsafePlayer target = RunsafeServer.Instance.getPlayer(targetName);
+
+			if (target == null)
+				continue;
 
 			if (target instanceof RunsafeAmbiguousPlayer)
 				return target.toString();

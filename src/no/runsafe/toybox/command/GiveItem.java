@@ -2,6 +2,8 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -15,25 +17,17 @@ public class GiveItem extends ExecutableCommand
 {
 	public GiveItem()
 	{
-		super("give", "Gives a player an item", "runsafe.toybox.give");
+		super(
+			"give", "Give yourself or a player an item", "runsafe.toybox.give",
+			new RequiredArgument("item"), new RequiredArgument("amount"), new PlayerArgument(false)
+		);
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		return null;
-	}
-
-	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
-	{
-		if (arguments.length < 2)
-			return "&fUsage: /&3give &f[&eplayer&f] <&eitem&f> <&eamount&f>";
-
-		boolean shortHand = !(arguments.length > 2);
 		RunsafePlayer player;
-
-		if (shortHand)
+		if (!parameters.containsKey("player"))
 		{
 			if (executor instanceof RunsafePlayer)
 				player = (RunsafePlayer) executor;
@@ -42,7 +36,7 @@ public class GiveItem extends ExecutableCommand
 		}
 		else
 		{
-			player = RunsafeServer.Instance.getPlayer(arguments[0]);
+			player = RunsafeServer.Instance.getPlayer(parameters.get("player"));
 			if (player == null)
 				return "&cThat player does not exist.";
 
@@ -50,12 +44,12 @@ public class GiveItem extends ExecutableCommand
 				return player.toString();
 		}
 
-		RunsafeItemStack item = this.getItemId((shortHand ? arguments[0] : arguments[1]));
+		RunsafeItemStack item = this.getItemId(parameters.get("item"));
 
 		if (item == null)
 			return "&cInvalid item name or ID.";
 
-		int amount = Integer.valueOf((shortHand ? arguments[1] : arguments[2]));
+		int amount = Integer.valueOf(parameters.get("amount"));
 		this.giveItems(player, item, amount);
 
 		return String.format("&fGave %sx %s to %s&f.", amount, item.getNormalName(), player.getPrettyName());

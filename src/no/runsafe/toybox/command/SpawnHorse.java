@@ -1,5 +1,7 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.horses.HorseSpawner;
@@ -13,23 +15,26 @@ public class SpawnHorse extends PlayerCommand
 {
 	public SpawnHorse(HorseSpawner horseSpawner)
 	{
-		super("spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob", "count", "tame");
+		super(
+			"spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob",
+			new RequiredArgument("count"), new RequiredArgument("tame"),
+			new EnumArgument("type", SpawnableHorseType.values(), false),
+			new EnumArgument("variant", SpawnableHorseVariant.values(), false)
+		);
 		this.horseSpawner = horseSpawner;
 	}
 
 	@Override
 	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
-		return null;
-	}
-
-	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters, String[] arguments)
-	{
 		try
 		{
-			SpawnableHorseType type = (arguments.length > 0 ? SpawnableHorseType.valueOf(arguments[0].toUpperCase()) : this.getRandomHorseType());
-			SpawnableHorseVariant variant = (arguments.length > 1 ? SpawnableHorseVariant.valueOf(arguments[1].toUpperCase()) : this.getRandomHorseVariant());
+			SpawnableHorseType type = parameters.containsKey("type")
+				? SpawnableHorseType.valueOf(parameters.get("type").toUpperCase())
+				: this.getRandomHorseType();
+			SpawnableHorseVariant variant = parameters.containsKey("variant")
+				? SpawnableHorseVariant.valueOf(parameters.get("variant").toUpperCase())
+				: this.getRandomHorseVariant();
 
 			if (type == null)
 				return "&cInvalid horse type.";
@@ -40,9 +45,7 @@ public class SpawnHorse extends PlayerCommand
 			int count = Integer.valueOf(parameters.get("count"));
 
 			for (int i = 0; i < count; ++i)
-			{
 				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, parameters.get("tame").equals("1"));
-			}
 		}
 		catch (IllegalArgumentException exception)
 		{

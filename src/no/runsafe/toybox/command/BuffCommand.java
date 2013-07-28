@@ -2,6 +2,9 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.OptionalArgument;
+import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
@@ -15,64 +18,50 @@ public class BuffCommand extends ExecutableCommand
 {
 	public BuffCommand()
 	{
-		super("buff", "Apply a buff to a target player", "runsafe.toybox.buff", "effect");
+		super(
+			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
+			new EnumArgument("effect", buffs.keySet(), true),
+			new OptionalArgument("duration"), new OptionalArgument("amplitude"),
+			new PlayerArgument(false)
+		);
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		return null;
-	}
-
-	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
-	{
 		String buffName = parameters.get("effect");
 		if (!BuffCommand.buffs.containsKey(buffName))
 			return "&cAvailable effects: " + StringUtils.join(BuffCommand.buffs.keySet(), ", ");
 
-		RunsafePlayer target;
+		RunsafePlayer target = null;
 		int duration = 36000;
 		int amp = 5;
 
 		if (executor instanceof RunsafePlayer)
-		{
-			if (arguments.length < 3)
-			{
-				target = (RunsafePlayer) executor;
-			}
-			else
-			{
-				target = RunsafeServer.Instance.getPlayer(arguments[0]);
-				if (target instanceof RunsafeAmbiguousPlayer)
-					return target.toString();
+			target = (RunsafePlayer) executor;
 
-				if (!target.isOnline())
-					return String.format("&cThe player %s is offline.", target.getName());
-			}
-		}
-		else
-		{
-			if (arguments.length < 1)
-				return "&cYou must provide a player to apply an effect to.";
+		if (parameters.containsKey("player"))
+			target = RunsafeServer.Instance.getOnlinePlayer(
+				executor instanceof RunsafePlayer ? (RunsafePlayer) executor : null,
+				parameters.get("player")
+			);
 
-			target = RunsafeServer.Instance.getPlayer(arguments[0]);
-			if (target instanceof RunsafeAmbiguousPlayer)
-				return target.toString();
+		if (target instanceof RunsafeAmbiguousPlayer)
+			return target.toString();
 
-			if (!target.isOnline())
-				return String.format("&cThe player %s is offline.", target.getName());
-		}
+		if (target == null)
+			return "&cYou must provide a player to apply an effect to.";
 
-		if (arguments.length > 1)
-		{
-			duration = Integer.parseInt(arguments[arguments.length - 2]);
-			amp = Integer.parseInt(arguments[arguments.length - 1]);
-		}
+		if (!target.isOnline())
+			return String.format("&cThe player %s is offline.", target.getName());
+
+		if (parameters.containsKey("duration"))
+			duration = Integer.parseInt(parameters.get("duration"));
+		if (parameters.containsKey("amplitude"))
+			amp = Integer.parseInt(parameters.get("amplitude"));
 
 		BuffCommand.buffs.get(buffName).amplification(amp).duration(duration).applyTo(target);
-
-		return null; // Remove
+		return null;
 	}
 
 	private static final HashMap<String, Buff> buffs = new HashMap<String, Buff>();

@@ -2,7 +2,10 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.OptionalArgument;
+import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.minecraft.RunsafeServer;
+import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
@@ -12,7 +15,10 @@ public class Lightning extends ExecutableCommand
 {
 	public Lightning()
 	{
-		super("lightning", "Fires lightning at a player, the location you are looking, or a coordinate", "runsafe.toybox.lightning");
+		super(
+			"lightning", "Fires lightning at a player, the location you are looking, or a coordinate", "runsafe.toybox.lightning",
+			new PlayerArgument("playerOrX", false), new OptionalArgument("y"), new OptionalArgument("z")
+		);
 	}
 
 	@Override
@@ -24,18 +30,12 @@ public class Lightning extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		return null;
-	}
-
-	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters, String[] arguments)
-	{
-		if (arguments.length == 0)
+		if (parameters.size() == 0)
 			return StrikeTarget(executor);
-		if (arguments.length == 1)
-			return StrikePlayer(arguments[0]);
-		if (arguments.length == 3)
-			return StrikeCoordinates(executor, arguments[0], arguments[1], arguments[2]);
+		if (parameters.size() == 1)
+			return StrikePlayer(parameters.get("playerOrX"));
+		if (parameters.size() == 3)
+			return StrikeCoordinates(executor, parameters.get("playerOrX"), parameters.get("y"), parameters.get("z"));
 
 		return getUsage(executor);
 	}
@@ -51,10 +51,13 @@ public class Lightning extends ExecutableCommand
 		return "No block in sight";
 	}
 
-	private String StrikeCoordinates(ICommandExecutor executor, String argument, String argument1, String argument2)
+	private String StrikeCoordinates(ICommandExecutor executor, String x, String y, String z)
 	{
 		if (executor instanceof RunsafePlayer)
 		{
+			RunsafeWorld world = ((RunsafePlayer) executor).getWorld();
+			if (world != null)
+				world.strikeLightning(world.getLocation(Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)));
 			return null;
 		}
 		return "The console isn't in a world..";
