@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
@@ -9,7 +10,10 @@ public class SpawnMob extends PlayerCommand
 {
 	public SpawnMob()
 	{
-		super("spawnmob", "Spawns a mob", "runsafe.toybox.spawnmob", "name", "count");
+		super(
+			"spawnmob", "Spawns a mob", "runsafe.toybox.spawnmob",
+			new RequiredArgument("name"), new RequiredArgument("count")
+		);
 	}
 
 	@Override

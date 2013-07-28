@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Sound;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -10,7 +11,10 @@ public class PlaySound extends PlayerCommand
 {
 	public PlaySound()
 	{
-		super("playsound", "Plays a sound", "runsafe.toybox.playsound", "sound", "volume", "pitch");
+		super(
+			"playsound", "Plays a sound", "runsafe.toybox.playsound",
+			new RequiredArgument("sound"), new RequiredArgument("volume"), new RequiredArgument("pitch")
+		);
 	}
 
 	@Override

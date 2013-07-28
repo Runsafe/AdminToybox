@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.MobDropHandler;
@@ -10,7 +11,10 @@ public class MobDrop extends PlayerCommand
 {
 	public MobDrop(MobDropHandler handler)
 	{
-		super("mobdrop", "Drops a block full of mobs", "runsafe.toybox.mobdrop", "mobType", "amount");
+		super(
+			"mobdrop", "Drops a block full of mobs", "runsafe.toybox.mobdrop",
+			new RequiredArgument("mobType"), new RequiredArgument("amount")
+		);
 		this.handler = handler;
 	}
 

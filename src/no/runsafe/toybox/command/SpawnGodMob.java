@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.Enchant;
@@ -15,7 +16,10 @@ public class SpawnGodMob extends PlayerCommand
 {
 	public SpawnGodMob()
 	{
-		super("spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob", "mobName", "amount");
+		super(
+			"spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob",
+			new RequiredArgument("mobName"), new RequiredArgument("amount")
+		);
 	}
 
 	@Override

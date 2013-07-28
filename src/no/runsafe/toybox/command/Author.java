@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -12,7 +13,10 @@ public class Author extends PlayerCommand
 {
 	public Author()
 	{
-		super("author", "Changes the author of the book you are holding", "runsafe.toybox.author", "player");
+		super(
+			"author", "Changes the author of the book you are holding", "runsafe.toybox.author",
+			new PlayerArgument()
+		);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeWorld;
@@ -12,7 +13,10 @@ public class Nuke extends PlayerCommand
 {
 	public Nuke()
 	{
-		super("nuke", "Nukes in a certain radius", "runsafe.toybox.nuke", "radius", "power");
+		super(
+			"nuke", "Nukes in a certain radius", "runsafe.toybox.nuke",
+			new RequiredArgument("radius"), new RequiredArgument("power")
+		);
 	}
 
 	@Override

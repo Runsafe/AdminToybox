@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeServer;
@@ -13,7 +14,10 @@ public class CreateHead extends PlayerCommand
 {
 	public CreateHead()
 	{
-		super("createhead", "Creates the head of a player", "runsafe.toybox.createhead", "player");
+		super(
+			"createhead", "Creates the head of a player", "runsafe.toybox.createhead",
+			new PlayerArgument()
+		);
 	}
 
 	@Override
