@@ -1,11 +1,11 @@
 package no.runsafe.toybox.horses;
 
-import net.minecraft.server.v1_6_R2.EntityHorse;
-import net.minecraft.server.v1_6_R2.EntityTypes;
-import net.minecraft.server.v1_6_R2.NBTTagCompound;
-import net.minecraft.server.v1_6_R2.World;
+import net.minecraft.server.v1_6_R3.EntityHorse;
+import net.minecraft.server.v1_6_R3.EntityTypes;
+import net.minecraft.server.v1_6_R3.NBTTagCompound;
+import net.minecraft.server.v1_6_R3.World;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 
 public class HorseSpawner
 {
