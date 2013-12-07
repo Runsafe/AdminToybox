@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
@@ -22,7 +23,7 @@ public class Nuke extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
-		RunsafeWorld world = executor.getWorld();
+		IWorld world = executor.getWorld();
 		int radius = Integer.valueOf(parameters.get("radius"));
 		int power = Integer.valueOf(parameters.get("power"));
 		RunsafeLocation location = executor.getLocation();
@@ -39,7 +40,7 @@ public class Nuke extends PlayerCommand
 			int subCurrent = 0;
 			while (subCurrent < radius)
 			{
-				TNTPrimed tnt = world.spawn(location, TNTPrimed.class);
+				TNTPrimed tnt = ((RunsafeWorld)world).spawn(location, TNTPrimed.class);
 				tnt.setIsIncendiary(true);
 				tnt.setYield(power);
 				location.incrementZ(1);

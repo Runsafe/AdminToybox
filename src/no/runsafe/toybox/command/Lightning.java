@@ -1,12 +1,12 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
@@ -56,7 +56,7 @@ public class Lightning extends ExecutableCommand
 	{
 		if (executor instanceof RunsafePlayer)
 		{
-			RunsafeWorld world = ((RunsafePlayer) executor).getWorld();
+			IWorld world = ((RunsafePlayer) executor).getWorld();
 			if (world != null)
 				world.strikeLightning(world.getLocation(Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)));
 			return null;
