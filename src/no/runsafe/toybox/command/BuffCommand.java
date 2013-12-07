@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
@@ -33,12 +34,12 @@ public class BuffCommand extends ExecutableCommand
 		if (!BuffCommand.buffs.containsKey(buffName))
 			return "&cAvailable effects: " + StringUtils.join(BuffCommand.buffs.keySet(), ", ");
 
-		RunsafePlayer target = null;
+		IPlayer target = null;
 		int duration = 36000;
 		int amp = 5;
 
-		if (executor instanceof RunsafePlayer)
-			target = (RunsafePlayer) executor;
+		if (executor instanceof IPlayer)
+			target = (IPlayer) executor;
 
 		if (parameters.containsKey("player"))
 			target = RunsafeServer.Instance.getOnlinePlayer(

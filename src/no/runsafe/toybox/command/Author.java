@@ -2,10 +2,10 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 import no.runsafe.framework.minecraft.item.meta.RunsafeBook;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class Author extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
 		if (item.is(Item.Special.Crafted.WrittenBook))

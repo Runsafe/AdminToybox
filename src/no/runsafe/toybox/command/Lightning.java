@@ -4,6 +4,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
@@ -65,10 +66,10 @@ public class Lightning extends ExecutableCommand
 
 	private String StrikePlayer(String argument)
 	{
-		RunsafePlayer target = RunsafeServer.Instance.getPlayer(argument);
+		IPlayer target = RunsafeServer.Instance.getPlayer(argument);
 		if (target instanceof RunsafeAmbiguousPlayer)
 			return target.toString();
-		if (!target.isOnline())
+		if (target == null || !target.isOnline())
 			return "Target player is offline!";
 		target.strikeWithLightning(false);
 		return "Thy will be done.";

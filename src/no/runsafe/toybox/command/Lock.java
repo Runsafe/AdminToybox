@@ -3,8 +3,8 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.event.player.IPlayerInteractEvent;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerInteractEvent;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.LockedObjectHandler;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		String playerName = executor.getName();
 		if (this.lockingPlayers.contains(playerName))
@@ -39,7 +39,7 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	public void OnPlayerInteractEvent(RunsafePlayerInteractEvent event)
 	{
 		IBlock block = event.getBlock();
-		RunsafePlayer player = event.getPlayer();
+		IPlayer player = event.getPlayer();
 		String playerName = player.getName();
 
 		if (block != null)

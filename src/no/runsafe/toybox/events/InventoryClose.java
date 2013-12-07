@@ -1,8 +1,8 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.api.event.inventory.IInventoryClosed;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.event.inventory.RunsafeInventoryCloseEvent;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 
 public class InventoryClose implements IInventoryClosed
@@ -15,7 +15,7 @@ public class InventoryClose implements IInventoryClosed
 	@Override
 	public void OnInventoryClosed(RunsafeInventoryCloseEvent event)
 	{
-		RunsafePlayer player = event.getPlayer();
+		IPlayer player = event.getPlayer();
 		if (this.handler.PlayerHasOpenCarePackage(player))
 			this.handler.DropPackage(player);
 	}

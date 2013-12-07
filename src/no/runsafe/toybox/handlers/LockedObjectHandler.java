@@ -5,9 +5,9 @@ import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreak;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	}
 
 	@Override
-	public boolean OnBlockBreak(RunsafePlayer player, IBlock block)
+	public boolean OnBlockBreak(IPlayer player, IBlock block)
 	{
 		if (block != null)
 		{

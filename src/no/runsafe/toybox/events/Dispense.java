@@ -1,8 +1,8 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.block.IBlockState;
 import no.runsafe.framework.api.event.block.IBlockDispense;
-import no.runsafe.framework.minecraft.block.RunsafeBlockState;
 import no.runsafe.framework.minecraft.block.RunsafeDispenser;
 import no.runsafe.framework.minecraft.block.RunsafeDropper;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
@@ -13,7 +13,7 @@ public class Dispense implements IBlockDispense
 	@Override
 	public boolean OnBlockDispense(IBlock block, RunsafeMeta item)
 	{
-		RunsafeBlockState blockState = block.getBlockState();
+		IBlockState blockState = block.getBlockState();
 		RunsafeInventory inventory = null;
 
 		if (blockState instanceof RunsafeDispenser)

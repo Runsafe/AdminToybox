@@ -1,13 +1,12 @@
 package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.block.RunsafeChest;
 import no.runsafe.framework.minecraft.entity.RunsafeFallingBlock;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -21,24 +20,24 @@ public class CarePackageHandler
 		this.fallingDrops = new HashMap<Integer, RunsafeInventory>();
 	}
 
-	public void CreateCarePackage(RunsafePlayer player)
+	public void CreateCarePackage(IPlayer player)
 	{
 		RunsafeInventory newInventory = RunsafeServer.Instance.createInventory(null, 27, "Care Package"); // Create
 		player.openInventory(newInventory); // Show player the inventory.
 		this.awaitingDrops.put(player.getName(), newInventory); // Store the inventory pointer.
 	}
 
-	public boolean PlayerHasOpenCarePackage(RunsafePlayer player)
+	public boolean PlayerHasOpenCarePackage(IPlayer player)
 	{
 		return this.awaitingDrops.containsKey(player.getName()); // Does the player have an awaiting drop?
 	}
 
-	private RunsafeInventory GetAwaitingInventory(RunsafePlayer player)
+	private RunsafeInventory GetAwaitingInventory(IPlayer player)
 	{
 		return this.awaitingDrops.get(player.getName()); // Get an awaiting inventory linked to a player.
 	}
 
-	private void RemoveAwaitingInventory(RunsafePlayer player)
+	private void RemoveAwaitingInventory(IPlayer player)
 	{
 		this.awaitingDrops.remove(player.getName()); // Remove awaiting drop linked to player.
 	}
@@ -53,7 +52,7 @@ public class CarePackageHandler
 		this.fallingDrops.remove(entityID);
 	}
 
-	public void DropPackage(RunsafePlayer player)
+	public void DropPackage(IPlayer player)
 	{
 		RunsafeFallingBlock block = player.getWorld().spawnFallingBlock(player.getLocation(), Material.CHEST, (byte) 0);
 		block.setDropItem(false);

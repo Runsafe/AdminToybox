@@ -4,6 +4,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
@@ -26,7 +27,7 @@ public class GiveItem extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		RunsafePlayer player;
+		IPlayer player;
 		if (!parameters.containsKey("player"))
 		{
 			if (executor instanceof RunsafePlayer)
@@ -69,7 +70,7 @@ public class GiveItem extends ExecutableCommand
 		return null;
 	}
 
-	private void giveItems(RunsafePlayer player, RunsafeItemStack item, int amount)
+	private void giveItems(IPlayer player, RunsafeItemStack item, int amount)
 	{
 		int needed = amount;
 		while (needed > 0)

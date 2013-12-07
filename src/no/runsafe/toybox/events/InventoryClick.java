@@ -1,9 +1,9 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.api.event.inventory.IInventoryClick;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.event.inventory.RunsafeInventoryClickEvent;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public class InventoryClick implements IInventoryClick
 {
@@ -18,7 +18,7 @@ public class InventoryClick implements IInventoryClick
 			{
 				if (name.equalsIgnoreCase("Infinite"))
 				{
-					RunsafePlayer player = event.getWhoClicked();
+					IPlayer player = event.getWhoClicked();
 					if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
 					{
 						player.sendColouredMessage("&cYou do not have permission to make those.");

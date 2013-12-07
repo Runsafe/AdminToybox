@@ -3,9 +3,10 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.entity.RunsafeEntity;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.entity.EntityType;
 
 import java.util.Map;
 
@@ -21,11 +22,11 @@ public class Bazooka extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		final int delay = Integer.parseInt(parameters.get("delay"));
 		final float strength = Float.parseFloat(parameters.get("strength"));
-		final RunsafeEntity projectile = executor.Launch(parameters.get("entityName"));
+		final IEntity projectile = executor.Launch(EntityType.Get(parameters.get("entityName")));
 		if (projectile != null)
 		{
 			scheduler.startSyncTask(
