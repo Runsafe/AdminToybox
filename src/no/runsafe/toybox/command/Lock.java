@@ -1,8 +1,8 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.event.player.IPlayerInteractEvent;
-import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerInteractEvent;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.handlers.LockedObjectHandler;
@@ -38,7 +38,7 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	@Override
 	public void OnPlayerInteractEvent(RunsafePlayerInteractEvent event)
 	{
-		RunsafeBlock block = event.getBlock();
+		IBlock block = event.getBlock();
 		RunsafePlayer player = event.getPlayer();
 		String playerName = player.getName();
 

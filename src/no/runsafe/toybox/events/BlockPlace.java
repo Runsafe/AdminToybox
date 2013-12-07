@@ -1,7 +1,7 @@
 package no.runsafe.toybox.events;
 
+import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockPlace;
-import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.block.RunsafeBlockState;
 import no.runsafe.framework.minecraft.block.RunsafeSign;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -9,7 +9,7 @@ import no.runsafe.framework.minecraft.player.RunsafePlayer;
 public class BlockPlace implements IBlockPlace
 {
 	@Override
-	public boolean OnBlockPlace(RunsafePlayer player, RunsafeBlock block)
+	public boolean OnBlockPlace(RunsafePlayer player, IBlock block)
 	{
 		RunsafeBlockState blockState = block.getBlockState();
 		if (blockState instanceof RunsafeSign)

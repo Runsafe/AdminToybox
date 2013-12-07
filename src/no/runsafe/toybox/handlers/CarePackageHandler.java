@@ -1,5 +1,6 @@
 package no.runsafe.toybox.handlers;
 
+import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.block.RunsafeChest;
@@ -65,7 +66,7 @@ public class CarePackageHandler
 		return this.fallingDrops.containsKey(entityID);
 	}
 
-	public void ProcessDrop(Integer entityID, RunsafeBlock block)
+	public void ProcessDrop(Integer entityID, IBlock block)
 	{
 		List<RunsafeMeta> items = this.GetFallingInventory(entityID).getContents();
 		this.RemoveFallingInventory(entityID);

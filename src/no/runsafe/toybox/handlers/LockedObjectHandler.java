@@ -1,12 +1,12 @@
 package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreak;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
@@ -22,7 +22,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		this.output = output;
 	}
 
-	public boolean isLockedBlock(RunsafeBlock block)
+	public boolean isLockedBlock(IBlock block)
 	{
 		RunsafeLocation blockLocation = block.getLocation();
 		String worldName = blockLocation.getWorld().getName();
@@ -37,7 +37,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		return false;
 	}
 
-	public boolean canLockBlock(RunsafeBlock block)
+	public boolean canLockBlock(IBlock block)
 	{
 		for (Item item : LockedObjectHandler.lockableItems)
 			if (block.is(item))
@@ -46,7 +46,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		return false;
 	}
 
-	public void lockBlock(RunsafeBlock block)
+	public void lockBlock(IBlock block)
 	{
 		if (!this.isLockedBlock(block))
 		{
@@ -61,7 +61,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		}
 	}
 
-	public void unlockBlock(RunsafeBlock block)
+	public void unlockBlock(IBlock block)
 	{
 		if (this.isLockedBlock(block))
 		{
@@ -78,7 +78,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	}
 
 	@Override
-	public boolean OnBlockBreak(RunsafePlayer player, RunsafeBlock block)
+	public boolean OnBlockBreak(RunsafePlayer player, IBlock block)
 	{
 		if (block != null)
 		{
@@ -125,6 +125,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	private LockedObjectRepository repository;
 	private IOutput output;
 	private static List<Item> lockableItems = new ArrayList<Item>();
+
 	static
 	{
 		lockableItems.add(Item.Brewing.BrewingStand);
