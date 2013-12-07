@@ -2,11 +2,11 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.Enchant;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 import no.runsafe.framework.minecraft.entity.RunsafeLivingEntity;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
@@ -30,7 +30,7 @@ public class SpawnGodMob extends PlayerCommand
 		for (int i = 0; i < n; ++i)
 		{
 			String mobName = parameters.get("mobName");
-			RunsafeEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), mobName);
+			IEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), mobName);
 			if (entity instanceof RunsafeLivingEntity)
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;

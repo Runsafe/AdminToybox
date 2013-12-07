@@ -1,6 +1,7 @@
 package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 import no.runsafe.toybox.MobDropData;
 import org.bukkit.Material;
@@ -17,7 +18,7 @@ public class MobDropHandler
 
 	public void createMobDropper(RunsafeLocation location, String entityName, Integer amount)
 	{
-		RunsafeEntity block = location.getWorld().spawnFallingBlock(location, Material.OBSIDIAN, (byte) 0);
+		RunsafeEntity block = ((RunsafeWorld) location.getWorld()).spawnFallingBlock(location, Material.OBSIDIAN, (byte) 0);
 		MobDropData data = new MobDropData(EntityType.fromName(entityName), amount);
 		this.fallingMobDrops.put(block.getEntityId(), data);
 	}
