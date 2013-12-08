@@ -9,7 +9,6 @@ import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
-import org.bukkit.Material;
 
 import java.util.Map;
 
@@ -58,16 +57,8 @@ public class GiveItem extends ExecutableCommand
 
 	private RunsafeItemStack getItemId(String itemName)
 	{
-		for (Material material : Material.values())
-		{
-			if (material.name().replace("_", "").equalsIgnoreCase(itemName))
-				return Item.get(material, (byte) 0).getItem();
-
-			if (itemName.matches("-?\\d+(\\.\\d+)?"))
-				if (material.getId() == Integer.valueOf(itemName))
-					return Item.get(material, (byte) 0).getItem();
-		}
-		return null;
+		Item item = Item.get(itemName);
+		return item == null ? null : item.getItem();
 	}
 
 	private void giveItems(IPlayer player, RunsafeItemStack item, int amount)

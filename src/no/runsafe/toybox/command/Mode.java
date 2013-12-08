@@ -7,7 +7,7 @@ import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
-import org.bukkit.GameMode;
+import no.runsafe.framework.minecraft.player.GameMode;
 
 import java.util.Map;
 
@@ -37,34 +37,16 @@ public class Mode extends ExecutableCommand
 		if (!target.isOnline())
 			return String.format("&cThe player %s is offline.", target.getName());
 
-		String mode = parameters.get("mode");
-
-		if (mode.equalsIgnoreCase("survival") || mode.equalsIgnoreCase("s"))
-			target.setGameMode(GameMode.SURVIVAL);
-
-		if (mode.equalsIgnoreCase("creative") || mode.equalsIgnoreCase("c"))
-			target.setGameMode(GameMode.CREATIVE);
-
-		if (mode.equalsIgnoreCase("adventure") || mode.equalsIgnoreCase("a"))
-			target.setGameMode(GameMode.ADVENTURE);
-
+		GameMode mode = GameMode.search(parameters.get("mode"));
+		if (mode == null)
+			return String.format("&c%s is not a recognized game mode!", parameters.get("mode"));
+		mode.apply(target);
 		return this.getGameModeUpdateMessage(target);
 	}
 
 	private String getGameModeUpdateMessage(IPlayer target)
 	{
-		String gameModeName = "unknown";
-
-		if (target.getGameMode() == GameMode.SURVIVAL)
-			gameModeName = "survival";
-
-		if (target.getGameMode() == GameMode.CREATIVE)
-			gameModeName = "creative";
-
-		if (target.getGameMode() == GameMode.ADVENTURE)
-			gameModeName = "adventure";
-
-		return String.format("%s now has the game mode %s.", target.getPrettyName(), gameModeName);
+		return String.format("%s now has the game mode %s.", target.getPrettyName(), target.getGameMode());
 	}
 
 	private final IServer server;

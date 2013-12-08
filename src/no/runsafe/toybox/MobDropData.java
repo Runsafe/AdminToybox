@@ -1,16 +1,16 @@
 package no.runsafe.toybox;
 
-import org.bukkit.entity.EntityType;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 
 public class MobDropData
 {
-	public MobDropData(EntityType entityType, Integer mobAmount)
+	public MobDropData(RunsafeEntityType entityType, Integer mobAmount)
 	{
 		this.setEntityType(entityType);
 		this.setMobAmount(mobAmount);
 	}
 
-	public void setEntityType(EntityType entityType)
+	public void setEntityType(RunsafeEntityType entityType)
 	{
 		this.entityType = entityType;
 	}
@@ -20,7 +20,7 @@ public class MobDropData
 		this.mobAmount = mobAmount;
 	}
 
-	public EntityType getEntityType()
+	public RunsafeEntityType getEntityType()
 	{
 		return this.entityType;
 	}
@@ -30,6 +30,6 @@ public class MobDropData
 		return this.mobAmount;
 	}
 
-	private EntityType entityType;
+	private RunsafeEntityType entityType;
 	private Integer mobAmount;
 }
