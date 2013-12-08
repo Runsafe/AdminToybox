@@ -9,7 +9,6 @@ import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
@@ -44,7 +43,7 @@ public class BuffCommand extends ExecutableCommand
 
 		if (parameters.containsKey("player"))
 			target = server.getOnlinePlayer(
-				executor instanceof RunsafePlayer ? (RunsafePlayer) executor : null,
+				executor instanceof IPlayer ? (IPlayer) executor : null,
 				parameters.get("player")
 			);
 
