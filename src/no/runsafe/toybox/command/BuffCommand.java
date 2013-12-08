@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
@@ -7,7 +8,6 @@ import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
-import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.apache.commons.lang.StringUtils;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class BuffCommand extends ExecutableCommand
 {
-	public BuffCommand()
+	public BuffCommand(IServer server)
 	{
 		super(
 			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
@@ -25,6 +25,7 @@ public class BuffCommand extends ExecutableCommand
 			new OptionalArgument("duration"), new OptionalArgument("amplitude"),
 			new PlayerArgument(false)
 		);
+		this.server = server;
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class BuffCommand extends ExecutableCommand
 			target = (IPlayer) executor;
 
 		if (parameters.containsKey("player"))
-			target = RunsafeServer.Instance.getOnlinePlayer(
+			target = server.getOnlinePlayer(
 				executor instanceof RunsafePlayer ? (RunsafePlayer) executor : null,
 				parameters.get("player")
 			);
@@ -64,6 +65,8 @@ public class BuffCommand extends ExecutableCommand
 		BuffCommand.buffs.get(buffName).amplification(amp).duration(duration).applyTo(target);
 		return null;
 	}
+
+	private final IServer server;
 
 	private static final HashMap<String, Buff> buffs = new HashMap<String, Buff>();
 

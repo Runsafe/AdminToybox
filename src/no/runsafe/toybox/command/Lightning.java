@@ -1,25 +1,25 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.Map;
 
 public class Lightning extends ExecutableCommand
 {
-	public Lightning()
+	public Lightning(IServer server)
 	{
 		super(
 			"lightning", "Fires lightning at a player, the location you are looking, or a coordinate", "runsafe.toybox.lightning",
 			new PlayerArgument("playerOrX", false), new OptionalArgument("y"), new OptionalArgument("z")
 		);
+		this.server = server;
 	}
 
 	@Override
@@ -43,9 +43,9 @@ public class Lightning extends ExecutableCommand
 
 	private String StrikeTarget(ICommandExecutor executor)
 	{
-		if (executor instanceof RunsafePlayer)
+		if (executor instanceof IPlayer)
 		{
-			RunsafePlayer player = (RunsafePlayer) executor;
+			IPlayer player = (IPlayer) executor;
 			player.getWorld().strikeLightning(player.getTarget().getLocation());
 			return null;
 		}
@@ -54,9 +54,9 @@ public class Lightning extends ExecutableCommand
 
 	private String StrikeCoordinates(ICommandExecutor executor, String x, String y, String z)
 	{
-		if (executor instanceof RunsafePlayer)
+		if (executor instanceof IPlayer)
 		{
-			IWorld world = ((RunsafePlayer) executor).getWorld();
+			IWorld world = ((IPlayer) executor).getWorld();
 			if (world != null)
 				world.strikeLightning(world.getLocation(Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)));
 			return null;
@@ -66,12 +66,14 @@ public class Lightning extends ExecutableCommand
 
 	private String StrikePlayer(String argument)
 	{
-		IPlayer target = RunsafeServer.Instance.getPlayer(argument);
-		if (target instanceof RunsafeAmbiguousPlayer)
+		IPlayer target = server.getPlayer(argument);
+		if (target instanceof IAmbiguousPlayer)
 			return target.toString();
 		if (target == null || !target.isOnline())
 			return "Target player is offline!";
 		target.strikeWithLightning(false);
 		return "Thy will be done.";
 	}
+
+	private final IServer server;
 }

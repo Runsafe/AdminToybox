@@ -1,12 +1,11 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.PlayerListArgument;
+import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,9 +14,10 @@ import java.util.Map;
 
 public class Kill extends ExecutableCommand
 {
-	public Kill()
+	public Kill(IServer server)
 	{
 		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new PlayerListArgument(false));
+		this.server = server;
 	}
 
 	@Override
@@ -25,9 +25,9 @@ public class Kill extends ExecutableCommand
 	{
 		List<String> hitList = new ArrayList<String>();
 
-		if (executor instanceof RunsafePlayer)
+		if (executor instanceof IPlayer)
 		{
-			RunsafePlayer executingPlayer = (RunsafePlayer) executor;
+			IPlayer executingPlayer = (IPlayer) executor;
 			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others"))
 			{
 				if (!parameters.containsKey("players"))
@@ -57,12 +57,12 @@ public class Kill extends ExecutableCommand
 
 		for (String targetName : hitList)
 		{
-			IPlayer target = RunsafeServer.Instance.getPlayer(targetName);
+			IPlayer target = server.getPlayer(targetName);
 
 			if (target == null)
 				continue;
 
-			if (target instanceof RunsafeAmbiguousPlayer)
+			if (target instanceof IAmbiguousPlayer)
 				return target.toString();
 
 			if (target.isOnline())
@@ -73,4 +73,6 @@ public class Kill extends ExecutableCommand
 		}
 		return "&cDeath shall find those you seek quickly.";
 	}
+
+	private final IServer server;
 }

@@ -1,8 +1,8 @@
 package no.runsafe.toybox.handlers;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.block.RunsafeChest;
 import no.runsafe.framework.minecraft.entity.RunsafeFallingBlock;
@@ -15,15 +15,16 @@ import java.util.List;
 
 public class CarePackageHandler
 {
-	public CarePackageHandler()
+	public CarePackageHandler(IServer server)
 	{
+		this.server = server;
 		this.awaitingDrops = new HashMap<String, RunsafeInventory>();
 		this.fallingDrops = new HashMap<Integer, RunsafeInventory>();
 	}
 
 	public void CreateCarePackage(IPlayer player)
 	{
-		RunsafeInventory newInventory = RunsafeServer.Instance.createInventory(null, 27, "Care Package"); // Create
+		RunsafeInventory newInventory = server.createInventory(null, 27, "Care Package"); // Create
 		player.openInventory(newInventory); // Show player the inventory.
 		this.awaitingDrops.put(player.getName(), newInventory); // Store the inventory pointer.
 	}
@@ -55,7 +56,7 @@ public class CarePackageHandler
 
 	public void DropPackage(IPlayer player)
 	{
-		RunsafeFallingBlock block = ((RunsafeWorld)player.getWorld()).spawnFallingBlock(player.getLocation(), Material.CHEST, (byte) 0);
+		RunsafeFallingBlock block = ((RunsafeWorld) player.getWorld()).spawnFallingBlock(player.getLocation(), Material.CHEST, (byte) 0);
 		block.setDropItem(false);
 		this.fallingDrops.put(block.getEntityId(), this.GetAwaitingInventory(player));
 		this.RemoveAwaitingInventory(player);
@@ -83,4 +84,5 @@ public class CarePackageHandler
 
 	private final HashMap<String, RunsafeInventory> awaitingDrops;
 	private final HashMap<Integer, RunsafeInventory> fallingDrops;
+	private final IServer server;
 }

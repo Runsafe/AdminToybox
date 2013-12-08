@@ -1,37 +1,37 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import org.bukkit.GameMode;
 
 import java.util.Map;
 
 public class Mode extends ExecutableCommand
 {
-	public Mode()
+	public Mode(IServer server)
 	{
 		super(
 			"mode", "Changes the game-mode of the player", "runsafe.toybox.mode",
 			new EnumArgument("mode", GameMode.values(), true), new PlayerArgument(false)
 		);
+		this.server = server;
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		if (!(executor instanceof RunsafePlayer) && !parameters.containsKey("player"))
+		if (!(executor instanceof IPlayer) && !parameters.containsKey("player"))
 			return "&cYou need to supply a player for this command when called from the console.";
 
-		IPlayer target = (parameters.containsKey("player") ? RunsafeServer.Instance.getPlayer(parameters.get("player")) : (IPlayer) executor);
+		IPlayer target = (parameters.containsKey("player") ? server.getPlayer(parameters.get("player")) : (IPlayer) executor);
 		if (target == null)
 			return "Player not found";
-		if (target instanceof RunsafeAmbiguousPlayer)
+		if (target instanceof IAmbiguousPlayer)
 			return target.toString();
 
 		if (!target.isOnline())
@@ -66,5 +66,7 @@ public class Mode extends ExecutableCommand
 
 		return String.format("%s now has the game mode %s.", target.getPrettyName(), gameModeName);
 	}
+
+	private final IServer server;
 }
 
