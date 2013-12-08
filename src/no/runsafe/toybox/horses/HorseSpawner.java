@@ -4,13 +4,13 @@ import net.minecraft.server.v1_6_R3.EntityHorse;
 import net.minecraft.server.v1_6_R3.EntityTypes;
 import net.minecraft.server.v1_6_R3.NBTTagCompound;
 import net.minecraft.server.v1_6_R3.World;
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
-import no.runsafe.framework.minecraft.RunsafeLocation;
-import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
+import org.bukkit.Location;
 
 public class HorseSpawner
 {
-	public void spawnHorse(RunsafeLocation location, SpawnableHorseType type, SpawnableHorseVariant variant, boolean tamed)
+	public void spawnHorse(ILocation location, SpawnableHorseType type, SpawnableHorseVariant variant, boolean tamed)
 	{
 		World world = ObjectUnwrapper.convert(location.getWorld());
 		EntityHorse horse = (EntityHorse) EntityTypes.createEntityByName("EntityHorse", world);
@@ -24,6 +24,6 @@ public class HorseSpawner
 		tags.setBoolean("Tame", tamed);
 		horse.a(tags);
 
-		horse.teleportTo(location.getRaw(), false);
+		horse.teleportTo((Location) ObjectUnwrapper.convert(location), false);
 	}
 }

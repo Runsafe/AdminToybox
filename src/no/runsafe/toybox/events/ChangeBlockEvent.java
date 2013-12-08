@@ -1,12 +1,11 @@
 package no.runsafe.toybox.events;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.event.entity.IEntityChangeBlockEvent;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.event.entity.RunsafeEntityChangeBlockEvent;
 import no.runsafe.toybox.handlers.CarePackageHandler;
 import no.runsafe.toybox.handlers.MobDropHandler;
-import org.bukkit.Material;
 
 public class ChangeBlockEvent implements IEntityChangeBlockEvent
 {
@@ -23,7 +22,7 @@ public class ChangeBlockEvent implements IEntityChangeBlockEvent
 
 		if (this.handler.CheckDrop(entityID))
 		{
-			RunsafeLocation blockLocation = event.getBlock().getLocation();
+			ILocation blockLocation = event.getBlock().getLocation();
 			blockLocation.getBlock().setMaterial(Item.Decoration.Chest);
 
 			this.handler.ProcessDrop(entityID, blockLocation.getBlock());

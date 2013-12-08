@@ -1,10 +1,10 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeWorld;
 import org.bukkit.entity.TNTPrimed;
 
@@ -26,7 +26,7 @@ public class Nuke extends PlayerCommand
 		IWorld world = executor.getWorld();
 		int radius = Integer.valueOf(parameters.get("radius"));
 		int power = Integer.valueOf(parameters.get("power"));
-		RunsafeLocation location = executor.getLocation();
+		ILocation location = executor.getLocation();
 
 		location.decrementX(radius);
 		location.decrementZ(radius);
@@ -40,7 +40,7 @@ public class Nuke extends PlayerCommand
 			int subCurrent = 0;
 			while (subCurrent < radius)
 			{
-				TNTPrimed tnt = ((RunsafeWorld)world).spawn(location, TNTPrimed.class);
+				TNTPrimed tnt = ((RunsafeWorld) world).spawn(location, TNTPrimed.class);
 				tnt.setIsIncendiary(true);
 				tnt.setYield(power);
 				location.incrementZ(1);

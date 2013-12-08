@@ -1,11 +1,11 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.entity.EntityType;
 
 import java.util.Map;
@@ -35,7 +35,7 @@ public class Bazooka extends PlayerCommand
 					@Override
 					public void run()
 					{
-						RunsafeLocation location = projectile.getLocation();
+						ILocation location = projectile.getLocation();
 						projectile.getWorld().createExplosion(location, strength, false);
 						projectile.remove();
 					}

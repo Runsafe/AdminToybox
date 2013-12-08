@@ -1,10 +1,10 @@
 package no.runsafe.toybox.repositories;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.ISet;
 import no.runsafe.framework.api.database.Repository;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,23 +23,23 @@ public class LockedObjectRepository extends Repository
 		return "toybox_locked_objects";
 	}
 
-	public void storeLockedObject(RunsafeLocation location)
+	public void storeLockedObject(ILocation location)
 	{
 		this.database.Execute("INSERT INTO toybox_locked_objects (world, x, y, z) VALUES(?, ?, ?, ?)",
-				location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ());
+			location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
-	public void removeLockedObject(RunsafeLocation location)
+	public void removeLockedObject(ILocation location)
 	{
 		this.database.Execute(
-				"DELETE FROM toybox_locked_objects WHERE world = ? AND x = ? AND y =? AND z = ?",
-				location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ()
+			"DELETE FROM toybox_locked_objects WHERE world = ? AND x = ? AND y =? AND z = ?",
+			location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ()
 		);
 	}
 
-	public List<RunsafeLocation> getLockedObjects()
+	public List<ILocation> getLockedObjects()
 	{
-		List<RunsafeLocation> locations = new ArrayList<RunsafeLocation>();
+		List<ILocation> locations = new ArrayList<ILocation>();
 		ISet data = this.database.Query("SELECT world, x, y, z FROM toybox_locked_objects");
 
 		if (data != null)
@@ -55,12 +55,12 @@ public class LockedObjectRepository extends Repository
 		HashMap<Integer, List<String>> queries = new HashMap<Integer, List<String>>();
 		List<String> sql = new ArrayList<String>();
 		sql.add(
-				"CREATE TABLE `toybox_locked_objects` (" +
-						"`world` VARCHAR(255) NOT NULL," +
-						"`x` DOUBLE NOT NULL," +
-						"`y` DOUBLE NOT NULL," +
-						"`z` DOUBLE NOT NULL" +
-					")"
+			"CREATE TABLE `toybox_locked_objects` (" +
+				"`world` VARCHAR(255) NOT NULL," +
+				"`x` DOUBLE NOT NULL," +
+				"`y` DOUBLE NOT NULL," +
+				"`z` DOUBLE NOT NULL" +
+				")"
 		);
 		queries.put(1, sql);
 		return queries;

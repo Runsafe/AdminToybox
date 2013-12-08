@@ -1,5 +1,6 @@
 package no.runsafe.toybox.handlers;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreak;
@@ -7,7 +8,6 @@ import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 	public boolean isLockedBlock(IBlock block)
 	{
-		RunsafeLocation blockLocation = block.getLocation();
+		ILocation blockLocation = block.getLocation();
 		String worldName = blockLocation.getWorld().getName();
 
 		if (this.lockedObjects.containsKey(worldName))
 		{
-			List<RunsafeLocation> locations = this.lockedObjects.get(worldName);
-			for (RunsafeLocation location : locations)
+			List<ILocation> locations = this.lockedObjects.get(worldName);
+			for (ILocation location : locations)
 				if (location.distance(blockLocation) < 1)
 					return true;
 		}
@@ -50,12 +50,12 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	{
 		if (!this.isLockedBlock(block))
 		{
-			RunsafeLocation location = block.getLocation();
+			ILocation location = block.getLocation();
 			String worldName = location.getWorld().getName();
 
 			this.repository.storeLockedObject(location);
 			if (!this.lockedObjects.containsKey(worldName))
-				this.lockedObjects.put(worldName, new ArrayList<RunsafeLocation>());
+				this.lockedObjects.put(worldName, new ArrayList<ILocation>());
 
 			this.lockedObjects.get(worldName).add(location);
 		}
@@ -65,11 +65,11 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	{
 		if (this.isLockedBlock(block))
 		{
-			RunsafeLocation location = block.getLocation();
+			ILocation location = block.getLocation();
 			String worldName = location.getWorld().getName();
 
 			if (this.lockedObjects.containsKey(worldName))
-				for (RunsafeLocation checkLocation : this.lockedObjects.get(worldName))
+				for (ILocation checkLocation : this.lockedObjects.get(worldName))
 					if (checkLocation.distance(location) < 1)
 						this.lockedObjects.get(worldName).remove(checkLocation);
 
@@ -96,14 +96,14 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	@Override
 	public void OnPluginEnabled()
 	{
-		List<RunsafeLocation> locations = this.repository.getLockedObjects();
-		for (RunsafeLocation location : locations)
+		List<ILocation> locations = this.repository.getLockedObjects();
+		for (ILocation location : locations)
 		{
 			if (this.canLockBlock(location.getBlock()))
 			{
 				String worldName = location.getWorld().getName();
 				if (!this.lockedObjects.containsKey(worldName))
-					this.lockedObjects.put(worldName, new ArrayList<RunsafeLocation>());
+					this.lockedObjects.put(worldName, new ArrayList<ILocation>());
 
 				this.lockedObjects.get(worldName).add(location);
 			}
@@ -121,7 +121,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		this.lockedObjects.clear(); // Dump any objects we have in memory.
 	}
 
-	private HashMap<String, List<RunsafeLocation>> lockedObjects = new HashMap<String, List<RunsafeLocation>>();
+	private HashMap<String, List<ILocation>> lockedObjects = new HashMap<String, List<ILocation>>();
 	private LockedObjectRepository repository;
 	private IOutput output;
 	private static List<Item> lockableItems = new ArrayList<Item>();
