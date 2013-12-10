@@ -110,7 +110,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 			else
 			{
 				this.repository.removeLockedObject(location);
-				this.output.logError("Invalid locked object, removing: " + location.toString());
+				this.output.logError("Invalid locked object, removing: %s", location.toString());
 			}
 		}
 	}
