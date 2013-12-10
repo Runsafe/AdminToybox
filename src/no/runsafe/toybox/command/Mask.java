@@ -43,14 +43,10 @@ public class Mask extends ExecutableCommand implements INetworkEvent
 	@Override
 	public void onNetworkEvent(RunsafeNetworkEvent event)
 	{
-		server.broadcastMessage("EV DE");
 		if (event instanceof RunsafeLoginVerifiedEvent)
 		{
-			server.broadcastMessage("Got verify");
 			RunsafeLoginVerifiedEvent verifyEvent = (RunsafeLoginVerifiedEvent) event;
 			String playerName = verifyEvent.getPlayerName();
-
-			server.broadcastMessage(playerName);
 
 			if (masks.containsKey(playerName))
 				verifyEvent.setPlayerName(masks.get(playerName));
