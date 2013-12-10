@@ -1,11 +1,11 @@
 package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreak;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
+import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreak
 {
-	public LockedObjectHandler(LockedObjectRepository repository, IOutput output)
+	public LockedObjectHandler(LockedObjectRepository repository, IConsole output)
 	{
 		this.repository = repository;
 		this.output = output;
@@ -123,7 +123,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 	private HashMap<String, List<ILocation>> lockedObjects = new HashMap<String, List<ILocation>>();
 	private LockedObjectRepository repository;
-	private IOutput output;
+	private IConsole output;
 	private static List<Item> lockableItems = new ArrayList<Item>();
 
 	static
