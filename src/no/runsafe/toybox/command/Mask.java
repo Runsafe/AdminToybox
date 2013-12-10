@@ -49,7 +49,10 @@ public class Mask extends ExecutableCommand implements INetworkEvent
 			String playerName = verifyEvent.getPlayerName();
 
 			if (masks.containsKey(playerName))
+			{
 				verifyEvent.setPlayerName(masks.get(playerName));
+				masks.remove(playerName);
+			}
 		}
 	}
 
