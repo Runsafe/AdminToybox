@@ -2,9 +2,9 @@ package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.block.IChest;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeWorld;
-import no.runsafe.framework.minecraft.block.RunsafeChest;
 import no.runsafe.framework.minecraft.entity.RunsafeFallingBlock;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -72,9 +72,9 @@ public class CarePackageHandler
 		List<RunsafeMeta> items = this.GetFallingInventory(entityID).getContents();
 		this.RemoveFallingInventory(entityID);
 
-		if (block.getBlockState() instanceof RunsafeChest)
+		if (block instanceof IChest)
 		{
-			RunsafeChest chest = (RunsafeChest) block.getBlockState();
+			IChest chest = (IChest) block;
 			RunsafeInventory chestInventory = chest.getInventory();
 
 			for (RunsafeMeta item : items)
