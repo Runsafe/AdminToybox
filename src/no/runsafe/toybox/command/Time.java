@@ -33,9 +33,9 @@ public class Time extends ExecutableCommand
 		if (target == null)
 			return "You must specify a world from the console!";
 
-		int time = WellKnownTimes.valueOf(parameters.get("time")).getTime();
-		target.setTime(time);
-		console.logInformation("Time in world %s set to %d by %s", target.getName(), time, executor.getName());
+		WellKnownTimes time = WellKnownTimes.valueOf(parameters.get("time"));
+		target.setTime(time.getTime());
+		console.logInformation("Time in world %s set to %s by %s", target.getName(), time, executor.getName());
 		return String.format("Time set for %s", target.getName());
 	}
 
