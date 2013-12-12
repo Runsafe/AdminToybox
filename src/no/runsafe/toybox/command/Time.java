@@ -15,7 +15,7 @@ public class Time extends ExecutableCommand
 {
 	public Time(IConsole console)
 	{
-		super("time", "Change the time in a world", "runsafe.toybox.time.<world>", new EnumArgument("time", WellKnownTimes.values(), true), new WorldArgument(false));
+		super("time", "Change the time in a world", "runsafe.toybox.time", new EnumArgument("time", WellKnownTimes.values(), true), new WorldArgument(false));
 		this.console = console;
 	}
 
