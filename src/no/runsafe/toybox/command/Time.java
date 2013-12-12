@@ -19,7 +19,8 @@ public class Time extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
-		debug.debugFine("Setting time for %s to %s..", parameters.get("world"), parameters.get("time"));
+		int time = WellKnownTimes.valueOf(parameters.get("time")).getTime();
+		debug.debugFine("Setting time for %s to %s..", parameters.get("world"), time);
 		return null;
 	}
 
