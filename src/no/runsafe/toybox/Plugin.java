@@ -36,18 +36,13 @@ public class Plugin extends RunsafePlugin
 		addComponent(SpawnMob.class);
 		addComponent(Ride.class);
 		addComponent(CreateHead.class);
-		addComponent(Mode.class); // TODO: Move this to another more suiting plug-in.
 		addComponent(CarePackage.class);
 		addComponent(MobDrop.class);
 		addComponent(Nuke.class);
 		addComponent(SpawnGodMob.class);
 		addComponent(EnchantItem.class);
-		addComponent(RenameItem.class);
-		addComponent(GiveItem.class);
 		addComponent(Kill.class);
 		addComponent(BuffCommand.class);
-		addComponent(Colour.class);
-		addComponent(Author.class);
 		addComponent(PlaySound.class);
 		addComponent(Lock.class);
 		addComponent(SpawnHorse.class);
