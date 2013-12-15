@@ -1,6 +1,9 @@
 package no.runsafe.toybox;
 
 import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Database;
+import no.runsafe.framework.features.Events;
 import no.runsafe.toybox.command.*;
 import no.runsafe.toybox.events.*;
 import no.runsafe.toybox.handlers.CarePackageHandler;
@@ -14,6 +17,11 @@ public class Plugin extends RunsafePlugin
 	@Override
 	protected void PluginSetup()
 	{
+		// Framework features
+		addComponent(Commands.class);
+		addComponent(Events.class);
+		addComponent(Database.class);
+
 		// Repositories
 		addComponent(LockedObjectRepository.class);
 
