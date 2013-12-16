@@ -15,7 +15,7 @@ import no.runsafe.toybox.repositories.LockedObjectRepository;
 public class Plugin extends RunsafePlugin
 {
 	@Override
-	protected void PluginSetup()
+	protected void pluginSetup()
 	{
 		// Framework features
 		addComponent(Commands.class);
