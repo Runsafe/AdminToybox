@@ -49,7 +49,5 @@ commands:
     aliases: [ps]
   lock:
     description: Enables locking and unlocking of objects.
-  mask:
-    description: Behold the power of pure water!
   time:
     description: Sets the time in a world.
