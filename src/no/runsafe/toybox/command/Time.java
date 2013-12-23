@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.IUniverseManager;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -7,16 +8,16 @@ import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.WorldArgument;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.internal.Multiverse;
 
 import java.util.Map;
 
 public class Time extends ExecutableCommand
 {
-	public Time(IConsole console)
+	public Time(IConsole console, IUniverseManager manager)
 	{
 		super("time", "Change the time in a world", "runsafe.toybox.time", new EnumArgument("time", WellKnownTimes.values(), true), new WorldArgument(false));
 		this.console = console;
+		this.manager = manager;
 	}
 
 	@Override
@@ -24,7 +25,7 @@ public class Time extends ExecutableCommand
 	{
 		IWorld target = null;
 		if (parameters.containsKey("world"))
-			target = Multiverse.Get().getWorld(parameters.get("world"));
+			target = manager.getWorld(parameters.get("world"));
 
 		if (target == null && executor instanceof IPlayer)
 			target = ((IPlayer) executor).getWorld();
@@ -61,4 +62,5 @@ public class Time extends ExecutableCommand
 	}
 
 	private final IConsole console;
+	private final IUniverseManager manager;
 }
