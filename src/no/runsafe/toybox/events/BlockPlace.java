@@ -1,11 +1,9 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.api.block.IBlock;
-import no.runsafe.framework.api.block.IBlockState;
 import no.runsafe.framework.api.block.ISign;
 import no.runsafe.framework.api.event.block.IBlockPlace;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.block.RunsafeSign;
 
 public class BlockPlace implements IBlockPlace
 {
