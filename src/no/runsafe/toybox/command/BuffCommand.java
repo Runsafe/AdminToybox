@@ -6,9 +6,9 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
-import no.runsafe.framework.minecraft.player.RunsafeAmbiguousPlayer;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
@@ -47,7 +47,7 @@ public class BuffCommand extends ExecutableCommand
 				parameters.get("player")
 			);
 
-		if (target instanceof RunsafeAmbiguousPlayer)
+		if (target instanceof IAmbiguousPlayer)
 			return target.toString();
 
 		if (target == null)
