@@ -99,7 +99,8 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		List<ILocation> locations = this.repository.getLockedObjects();
 		for (ILocation location : locations)
 		{
-			if (this.canLockBlock(location.getBlock()))
+			IBlock block = location.getBlock();
+			if (block != null && this.canLockBlock(block))
 			{
 				String worldName = location.getWorld().getName();
 				if (!this.lockedObjects.containsKey(worldName))
