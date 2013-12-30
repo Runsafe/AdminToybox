@@ -1,6 +1,7 @@
 package no.runsafe.toybox.events;
 
 import no.runsafe.framework.api.ILocation;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.player.IPlayerMove;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
@@ -15,7 +16,16 @@ public class PlayerMove implements IPlayerMove
 		if (to.getBlock().is(Item.Redstone.Device.Hopper))
 		{
 			player.damage(20.0);
-			((RunsafeWorld) player.getWorld()).playEffect(player.getLocation(), Effect.POTION_BREAK, 16421);
+
+			IWorld playerWorld = player.getWorld();
+			ILocation playerLocation = player.getLocation();
+			if (playerLocation != null && playerWorld != null)
+			{
+				ILocation splashLocation = playerLocation.clone();
+				splashLocation.offset(0.5D, 0, 0.5D);
+
+				playerWorld.playEffect(splashLocation, Effect.POTION_BREAK, 16421);
+			}
 		}
 		return true;
 	}
