@@ -35,7 +35,7 @@ public class MobDropHandler
 
 		while (current < data.getMobAmount())
 		{
-			location.getWorld().spawnCreature(location, data.getEntityType().getId());
+			location.getWorld().spawnCreature(location, data.getEntityType().getName());
 			current++;
 		}
 

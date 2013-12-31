@@ -25,13 +25,13 @@ public class LockedObjectRepository extends Repository
 
 	public void storeLockedObject(ILocation location)
 	{
-		this.database.Execute("INSERT INTO toybox_locked_objects (world, x, y, z) VALUES(?, ?, ?, ?)",
+		database.execute("INSERT INTO toybox_locked_objects (world, x, y, z) VALUES(?, ?, ?, ?)",
 			location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	public void removeLockedObject(ILocation location)
 	{
-		this.database.Execute(
+		database.execute(
 			"DELETE FROM toybox_locked_objects WHERE world = ? AND x = ? AND y =? AND z = ?",
 			location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ()
 		);
@@ -40,7 +40,7 @@ public class LockedObjectRepository extends Repository
 	public List<ILocation> getLockedObjects()
 	{
 		List<ILocation> locations = new ArrayList<ILocation>();
-		ISet data = this.database.Query("SELECT world, x, y, z FROM toybox_locked_objects");
+		ISet data = database.query("SELECT world, x, y, z FROM toybox_locked_objects");
 
 		if (data != null)
 			for (IRow node : data)
