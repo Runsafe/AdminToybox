@@ -3,18 +3,20 @@ package no.runsafe.toybox.handlers;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreak;
+import no.runsafe.framework.api.event.block.IBlockRedstone;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
+import no.runsafe.framework.minecraft.event.block.RunsafeBlockRedstoneEvent;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreak
+public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreak, IBlockRedstone
 {
 	public LockedObjectHandler(LockedObjectRepository repository, IConsole output)
 	{
@@ -120,6 +122,14 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	}
 
 	@Override
+	public void OnBlockRedstoneEvent(RunsafeBlockRedstoneEvent event)
+	{
+		IBlock block = event.getBlock();
+		if (block != null && isLockedBlock(block))
+			event.setNewCurrent(5);
+	}
+
+	@Override
 	public void OnPluginDisabled()
 	{
 		this.lockedObjects.clear(); // Dump any objects we have in memory.
@@ -146,5 +156,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		lockableItems.add(Item.Decoration.EnchantmentTable);
 		lockableItems.add(Item.Decoration.EnderChest);
 		lockableItems.add(Item.Decoration.Anvil.Any);
+		lockableItems.add(Item.Redstone.Lamp.Off);
+		lockableItems.add(Item.Redstone.Lamp.On);
 	}
 }
