@@ -1,14 +1,15 @@
 package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.block.IChest;
+import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.entity.RunsafeFallingBlock;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import org.bukkit.Material;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,8 +57,11 @@ public class CarePackageHandler
 
 	public void DropPackage(IPlayer player)
 	{
-		RunsafeFallingBlock block = ((RunsafeWorld) player.getWorld()).spawnFallingBlock(player.getLocation(), Material.CHEST, (byte) 0);
-		block.setDropItem(false);
+		IWorld world = player.getWorld();
+		if (world == null)
+			return;
+		IEntity block = world.spawnFallingBlock(player.getLocation(), Item.Decoration.Chest);
+		((RunsafeFallingBlock) block).setDropItem(false);
 		this.fallingDrops.put(block.getEntityId(), this.GetAwaitingInventory(player));
 		this.RemoveAwaitingInventory(player);
 	}
