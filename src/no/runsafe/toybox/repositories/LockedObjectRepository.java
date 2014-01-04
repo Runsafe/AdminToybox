@@ -53,7 +53,7 @@ public class LockedObjectRepository extends Repository
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> queries = new LinkedHashMap<Integer, List<String>>();
+		HashMap<Integer, List<String>> queries = new LinkedHashMap<Integer, List<String>>(1);
 		List<String> sql = new ArrayList<String>();
 		sql.add(
 			"CREATE TABLE `toybox_locked_objects` (" +
