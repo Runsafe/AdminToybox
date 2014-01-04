@@ -8,6 +8,7 @@ import no.runsafe.framework.api.database.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LockedObjectRepository extends Repository
@@ -52,7 +53,7 @@ public class LockedObjectRepository extends Repository
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> queries = new HashMap<Integer, List<String>>();
+		HashMap<Integer, List<String>> queries = new LinkedHashMap<Integer, List<String>>();
 		List<String> sql = new ArrayList<String>();
 		sql.add(
 			"CREATE TABLE `toybox_locked_objects` (" +
