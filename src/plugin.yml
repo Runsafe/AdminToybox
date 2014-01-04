@@ -51,3 +51,5 @@ commands:
     description: Enables locking and unlocking of objects.
   time:
     description: Sets the time in a world.
+  thorns:
+    description: Protect the player with insta-gib thorns.

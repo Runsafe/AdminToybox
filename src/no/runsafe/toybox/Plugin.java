@@ -55,6 +55,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Lock.class);
 		addComponent(SpawnHorse.class);
 		addComponent(Time.class);
+		addComponent(Thorns.class);
 
 		// Events
 		addComponent(InventoryClose.class);
