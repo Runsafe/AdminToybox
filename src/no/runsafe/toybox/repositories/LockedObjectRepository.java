@@ -1,14 +1,9 @@
 package no.runsafe.toybox.repositories;
 
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.database.IDatabase;
-import no.runsafe.framework.api.database.IRow;
-import no.runsafe.framework.api.database.ISet;
-import no.runsafe.framework.api.database.Repository;
+import no.runsafe.framework.api.database.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LockedObjectRepository extends Repository
@@ -51,20 +46,20 @@ public class LockedObjectRepository extends Repository
 	}
 
 	@Override
-	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
+	public ISchemaUpdate getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> queries = new LinkedHashMap<Integer, List<String>>(1);
-		List<String> sql = new ArrayList<String>();
-		sql.add(
+		ISchemaUpdate update = new SchemaUpdate();
+
+		update.addQueries(
 			"CREATE TABLE `toybox_locked_objects` (" +
 				"`world` VARCHAR(255) NOT NULL," +
 				"`x` DOUBLE NOT NULL," +
 				"`y` DOUBLE NOT NULL," +
 				"`z` DOUBLE NOT NULL" +
-				")"
+			")"
 		);
-		queries.put(1, sql);
-		return queries;
+
+		return update;
 	}
 
 	private IDatabase database;
