@@ -1,6 +1,7 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.ILocation;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.ILivingEntity;
 import no.runsafe.framework.api.event.entity.IEntityDamageByEntityEvent;
@@ -14,7 +15,6 @@ import no.runsafe.framework.minecraft.event.entity.RunsafeEntityDamageByEntityEv
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 {
@@ -24,7 +24,7 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String playerName = executor.getName();
 		if (protectedPlayers.contains(playerName))

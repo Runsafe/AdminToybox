@@ -1,11 +1,10 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Sound;
-
-import java.util.Map;
 
 public class PlaySound extends PlayerCommand
 {
@@ -18,7 +17,7 @@ public class PlaySound extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		float volume = Float.valueOf(parameters.get("volume"));
 		float pitch = Float.valueOf(parameters.get("pitch"));

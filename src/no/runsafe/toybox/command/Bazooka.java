@@ -2,6 +2,7 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
@@ -22,7 +23,7 @@ public class Bazooka extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		final int delay = Integer.parseInt(parameters.get("delay"));
 		final float strength = Float.parseFloat(parameters.get("strength"));

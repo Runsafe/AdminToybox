@@ -4,6 +4,7 @@ import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
@@ -12,7 +13,6 @@ import no.runsafe.framework.minecraft.Buff;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class BuffCommand extends ExecutableCommand
 {
@@ -28,7 +28,7 @@ public class BuffCommand extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		String buffName = parameters.get("effect");
 		if (!BuffCommand.buffs.containsKey(buffName))

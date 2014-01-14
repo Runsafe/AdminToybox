@@ -1,6 +1,7 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.event.player.IPlayerInteractEvent;
 import no.runsafe.framework.api.player.IPlayer;
@@ -9,7 +10,6 @@ import no.runsafe.toybox.handlers.LockedObjectHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lock extends PlayerCommand implements IPlayerInteractEvent
 {
@@ -20,7 +20,7 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String playerName = executor.getName();
 		if (this.lockingPlayers.contains(playerName))
