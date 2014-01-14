@@ -45,7 +45,7 @@ public class Lightning extends ExecutableCommand
 		if (executor instanceof IPlayer)
 		{
 			IPlayer player = (IPlayer) executor;
-			player.getWorld().strikeLightning(player.getTarget().getLocation());
+			player.getWorld().strikeLightning(player.getTargetBlock().getLocation());
 			return null;
 		}
 		return "No block in sight";
