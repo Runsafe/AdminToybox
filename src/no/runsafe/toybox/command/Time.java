@@ -4,9 +4,9 @@ import no.runsafe.framework.api.IUniverseManager;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.AutoWorldArgument;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.WorldArgument;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 
@@ -14,7 +14,7 @@ public class Time extends ExecutableCommand
 {
 	public Time(IConsole console, IUniverseManager manager)
 	{
-		super("time", "Change the time in a world", "runsafe.toybox.time", new EnumArgument("time", WellKnownTimes.values(), true), new WorldArgument(false));
+		super("time", "Change the time in a world", "runsafe.toybox.time", new EnumArgument("time", WellKnownTimes.values(), true), new AutoWorldArgument());
 		this.console = console;
 		this.manager = manager;
 	}
@@ -22,13 +22,7 @@ public class Time extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IWorld target = null;
-		if (parameters.containsKey("world"))
-			target = manager.getWorld(parameters.get("world"));
-
-		if (target == null && executor instanceof IPlayer)
-			target = ((IPlayer) executor).getWorld();
-
+		IWorld target = parameters.getWorld("world");
 
 		if (target == null)
 			return "You must specify a world from the console!";
