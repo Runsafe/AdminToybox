@@ -1,41 +1,32 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.PlayerArgument;
+import no.runsafe.framework.api.command.argument.OnlinePlayerArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
 public class Mount extends PlayerCommand
 {
-	public Mount(IServer server)
+	public Mount()
 	{
 		super(
 			"mount", "Mounts you on the given player or entity ID", "runsafe.toybox.mount",
-			new PlayerArgument("target", true)
+			new OnlinePlayerArgument("target", true)
 		);
-		this.server = server;
 	}
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		IPlayer player = server.getOnlinePlayer(executor, parameters.get("target"));
-		if (player == null)
+		IPlayer target = parameters.getPlayer("target");
+		if (target != null && !executor.shouldNotSee(target))
 		{
-			try
-			{
-				executor.getWorld().getEntityById(Integer.parseInt(parameters.get("target"))).setPassenger(executor);
-				return null;
-			}
-			catch (Exception e)
-			{
-				return "Unable to find target..";
-			}
+			target.setPassenger(executor);
+			return "&aMounted " + target.getName() + ".";
 		}
-		player.setPassenger(executor);
-		return null;
+		else
+		{
+			return "&cUnable to find target..";
+		}
 	}
-
-	private final IServer server;
 }

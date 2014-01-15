@@ -1,8 +1,7 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.command.argument.AnyPlayerArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.PlayerArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
@@ -11,19 +10,18 @@ import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
 
 public class CreateHead extends PlayerCommand
 {
-	public CreateHead(IServer server)
+	public CreateHead()
 	{
 		super(
 			"createhead", "Creates the head of a player", "runsafe.toybox.createhead",
-			new PlayerArgument()
+			new AnyPlayerArgument()
 		);
-		this.server = server;
 	}
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		IPlayer player = server.getPlayer(parameters.get("player"));
+		IPlayer player = parameters.getPlayer("player");
 		if (player instanceof IAmbiguousPlayer)
 			return player.toString();
 
@@ -37,6 +35,4 @@ public class CreateHead extends PlayerCommand
 
 		return "Creating the head of " + player.getName();
 	}
-
-	private final IServer server;
 }
