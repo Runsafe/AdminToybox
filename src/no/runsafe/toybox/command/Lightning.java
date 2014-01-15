@@ -19,7 +19,7 @@ public class Lightning extends ExecutableCommand
 	}
 
 	@Override
-	public String getUsageCommandParams()
+	public String getUsageCommandParams(ICommandExecutor executor)
 	{
 		return "(<player>|<x> <y> <z>)";
 	}
