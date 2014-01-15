@@ -21,6 +21,8 @@ public class CreateHead extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		IPlayer player = parameters.getPlayer("player");
+		if (player == null)
+			return null;
 
 		RunsafeSkull heads = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
 		heads.setAmount(1);
