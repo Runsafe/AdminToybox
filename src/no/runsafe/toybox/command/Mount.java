@@ -21,6 +21,9 @@ public class Mount extends PlayerCommand
 		IPlayer target = parameters.getPlayer("target");
 		if (target != null && !executor.shouldNotSee(target))
 		{
+			if (target.getName().equalsIgnoreCase(executor.getName()))
+				return "&cYou cannot mount yourself, this would end badly.";
+
 			target.setPassenger(executor);
 			return "&aMounted " + target.getName() + ".";
 		}
