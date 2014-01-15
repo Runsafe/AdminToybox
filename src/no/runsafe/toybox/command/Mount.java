@@ -1,7 +1,7 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.OnlinePlayerArgument;
+import no.runsafe.framework.api.command.argument.OnlinePlayerRequired;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
@@ -11,7 +11,7 @@ public class Mount extends PlayerCommand
 	{
 		super(
 			"mount", "Mounts you on the given player or entity ID", "runsafe.toybox.mount",
-			new OnlinePlayerArgument("target", true)
+			new OnlinePlayerRequired("target")
 		);
 	}
 

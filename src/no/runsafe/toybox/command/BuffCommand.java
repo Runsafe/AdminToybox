@@ -18,7 +18,7 @@ public class BuffCommand extends ExecutableCommand
 			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
 			new EnumArgument("effect", buffs.keySet(), true),
 			new OptionalArgument("duration"), new OptionalArgument("amplitude"),
-			new OnlinePlayerArgument(false)
+			new SelfOrOnlinePlayer()
 		);
 	}
 
@@ -38,9 +38,6 @@ public class BuffCommand extends ExecutableCommand
 
 		if (parameters.containsKey("player"))
 			target = parameters.getPlayer("player");
-
-		if (target instanceof IAmbiguousPlayer)
-			return target.toString();
 
 		if (target == null)
 			return "&cYou must provide a player to apply an effect to.";
