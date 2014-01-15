@@ -53,3 +53,5 @@ commands:
     description: Sets the time in a world.
   thorns:
     description: Protect the player with insta-gib thorns.
+  lasso:
+    description: Lasso things!
