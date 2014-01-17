@@ -2,10 +2,10 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
-import no.runsafe.framework.api.entity.ILivingEntity;
 import no.runsafe.framework.api.event.player.IPlayerInteractEntityEvent;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
+import no.runsafe.framework.minecraft.entity.RunsafeLivingEntity;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerInteractEntityEvent;
 import no.runsafe.toybox.PendingLasso;
 
@@ -54,9 +54,9 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 			}
 			else
 			{
-				if (entity instanceof ILivingEntity)
+				if (entity instanceof RunsafeLivingEntity)
 				{
-					((ILivingEntity) entity).setLeashHolder(stages.get(playerName).getEntity());
+					((RunsafeLivingEntity) entity).setLeashHolder(stages.get(playerName).getEntity());
 					stages.remove(playerName);
 					player.sendColouredMessage("&aLasso complete.");
 				}

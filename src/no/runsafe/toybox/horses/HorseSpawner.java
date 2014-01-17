@@ -12,7 +12,7 @@ public class HorseSpawner
 {
 	public void spawnHorse(ILocation location, SpawnableHorseType type, SpawnableHorseVariant variant, boolean tamed)
 	{
-		World world = ObjectUnwrapper.convert(location.getWorld());
+		World world = ObjectUnwrapper.getMinecraft(location.getWorld());
 		EntityHorse horse = (EntityHorse) EntityTypes.createEntityByName("EntityHorse", world);
 		horse.setType(type.ordinal());
 
