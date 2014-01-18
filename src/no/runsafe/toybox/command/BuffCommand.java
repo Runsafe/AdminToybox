@@ -2,8 +2,10 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
-import no.runsafe.framework.api.command.argument.*;
-import no.runsafe.framework.api.player.IAmbiguousPlayer;
+import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.argument.OptionalArgument;
+import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
 import org.apache.commons.lang.StringUtils;
