@@ -2,13 +2,12 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
-import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.argument.MapRequired;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 
@@ -18,8 +17,8 @@ public class BuffCommand extends ExecutableCommand
 	{
 		super(
 			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
-			new EnumArgument("effect", buffs.keySet(), true),
-			new OptionalArgument("duration"), new OptionalArgument("amplitude"),
+			new MapRequired<Buff>("effect", buffs),
+			new OptionalArgument("duration", "36000"), new OptionalArgument("amplitude", "5"),
 			new SelfOrOnlinePlayer()
 		);
 	}
@@ -27,32 +26,18 @@ public class BuffCommand extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		String buffName = parameters.get("effect");
-		if (!BuffCommand.buffs.containsKey(buffName))
-			return "&cAvailable effects: " + StringUtils.join(BuffCommand.buffs.keySet(), ", ");
+		Buff effect = parameters.getMappedValue("effect");
+		if (effect == null)
+			return null;
 
-		IPlayer target = null;
-		int duration = 36000;
-		int amp = 5;
-
-		if (executor instanceof IPlayer)
-			target = (IPlayer) executor;
-
-		if (parameters.containsKey("player"))
-			target = parameters.getPlayer("player");
-
+		IPlayer target = parameters.getPlayer("player");
 		if (target == null)
-			return "&cYou must provide a player to apply an effect to.";
+			return null;
 
-		if (!target.isOnline())
-			return String.format("&cThe player %s is offline.", target.getName());
+		int duration = Integer.parseInt(parameters.get("duration"));
+		int amp = Integer.parseInt(parameters.get("amplitude"));
 
-		if (parameters.containsKey("duration"))
-			duration = Integer.parseInt(parameters.get("duration"));
-		if (parameters.containsKey("amplitude"))
-			amp = Integer.parseInt(parameters.get("amplitude"));
-
-		BuffCommand.buffs.get(buffName).amplification(amp).duration(duration).applyTo(target);
+		effect.amplification(amp).duration(duration).applyTo(target);
 		return null;
 	}
 
