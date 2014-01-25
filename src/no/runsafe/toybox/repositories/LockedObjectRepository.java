@@ -8,11 +8,6 @@ import java.util.List;
 
 public class LockedObjectRepository extends Repository
 {
-	public LockedObjectRepository(IDatabase database)
-	{
-		this.database = database;
-	}
-
 	@Override
 	public String getTableName()
 	{
@@ -61,6 +56,4 @@ public class LockedObjectRepository extends Repository
 
 		return update;
 	}
-
-	private IDatabase database;
 }
