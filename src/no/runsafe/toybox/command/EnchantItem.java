@@ -27,18 +27,19 @@ public class EnchantItem extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		RunsafeItemStack item = executor.getItemInHand();
-		String enchantName = parameters.get("enchant");
+		if (item == null)
+			return "&cNo item in your hand.";
 
+		String enchantName = parameters.get("enchant");
 		if (enchantName.equalsIgnoreCase("help"))
 		{
-			RunsafeItemStack itemHeld = executor.getItemInHand();
 			List<String> enchantNames = new ArrayList<String>();
 			for (IEnchant enchant : Enchant.All)
 			{
 				enchantNames.add(
 					String.format(
-						itemHeld.getItemId() > 0 ? "%s%s" : "%2$s",
-						enchant.canEnchant(itemHeld) ? "&a" : "&c",
+						item.getItemId() > 0 ? "%s%s" : "%2$s",
+						enchant.canEnchant(item) ? "&a" : "&c",
 						enchant.getName().toLowerCase()
 					)
 				);
