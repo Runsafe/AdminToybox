@@ -9,6 +9,9 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Enchant;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class EnchantItem extends PlayerCommand
 {
 	public EnchantItem()
@@ -25,14 +28,32 @@ public class EnchantItem extends PlayerCommand
 		RunsafeItemStack item = executor.getItemInHand();
 		if (item == null)
 			return "&cNo item in your hand.";
+		StringBuilder feedback = new StringBuilder();
 		String[] enchants = parameters.get("enchant").split(" ");
-		for (String enchantName : enchants)
+		for (String param : enchants)
 		{
-			IEnchant enchant = Enchant.getByName(enchantName);
+			Matcher spec = enchantSpec.matcher(param);
+			IEnchant enchant;
+			if (spec.matches())
+			{
+				enchant = Enchant.getByName(spec.group(1));
+				if (enchant != null)
+					enchant = enchant.power(Integer.parseInt(spec.group(2)));
+			}
+			else
+			{
+				enchant = Enchant.getByName(param);
+				if (enchant != null)
+					enchant = enchant.max();
+			}
 			if (enchant != null)
-				enchant.max().applyTo(item);
-
+			{
+				enchant.applyTo(item);
+				feedback.append(String.format("Applied enchant %s at power %d to item.\n", enchant.getName(), enchant.power()));
+			}
 		}
-		return "&2Your item has been enchanted.";
+		return "&2Your item has been enchanted:\n" + feedback.toString();
 	}
+
+	static final Pattern enchantSpec = Pattern.compile("(.*):(\\d+)");
 }
