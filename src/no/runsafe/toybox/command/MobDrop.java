@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.EntityTypeArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -12,7 +13,7 @@ public class MobDrop extends PlayerCommand
 	{
 		super(
 			"mobdrop", "Drops a block full of mobs", "runsafe.toybox.mobdrop",
-			new RequiredArgument("mobType"), new RequiredArgument("amount")
+			new EntityTypeArgument("mobType", true), new RequiredArgument("amount")
 		);
 		this.handler = handler;
 	}

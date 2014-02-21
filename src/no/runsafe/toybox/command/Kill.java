@@ -4,7 +4,8 @@ import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.PlayerListArgument;
+import no.runsafe.framework.api.command.argument.ListOf;
+import no.runsafe.framework.api.command.argument.OnlinePlayerRequired;
 import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 
@@ -16,7 +17,7 @@ public class Kill extends ExecutableCommand
 {
 	public Kill(IServer server)
 	{
-		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new PlayerListArgument(false));
+		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new ListOf<OnlinePlayerRequired>(new OnlinePlayerRequired()));
 		this.server = server;
 	}
 
@@ -30,7 +31,7 @@ public class Kill extends ExecutableCommand
 			IPlayer executingPlayer = (IPlayer) executor;
 			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others"))
 			{
-				if (!parameters.containsKey("players"))
+				if (!parameters.containsKey("player"))
 				{
 					executingPlayer.explode(0, false, false);
 					executingPlayer.damage(500.0D);
@@ -40,7 +41,7 @@ public class Kill extends ExecutableCommand
 			}
 			else
 			{
-				if (!parameters.containsKey("players"))
+				if (!parameters.containsKey("player"))
 				{
 					executingPlayer.explode(0, false, false);
 					executingPlayer.damage(500.0D);
@@ -50,10 +51,10 @@ public class Kill extends ExecutableCommand
 		}
 		else
 		{
-			if (!parameters.containsKey("players"))
+			if (!parameters.containsKey("player"))
 				return "&cPlease provide some players you wish to kill.";
 		}
-		Collections.addAll(hitList, parameters.get("players").split("\\s+"));
+		Collections.addAll(hitList, parameters.get("player").split("\\s+"));
 
 		for (String targetName : hitList)
 		{

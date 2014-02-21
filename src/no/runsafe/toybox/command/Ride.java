@@ -1,7 +1,7 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.EntityTypeArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
@@ -12,7 +12,7 @@ public class Ride extends PlayerCommand
 	{
 		super(
 			"ride", "Spawns an entity and mounts you to it", "runsafe.toybox.ride",
-			new RequiredArgument("entityName")
+			new EntityTypeArgument(true)
 		);
 	}
 

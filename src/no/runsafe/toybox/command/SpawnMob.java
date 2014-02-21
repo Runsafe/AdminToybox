@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.EntityTypeArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -11,7 +12,7 @@ public class SpawnMob extends PlayerCommand
 	{
 		super(
 			"spawnmob", "Spawns a mob", "runsafe.toybox.spawnmob",
-			new RequiredArgument("name"), new RequiredArgument("count")
+			new EntityTypeArgument("name", true), new RequiredArgument("count")
 		);
 	}
 

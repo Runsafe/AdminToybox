@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.EntityTypeArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -17,7 +18,7 @@ public class SpawnGodMob extends PlayerCommand
 	{
 		super(
 			"spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob",
-			new RequiredArgument("mobName"), new RequiredArgument("amount")
+			new EntityTypeArgument("mobName", true), new RequiredArgument("amount")
 		);
 	}
 
