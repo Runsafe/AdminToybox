@@ -26,7 +26,7 @@ public class Bazooka extends PlayerCommand
 	{
 		final int delay = Integer.parseInt(parameters.get("delay"));
 		final float strength = Float.parseFloat(parameters.get("strength"));
-		final IEntity projectile = executor.Launch(EntityType.Get(parameters.get("entityName")));
+		final IEntity projectile = executor.Launch(EntityType.Get(parameters.get("entityType")));
 		if (projectile != null)
 		{
 			scheduler.startSyncTask(

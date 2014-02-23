@@ -19,7 +19,7 @@ public class Ride extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		IEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("entityName"));
+		IEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("entityType"));
 		if (entity == null)
 			return "Invalid entity name";
 		entity.setPassenger(executor);
