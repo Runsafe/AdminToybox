@@ -1,5 +1,6 @@
 package no.runsafe.toybox.handlers;
 
+import com.google.common.collect.Lists;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.IWorld;
@@ -71,17 +72,20 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 	public void unlockBlock(IBlock block)
 	{
-		if (this.isLockedBlock(block))
+		if (isLockedBlock(block))
 		{
 			ILocation location = block.getLocation();
 			String worldName = location.getWorld().getName();
 
-			if (this.lockedObjects.containsKey(worldName))
-				for (ILocation checkLocation : this.lockedObjects.get(worldName))
+			if (lockedObjects.containsKey(worldName))
+			{
+				List<ILocation> locations = Lists.newArrayList(lockedObjects.get(worldName));
+				for (ILocation checkLocation : locations)
 					if (checkLocation.distance(location) < 1)
-						this.lockedObjects.get(worldName).remove(checkLocation);
-
-			this.repository.removeLockedObject(location);
+						locations.remove(checkLocation);
+				lockedObjects.put(worldName, locations);
+			}
+			repository.removeLockedObject(location);
 		}
 	}
 
