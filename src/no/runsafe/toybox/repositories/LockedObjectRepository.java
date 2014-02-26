@@ -28,10 +28,10 @@ public class LockedObjectRepository extends Repository
 		);
 	}
 
-	public List<ILocation> getLockedObjects()
+	public List<ILocation> getLockedObjects(String worldName)
 	{
 		List<ILocation> locations = new ArrayList<ILocation>();
-		ISet data = database.query("SELECT world, x, y, z FROM toybox_locked_objects");
+		ISet data = database.query("SELECT world, x, y, z FROM toybox_locked_objects WHERE world=?", worldName);
 
 		if (data != null)
 			for (IRow node : data)

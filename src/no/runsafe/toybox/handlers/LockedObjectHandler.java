@@ -1,11 +1,15 @@
 package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.ILocation;
+import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.block.IBlockBreak;
 import no.runsafe.framework.api.event.block.IBlockRedstone;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
+import no.runsafe.framework.api.event.world.IWorldLoad;
+import no.runsafe.framework.api.event.world.IWorldUnload;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
@@ -13,15 +17,17 @@ import no.runsafe.framework.minecraft.event.block.RunsafeBlockRedstoneEvent;
 import no.runsafe.toybox.repositories.LockedObjectRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreak, IBlockRedstone
+public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBlockBreak, IBlockRedstone, IWorldLoad, IWorldUnload
 {
-	public LockedObjectHandler(LockedObjectRepository repository, IConsole output)
+	public LockedObjectHandler(LockedObjectRepository repository, IConsole output, IServer server)
 	{
 		this.repository = repository;
 		this.output = output;
+		this.server = server;
 	}
 
 	public boolean isLockedBlock(IBlock block)
@@ -98,27 +104,8 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	@Override
 	public void OnPluginEnabled()
 	{
-		List<ILocation> locations = this.repository.getLockedObjects();
-		for (ILocation location : locations)
-		{
-			if (location == null)
-				continue;
-
-			IBlock block = location.getBlock();
-			if (block != null && this.canLockBlock(block))
-			{
-				String worldName = location.getWorld().getName();
-				if (!this.lockedObjects.containsKey(worldName))
-					this.lockedObjects.put(worldName, new ArrayList<ILocation>());
-
-				this.lockedObjects.get(worldName).add(location);
-			}
-			else
-			{
-				this.repository.removeLockedObject(location);
-				this.output.logError("Invalid locked object, removing: %s", location.toString());
-			}
-		}
+		for (IWorld world : server.getWorlds())
+			OnWorldLoad(world);
 	}
 
 	@Override
@@ -135,9 +122,43 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		this.lockedObjects.clear(); // Dump any objects we have in memory.
 	}
 
-	private HashMap<String, List<ILocation>> lockedObjects = new HashMap<String, List<ILocation>>();
+	@Override
+	public void OnWorldLoad(IWorld world)
+	{
+		String worldName = world.getName();
+		if (!lockedObjects.containsKey(worldName))
+			lockedObjects.put(worldName, new ArrayList<ILocation>());
+		List<ILocation> locations = repository.getLockedObjects(worldName);
+		if (locations.isEmpty())
+			return;
+		output.logInformation("Locking %d objects in world %s.", locations.size(), worldName);
+		for (ILocation location : locations)
+		{
+			if (location == null)
+				continue;
+
+			IBlock block = location.getBlock();
+			if (block == null || !this.canLockBlock(block))
+			{
+				repository.removeLockedObject(location);
+				output.logError("Invalid locked object, removing: %s", location.toString());
+			}
+			else
+				lockedObjects.get(worldName).add(location);
+		}
+	}
+
+	@Override
+	public void OnWorldUnload(IWorld world)
+	{
+		if (lockedObjects.containsKey(world.getName()))
+			lockedObjects.remove(world.getName());
+	}
+
+	private Map<String, List<ILocation>> lockedObjects = new ConcurrentHashMap<String, List<ILocation>>();
 	private LockedObjectRepository repository;
 	private IConsole output;
+	private final IServer server;
 	private static List<Item> lockableItems = new ArrayList<Item>();
 
 	static
