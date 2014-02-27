@@ -1,6 +1,6 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.argument.EnumArgument;
+import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -18,8 +18,8 @@ public class SpawnHorse extends PlayerCommand
 		super(
 			"spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob",
 			new RequiredArgument("count"), new RequiredArgument("tame"),
-			new EnumArgument("type", SpawnableHorseType.values(), false),
-			new EnumArgument("variant", SpawnableHorseVariant.values(), false)
+			new Enumeration.Optional("type", SpawnableHorseType.values()),
+			new Enumeration.Optional("variant", SpawnableHorseVariant.values())
 		);
 		this.horseSpawner = horseSpawner;
 	}
@@ -29,18 +29,12 @@ public class SpawnHorse extends PlayerCommand
 	{
 		try
 		{
-			SpawnableHorseType type = parameters.containsKey("type")
-				? SpawnableHorseType.valueOf(parameters.get("type").toUpperCase())
-				: this.getRandomHorseType();
-			SpawnableHorseVariant variant = parameters.containsKey("variant")
-				? SpawnableHorseVariant.valueOf(parameters.get("variant").toUpperCase())
-				: this.getRandomHorseVariant();
-
+			SpawnableHorseType type = parameters.getValue("type");
 			if (type == null)
-				return "&cInvalid horse type.";
-
+				type = this.getRandomHorseType();
+			SpawnableHorseVariant variant = parameters.getValue("variant");
 			if (variant == null)
-				return "&cInvalid horse variant.";
+				variant = this.getRandomHorseVariant();
 
 			int count = Integer.valueOf(parameters.get("count"));
 

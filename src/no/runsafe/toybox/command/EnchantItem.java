@@ -1,12 +1,11 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.argument.EnchantArgument;
+import no.runsafe.framework.api.command.argument.Enchant;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.ListOf;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.minecraft.IEnchant;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.Enchant;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 
 import java.util.regex.Matcher;
@@ -18,7 +17,7 @@ public class EnchantItem extends PlayerCommand
 	{
 		super(
 			"enchant", "Enchants an item", "runsafe.toybox.enchant",
-			new ListOf<EnchantArgument>(new EnchantArgument(true))
+			new ListOf<Enchant.Required>(new Enchant.Required())
 		);
 	}
 
@@ -36,13 +35,13 @@ public class EnchantItem extends PlayerCommand
 			IEnchant enchant;
 			if (spec.matches())
 			{
-				enchant = Enchant.getByName(spec.group(1));
+				enchant = no.runsafe.framework.minecraft.Enchant.getByName(spec.group(1));
 				if (enchant != null)
 					enchant = enchant.power(Integer.parseInt(spec.group(2)));
 			}
 			else
 			{
-				enchant = Enchant.getByName(param);
+				enchant = no.runsafe.framework.minecraft.Enchant.getByName(param);
 				if (enchant != null)
 					enchant = enchant.max();
 			}

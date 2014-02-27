@@ -1,6 +1,7 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.argument.EntityTypeArgument;
+import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -12,7 +13,7 @@ public class SpawnMob extends PlayerCommand
 	{
 		super(
 			"spawnmob", "Spawns a mob", "runsafe.toybox.spawnmob",
-			new EntityTypeArgument("name", true), new RequiredArgument("count")
+			new EntityType.Required("name"), new RequiredArgument("count")
 		);
 	}
 
@@ -25,7 +26,11 @@ public class SpawnMob extends PlayerCommand
 		if (name.equalsIgnoreCase("horse"))
 			return "&cPlease use /spawnhorse for that.";
 		for (int i = 0; i < n; ++i)
-			executor.getWorld().spawnCreature(executor.getLocation(), name);
+		{
+			IWorld world = executor.getWorld();
+			if (world != null)
+				world.spawnCreature(executor.getLocation(), name);
+		}
 		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.argument.EntityTypeArgument;
+import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
@@ -12,16 +13,17 @@ public class Ride extends PlayerCommand
 	{
 		super(
 			"ride", "Spawns an entity and mounts you to it", "runsafe.toybox.ride",
-			new EntityTypeArgument(true)
+			new EntityType.Required()
 		);
 	}
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
+		IWorld world = executor.getWorld();
+		if (world == null)
+			return null;
 		IEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("entityType"));
-		if (entity == null)
-			return "Invalid entity name";
 		entity.setPassenger(executor);
 		return null;
 	}

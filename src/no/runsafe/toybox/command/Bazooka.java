@@ -2,11 +2,15 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
-import no.runsafe.framework.api.command.argument.*;
+import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.command.argument.DecimalNumber;
+import no.runsafe.framework.api.command.argument.EntityType;
+import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.entity.EntityType;
 
 public class Bazooka extends PlayerCommand
 {
@@ -14,7 +18,7 @@ public class Bazooka extends PlayerCommand
 	{
 		super(
 			"bazooka", "Fire an entity and make it explode", "runsafe.toybox.bazooka",
-			new EntityTypeArgument(true), new IntegerArgument("delay", true), new FloatArgument("strength", true)
+			new EntityType.Required(), new WholeNumber.Required("delay"), new DecimalNumber.Required("strength")
 		);
 		this.scheduler = scheduler;
 	}
@@ -22,9 +26,12 @@ public class Bazooka extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
+		final IWorld world = executor.getWorld();
+		if (world == null)
+			return null;
 		final Integer delay = parameters.getValue("delay");
 		final Float strength = parameters.getValue("strength");
-		final IEntity projectile = executor.Launch(EntityType.Get(parameters.get("entityType")));
+		final IEntity projectile = executor.Launch((RunsafeEntityType) parameters.getValue("entityType"));
 		if (projectile != null && delay != null && strength != null)
 		{
 			scheduler.startSyncTask(
@@ -34,7 +41,7 @@ public class Bazooka extends PlayerCommand
 					public void run()
 					{
 						ILocation location = projectile.getLocation();
-						projectile.getWorld().createExplosion(location, strength, false);
+						world.createExplosion(location, strength, false);
 						projectile.remove();
 					}
 				},

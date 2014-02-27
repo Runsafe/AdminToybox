@@ -1,6 +1,7 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.argument.EntityTypeArgument;
+import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -18,7 +19,7 @@ public class SpawnGodMob extends PlayerCommand
 	{
 		super(
 			"spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob",
-			new EntityTypeArgument("mobName", true), new RequiredArgument("amount")
+			new EntityType.Required("mobName"), new RequiredArgument("amount")
 		);
 	}
 
@@ -26,11 +27,14 @@ public class SpawnGodMob extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		int n = Integer.parseInt(parameters.get("amount"));
+		IWorld world = executor.getWorld();
+		if (world == null)
+			return null;
 
 		for (int i = 0; i < n; ++i)
 		{
 			String mobName = parameters.get("mobName");
-			IEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), mobName);
+			IEntity entity = world.spawnCreature(executor.getLocation(), mobName);
 			if (entity instanceof RunsafeLivingEntity)
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;

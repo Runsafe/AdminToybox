@@ -2,8 +2,10 @@ package no.runsafe.toybox.handlers;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.entity.EntityType;
+import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 import no.runsafe.toybox.MobDropData;
 
 import java.util.HashMap;
@@ -15,10 +17,10 @@ public class MobDropHandler
 		this.fallingMobDrops = new HashMap<Integer, MobDropData>();
 	}
 
-	public void createMobDropper(ILocation location, String entityName, Integer amount)
+	public void createMobDropper(ILocation location, RunsafeEntityType entityName, Integer amount)
 	{
 		IEntity block = location.getWorld().spawnFallingBlock(location, Item.BuildingBlock.Obsidian);
-		MobDropData data = new MobDropData(EntityType.Get(entityName), amount);
+		MobDropData data = new MobDropData(entityName, amount);
 		this.fallingMobDrops.put(block.getEntityId(), data);
 	}
 
