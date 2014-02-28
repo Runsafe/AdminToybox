@@ -19,12 +19,7 @@ public class PlayerMove implements IPlayerMove
 			IWorld playerWorld = player.getWorld();
 			ILocation playerLocation = player.getLocation();
 			if (playerLocation != null && playerWorld != null)
-			{
-				ILocation splashLocation = playerLocation.clone();
-				splashLocation.offset(0.5D, 0, 0.5D);
-
-				playerWorld.playEffect(splashLocation, Effect.POTION_BREAK, 16421);
-			}
+				playerWorld.playEffect(playerLocation, Effect.POTION_BREAK, 16421);
 		}
 		return true;
 	}
