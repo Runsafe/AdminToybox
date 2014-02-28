@@ -2,13 +2,20 @@ package no.runsafe.toybox.events;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.IWorldEffect;
 import no.runsafe.framework.api.event.player.IPlayerMove;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
-import org.bukkit.Effect;
+import no.runsafe.framework.minecraft.WorldBlockEffect;
+import no.runsafe.framework.minecraft.WorldBlockEffectType;
 
 public class PlayerMove implements IPlayerMove
 {
+	public PlayerMove()
+	{
+		effect = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.Wool.Red);
+	}
+
 	@Override
 	public boolean OnPlayerMove(IPlayer player, ILocation from, ILocation to)
 	{
@@ -19,8 +26,10 @@ public class PlayerMove implements IPlayerMove
 			IWorld playerWorld = player.getWorld();
 			ILocation playerLocation = player.getLocation();
 			if (playerLocation != null && playerWorld != null)
-				playerWorld.playEffect(playerLocation, Effect.POTION_BREAK, 16421);
+				playerLocation.playEffect(effect, 0.3F, 100, 50);
 		}
 		return true;
 	}
+
+	private final IWorldEffect effect;
 }
