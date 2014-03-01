@@ -1,7 +1,6 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.command.IBranchingExecution;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -9,7 +8,7 @@ import no.runsafe.framework.api.player.IPlayer;
 
 import java.util.Random;
 
-public class Roll extends PlayerCommand implements IBranchingExecution
+public class Roll extends PlayerCommand
 {
 	public Roll()
 	{
