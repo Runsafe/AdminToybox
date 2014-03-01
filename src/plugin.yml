@@ -55,3 +55,5 @@ commands:
     description: Protect the player with insta-gib thorns.
   lasso:
     description: Lasso things!
+  roll:
+    description: Roll a random number.

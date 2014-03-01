@@ -57,6 +57,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Time.class);
 		addComponent(Thorns.class);
 		addComponent(Lasso.class);
+		addComponent(Roll.class);
 
 		// Events
 		addComponent(InventoryClose.class);
