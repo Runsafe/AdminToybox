@@ -13,7 +13,7 @@ public class Time extends ExecutableCommand
 {
 	public Time(IConsole console, IUniverseManager manager)
 	{
-		super("time", "Change the time in a world", "runsafe.toybox.time", new Enumeration.Required("time", WellKnownTimes.values()), new AutoWorldArgument());
+		super("time", "Change the time in a world", "runsafe.toybox.time", new Enumeration("time", WellKnownTimes.values()).require(), new AutoWorldArgument());
 		this.console = console;
 		this.manager = manager;
 	}
@@ -21,7 +21,7 @@ public class Time extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IWorld target = parameters.getWorld("world");
+		IWorld target = parameters.getValue("world");
 
 		if (target == null)
 			return "You must specify a world from the console!";

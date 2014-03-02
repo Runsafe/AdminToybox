@@ -1,7 +1,7 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.SelfOrAnyPlayer;
+import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
@@ -13,14 +13,14 @@ public class CreateHead extends PlayerCommand
 	{
 		super(
 			"createhead", "Creates the head of a player", "runsafe.toybox.createhead",
-			new SelfOrAnyPlayer()
+			new Player.Any("player", true, true)
 		);
 	}
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		IPlayer player = parameters.getPlayer("player");
+		IPlayer player = parameters.getValue("player");
 		if (player == null)
 			return null;
 

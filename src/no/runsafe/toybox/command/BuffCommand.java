@@ -4,8 +4,8 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.MapRequired;
-import no.runsafe.framework.api.command.argument.OptionalArgument;
-import no.runsafe.framework.api.command.argument.SelfOrOnlinePlayer;
+import no.runsafe.framework.api.command.argument.Player;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
 
@@ -18,25 +18,25 @@ public class BuffCommand extends ExecutableCommand
 		super(
 			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
 			new MapRequired<Buff>("effect", buffs),
-			new OptionalArgument("duration", "36000"), new OptionalArgument("amplitude", "5"),
-			new SelfOrOnlinePlayer()
+			new WholeNumber("duration").withDefault(36000), new WholeNumber("amplitude").withDefault(5),
+			new Player.Online("player", false, true)
 		);
 	}
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		Buff effect = parameters.getMappedValue("effect");
+		Buff effect = parameters.getValue("effect");
 		if (effect == null)
 			return null;
 
-		IPlayer target = parameters.getPlayer("player");
+		IPlayer target = parameters.getValue("player");
 		if (target == null)
 			return null;
 
-		int duration = Integer.parseInt(parameters.get("duration"));
-		int amp = Integer.parseInt(parameters.get("amplitude"));
-
+		Integer amp = parameters.getValue("amplitude");
+		Integer duration = parameters.getValue("duration");
+		assert (amp != null && duration != null);
 		effect.amplification(amp).duration(duration).applyTo(target);
 		return null;
 	}

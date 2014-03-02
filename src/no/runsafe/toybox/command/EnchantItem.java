@@ -17,7 +17,7 @@ public class EnchantItem extends PlayerCommand
 	{
 		super(
 			"enchant", "Enchants an item", "runsafe.toybox.enchant",
-			new ListOf<Enchant.Required>(new Enchant.Required())
+			new ListOf<IEnchant>(new Enchant()).require()
 		);
 	}
 

@@ -18,7 +18,7 @@ public class Bazooka extends PlayerCommand
 	{
 		super(
 			"bazooka", "Fire an entity and make it explode", "runsafe.toybox.bazooka",
-			new EntityType.Required(), new WholeNumber.Required("delay"), new DecimalNumber.Required("strength")
+			new EntityType().require(), new WholeNumber("delay").require(), new DecimalNumber("strength").require()
 		);
 		this.scheduler = scheduler;
 	}

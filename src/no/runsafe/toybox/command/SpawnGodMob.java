@@ -4,6 +4,7 @@ import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
@@ -19,16 +20,16 @@ public class SpawnGodMob extends PlayerCommand
 	{
 		super(
 			"spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob",
-			new EntityType.Required("mobName"), new RequiredArgument("amount")
+			new EntityType("mobName").require(), new WholeNumber("amount").require()
 		);
 	}
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int n = Integer.parseInt(parameters.get("amount"));
+		Integer n = parameters.getValue("amount");
 		IWorld world = executor.getWorld();
-		if (world == null)
+		if (world == null || n == null)
 			return null;
 
 		for (int i = 0; i < n; ++i)

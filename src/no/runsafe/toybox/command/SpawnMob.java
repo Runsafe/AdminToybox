@@ -13,7 +13,7 @@ public class SpawnMob extends PlayerCommand
 	{
 		super(
 			"spawnmob", "Spawns a mob", "runsafe.toybox.spawnmob",
-			new EntityType.Required("name"), new RequiredArgument("count")
+			new EntityType("name").require(), new RequiredArgument("count")
 		);
 	}
 
