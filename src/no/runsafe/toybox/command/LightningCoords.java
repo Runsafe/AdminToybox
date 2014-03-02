@@ -20,13 +20,13 @@ public class LightningCoords extends PlayerCommand implements IBranchingExecutio
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		Float x = parameters.getValue("x");
-		Float y = parameters.getValue("y");
-		Float z = parameters.getValue("z");
+		Integer x = parameters.getValue("x");
+		Integer y = parameters.getValue("y");
+		Integer z = parameters.getValue("z");
 		assert (x != null && y != null && z != null);
 		IWorld world = executor.getWorld();
 		if (world != null)
-			world.strikeLightning(world.getLocation((double) x, (double) y, (double) z));
+			world.strikeLightning(world.getLocation(x + 0.5, y + 0.5, z + 0.5));
 		return null;
 	}
 }
