@@ -13,7 +13,7 @@ public class CreateHead extends PlayerCommand
 	{
 		super(
 			"createhead", "Creates the head of a player", "runsafe.toybox.createhead",
-			new Player.Any("player", true, true)
+			new Player.Any("player", true)
 		);
 	}
 
