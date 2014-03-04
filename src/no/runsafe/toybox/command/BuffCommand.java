@@ -19,7 +19,7 @@ public class BuffCommand extends ExecutableCommand
 			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
 			new MapRequired<Buff>("effect", buffs),
 			new WholeNumber("duration").withDefault(36000), new WholeNumber("amplitude").withDefault(5),
-			new Player.Online("player", true)
+			new Player().onlineOnly().defaultToExecutor()
 		);
 	}
 

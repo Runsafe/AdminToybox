@@ -11,7 +11,7 @@ public class Mount extends PlayerCommand
 	{
 		super(
 			"mount", "Mounts you on the given player or entity ID", "runsafe.toybox.mount",
-			new Player.Online("target").require()
+			new Player("target").onlineOnly().require()
 		);
 	}
 

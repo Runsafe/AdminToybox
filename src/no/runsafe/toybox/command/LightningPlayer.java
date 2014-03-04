@@ -13,7 +13,7 @@ public class LightningPlayer extends ExecutableCommand implements IBranchingExec
 	{
 		super(
 			"lightning", "Fires lightning at a player", "runsafe.toybox.lightning",
-			new Player.Online().require()
+			new Player().onlineOnly().require()
 		);
 	}
 
