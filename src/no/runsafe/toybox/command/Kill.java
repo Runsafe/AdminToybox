@@ -13,7 +13,7 @@ public class Kill extends ExecutableCommand
 {
 	public Kill()
 	{
-		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new ListOf<IPlayer>(new Player().onlineOnly()).require());
+		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new ListOf<IPlayer>(new Player().onlineOnly()));
 	}
 
 	@Override
@@ -26,9 +26,7 @@ public class Kill extends ExecutableCommand
 		{
 			IPlayer executingPlayer = (IPlayer) executor;
 			if (players.isEmpty())
-			{
 				return killPlayer(executingPlayer);
-			}
 			if (!executingPlayer.hasPermission("runsafe.toybox.kill.others"))
 				return "&cYou do not have permission to kill other players like this.";
 		}
