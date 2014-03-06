@@ -79,10 +79,10 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 			if (lockedObjects.containsKey(worldName))
 			{
-				List<ILocation> locations = Lists.newArrayList(lockedObjects.get(worldName));
-				for (ILocation checkLocation : locations)
-					if (checkLocation.distance(location) < 1)
-						locations.remove(checkLocation);
+				List<ILocation> locations = new ArrayList<ILocation>(lockedObjects.get(worldName).size());
+				for (ILocation checkLocation : lockedObjects.get(worldName))
+					if (checkLocation.distance(location) >= 1)
+						locations.add(checkLocation);
 				lockedObjects.put(worldName, locations);
 			}
 			repository.removeLockedObject(location);
