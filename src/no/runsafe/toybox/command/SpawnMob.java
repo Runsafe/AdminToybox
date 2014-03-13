@@ -23,8 +23,9 @@ public class SpawnMob extends PlayerCommand
 		int n = Integer.parseInt(parameters.get("count"));
 		String name = parameters.get("name");
 
-		if (name.equalsIgnoreCase("horse"))
+		if (name != null && name.equalsIgnoreCase("horse"))
 			return "&cPlease use /spawnhorse for that.";
+
 		for (int i = 0; i < n; ++i)
 		{
 			IWorld world = executor.getWorld();
