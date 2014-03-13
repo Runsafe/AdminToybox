@@ -30,7 +30,7 @@ public class SpawnMob extends PlayerCommand
 		{
 			IWorld world = executor.getWorld();
 			if (world != null)
-				world.spawnCreature(executor.getLocation(), name);
+				world.spawn(executor.getLocation(), no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(name));
 		}
 		return null;
 	}
