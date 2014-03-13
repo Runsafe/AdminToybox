@@ -57,3 +57,5 @@ commands:
     description: Lasso things!
   roll:
     description: Roll a random number.
+  spawncustomminecart:
+    description: Spawn a custom minecart.
