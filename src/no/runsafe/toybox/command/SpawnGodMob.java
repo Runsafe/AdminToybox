@@ -41,7 +41,7 @@ public class SpawnGodMob extends PlayerCommand
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
 
 				RunsafeMeta weapon;
-				if (mobName.equalsIgnoreCase("skeleton"))
+				if (mobName != null && mobName.equalsIgnoreCase("skeleton"))
 					weapon = Item.Combat.Bow.enchant(Enchant.All).getItem();
 				else
 					weapon = Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem();
