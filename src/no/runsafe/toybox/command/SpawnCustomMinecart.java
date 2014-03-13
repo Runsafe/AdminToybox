@@ -2,7 +2,7 @@ package no.runsafe.toybox.command;
 
 import net.minecraft.server.v1_7_R1.EntityMinecartAbstract;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
@@ -14,7 +14,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 {
 	public SpawnCustomMinecart()
 	{
-		super("spawncustomminecart", "Spawn a custom minecart!", "runsafe.toybox.spawnminecart", new RequiredArgument("id"), new RequiredArgument("data"));
+		super("spawncustomminecart", "Spawn a custom minecart!", "runsafe.toybox.spawnminecart", new WholeNumber("id"), new WholeNumber("data"));
 	}
 
 	@Override
