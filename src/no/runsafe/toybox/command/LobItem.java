@@ -1,8 +1,6 @@
 package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.block.IBlock;
-import no.runsafe.framework.api.block.IChest;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
@@ -27,24 +25,17 @@ public class LobItem extends PlayerCommand
 		ILocation location = executor.getLocation();
 		if (location != null)
 		{
-			location.offset(0, -1, 0);
-			IBlock locationBlock = location.getBlock();
-			executor.sendColouredMessage(locationBlock.getClass().getName());
-			if (locationBlock instanceof IChest)
+			RunsafeInventory inventory = executor.getInventory();
+			List<RunsafeMeta> items = inventory.getContents();
+
+			if (!items.isEmpty())
 			{
-				IChest chest = (IChest) locationBlock;
-				RunsafeInventory inventory = chest.getInventory();
-				List<RunsafeMeta> items = inventory.getContents();
+				RunsafeMeta dropItem = items.get(0);
+				inventory.remove(dropItem);
+				RunsafeItem item = location.getWorld().dropItem(location, dropItem);
+				RunsafeEntity entity = executor.Fire(ProjectileEntity.Snowball);
 
-				if (!items.isEmpty())
-				{
-					RunsafeMeta dropItem = items.get(0);
-					inventory.remove(dropItem);
-					RunsafeItem item = location.getWorld().dropItem(location, dropItem);
-					RunsafeEntity entity = executor.Fire(ProjectileEntity.Snowball);
-
-					entity.setPassenger(item);
-				}
+				entity.setPassenger(item);
 			}
 		}
 		return null;
