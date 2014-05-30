@@ -59,3 +59,5 @@ commands:
     description: Roll a random number.
   spawncustomminecart:
     description: Spawn a custom minecart.
+  lob:
+    description: Lob an item from the chest at your feet!

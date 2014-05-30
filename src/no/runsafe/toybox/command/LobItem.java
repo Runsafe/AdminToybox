@@ -1,0 +1,50 @@
+package no.runsafe.toybox.command;
+
+import no.runsafe.framework.api.ILocation;
+import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.block.IChest;
+import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.minecraft.Item;
+import no.runsafe.framework.minecraft.entity.ProjectileEntity;
+import no.runsafe.framework.minecraft.entity.RunsafeEntity;
+import no.runsafe.framework.minecraft.entity.RunsafeItem;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+
+import java.util.List;
+
+public class LobItem extends PlayerCommand
+{
+	public LobItem()
+	{
+		super("lob", "Throw an item stack from the chest at your feet", "runsafe.toybox.lob");
+	}
+
+	@Override
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
+	{
+		ILocation location = executor.getLocation();
+		if (location != null)
+		{
+			location.offset(0, -1, 0);
+			IBlock locationBlock = location.getBlock();
+			if (locationBlock.is(Item.Decoration.Chest))
+			{
+				IChest chest = (IChest) locationBlock;
+				RunsafeInventory inventory = chest.getInventory();
+				List<RunsafeMeta> items = inventory.getContents();
+
+				if (!items.isEmpty())
+				{
+					RunsafeItem item = location.getWorld().dropItem(location, items.get(0));
+					RunsafeEntity entity = executor.Fire(ProjectileEntity.Snowball);
+
+					entity.setPassenger(item);
+				}
+			}
+		}
+		return null;
+	}
+}

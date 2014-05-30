@@ -61,6 +61,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Lasso.class);
 		addComponent(Roll.class);
 		addComponent(SpawnCustomMinecart.class);
+		addComponent(LobItem.class);
 
 		// Events
 		addComponent(InventoryClose.class);
