@@ -30,7 +30,7 @@ public class LobItem extends PlayerCommand
 		{
 			location.offset(0, -1, 0);
 			IBlock locationBlock = location.getBlock();
-			if (locationBlock.is(Item.Decoration.Chest))
+			if (locationBlock instanceof IChest)
 			{
 				IChest chest = (IChest) locationBlock;
 				RunsafeInventory inventory = chest.getInventory();
