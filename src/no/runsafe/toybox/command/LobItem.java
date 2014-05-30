@@ -38,7 +38,9 @@ public class LobItem extends PlayerCommand
 
 				if (!items.isEmpty())
 				{
-					RunsafeItem item = location.getWorld().dropItem(location, items.get(0));
+					RunsafeMeta dropItem = items.get(0);
+					inventory.remove(dropItem);
+					RunsafeItem item = location.getWorld().dropItem(location, dropItem);
 					RunsafeEntity entity = executor.Fire(ProjectileEntity.Snowball);
 
 					entity.setPassenger(item);
