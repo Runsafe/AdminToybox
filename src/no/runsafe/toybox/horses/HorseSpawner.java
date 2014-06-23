@@ -1,9 +1,9 @@
 package no.runsafe.toybox.horses;
 
-import net.minecraft.server.v1_7_R2.EntityHorse;
-import net.minecraft.server.v1_7_R2.EntityTypes;
-import net.minecraft.server.v1_7_R2.NBTTagCompound;
-import net.minecraft.server.v1_7_R2.World;
+import net.minecraft.server.v1_7_R3.EntityHorse;
+import net.minecraft.server.v1_7_R3.EntityTypes;
+import net.minecraft.server.v1_7_R3.NBTTagCompound;
+import net.minecraft.server.v1_7_R3.World;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
 import org.bukkit.Location;

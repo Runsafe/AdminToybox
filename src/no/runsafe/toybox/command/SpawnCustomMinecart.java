@@ -1,6 +1,6 @@
 package no.runsafe.toybox.command;
 
-import net.minecraft.server.v1_7_R2.EntityMinecartAbstract;
+import net.minecraft.server.v1_7_R3.EntityMinecartAbstract;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -8,7 +8,7 @@ import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
 import no.runsafe.framework.minecraft.entity.PassiveEntity;
-import org.bukkit.craftbukkit.v1_7_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_7_R3.entity.CraftEntity;
 
 public class SpawnCustomMinecart extends PlayerCommand
 {
