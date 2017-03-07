@@ -52,7 +52,7 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 			if (attackingEntity instanceof ILivingEntity)
 				killTarget = (ILivingEntity) attackingEntity;
 			else if (attackingEntity instanceof RunsafeProjectile)
-				killTarget = ((RunsafeProjectile) attackingEntity).getShooter();
+				killTarget = (ILivingEntity)((RunsafeProjectile) attackingEntity).getShooter();
 
 
 			// Check we have an entity to kill and that we're protecting a player.
