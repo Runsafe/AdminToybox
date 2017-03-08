@@ -2,6 +2,7 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.WholeNumber;
+import no.runsafe.framework.api.command.argument.ByteValue;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
@@ -19,7 +20,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 				"Spawn a custom minecart!",
 				"runsafe.toybox.spawnminecart",
 				new WholeNumber("id"),
-				new WholeNumber("data"),
+				new ByteValue("data"),
 				new WholeNumber("blockOffset")
 		);
 	}
@@ -37,7 +38,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 			return null;
 		MaterialData minecartBlock = new MaterialData(
 				(Integer) parameters.getValue("id"),
-				(byte) (int) (Integer) parameters.getValue("data")
+				(Byte) parameters.getValue("data")
 		);
 		ema.setDisplayBlock(minecartBlock);
 
