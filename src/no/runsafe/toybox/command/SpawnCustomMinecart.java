@@ -37,7 +37,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 			return null;
 		MaterialData minecartBlock = new MaterialData(
 				(Integer) parameters.getValue("id"),
-				(byte)(int)(Integer)parameters.getValue("data")
+				(byte) (int) (Integer) parameters.getValue("data")
 		);
 		ema.setDisplayBlock(minecartBlock);
 
