@@ -4,6 +4,7 @@ import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.ILivingEntity;
+import no.runsafe.framework.api.entity.IProjectileSource;
 import no.runsafe.framework.api.event.entity.IEntityDamageByEntityEvent;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
@@ -52,7 +53,12 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 			if (attackingEntity instanceof ILivingEntity)
 				killTarget = (ILivingEntity) attackingEntity;
 			else if (attackingEntity instanceof RunsafeProjectile)
-				killTarget = (ILivingEntity)((RunsafeProjectile) attackingEntity).getShooter();
+			{
+				IProjectileSource shooterSource = ((RunsafeProjectile) attackingEntity).getShooter();
+				if(shooterSource instanceof ILivingEntity)
+					killTarget = (ILivingEntity) shooterSource;
+			}
+
 
 
 			// Check we have an entity to kill and that we're protecting a player.
