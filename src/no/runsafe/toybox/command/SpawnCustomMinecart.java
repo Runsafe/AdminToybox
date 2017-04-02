@@ -28,8 +28,6 @@ public class SpawnCustomMinecart extends PlayerCommand
 		String blockName = parameters.getValue("blockName");
 		blockName.toLowerCase();
 
-		int blockOffset = parameters.getValue("blockOffset");
-
 		//Create minecart
 		IEntity minecartEntity = PassiveEntity.Minecart.spawn(executor.getLocation());
 		CraftEntity craftEntity = ObjectUnwrapper.convert(minecartEntity);
@@ -40,7 +38,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 		minecart.setDisplayBlock(minecartBlock.getBlockData());
 
 		//Set block offset
-		minecart.SetDisplayBlockOffset(blockOffset);
+		minecart.SetDisplayBlockOffset((Integer) parameters.getValue("blockOffset"));
 
 		return null;
 	}
