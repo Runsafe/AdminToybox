@@ -1,13 +1,16 @@
 package no.runsafe.toybox.command;
 
+import net.minecraft.server.v1_8_R3.Block;
+import net.minecraft.server.v1_8_R3.EntityMinecartAbstract;
 import no.runsafe.framework.api.command.argument.IArgumentList;
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.WholeNumber;
-import no.runsafe.framework.api.command.argument.ByteValue;
 import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
-import org.bukkit.entity.Minecart;
-import org.bukkit.material.MaterialData;
+import no.runsafe.framework.minecraft.entity.PassiveEntity;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 
 public class SpawnCustomMinecart extends PlayerCommand
 {
@@ -16,8 +19,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 		super("spawncustomminecart",
 				"Spawn a custom minecart!",
 				"runsafe.toybox.spawnminecart",
-				new WholeNumber("id").require(),
-				new ByteValue("data"),
+				new RequiredArgument("block"),
 				new WholeNumber("blockOffset")
 		);
 	}
@@ -26,28 +28,24 @@ public class SpawnCustomMinecart extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		//Get input
-		int blockID = parameters.getValue("id");
-
-		byte blockData = 0;
-		if(parameters.getValue("data") != null)
-			blockData = parameters.getValue("data");
+		String blockName = parameters.getValue("block");
+		blockName.toLowerCase();
 
 		int blockOffset = 8;
 		if(parameters.getValue("blockOffset") != null)
 			blockOffset = parameters.getValue("blockOffset");
 
 		//Create minecart
-		Minecart ema = ((org.bukkit.World) ObjectUnwrapper.convert(executor.getWorld())).spawn(
-				(org.bukkit.Location) ObjectUnwrapper.convert(executor.getLocation()),
-				Minecart.class
-		);
+		IEntity minecartEntity = PassiveEntity.Minecart.spawn(executor.getLocation());
+		CraftEntity craftEntity = ObjectUnwrapper.convert(minecartEntity);
+		EntityMinecartAbstract ema = (EntityMinecartAbstract) craftEntity.getHandle();
 
 		//Create block in minecart
-		MaterialData minecartBlock = new MaterialData(blockID, blockData);
-		ema.setDisplayBlock(minecartBlock);
+		Block minecartBlock = Block.getByName(blockName);
+		ema.setDisplayBlock(minecartBlock.getBlockData());
 
 		//Set block offset
-		ema.setDisplayBlockOffset(blockOffset);
+		ema.SetDisplayBlockOffset(blockOffset);
 
 		return null;
 	}
