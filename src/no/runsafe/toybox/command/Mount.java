@@ -10,7 +10,7 @@ public class Mount extends PlayerCommand
 	public Mount()
 	{
 		super(
-			"mount", "Mounts you on the given player or entity ID", "runsafe.toybox.mount",
+			"mount", "Mounts you on the given player.", "runsafe.toybox.mount",
 			new Player("target").onlineOnly().require()
 		);
 	}
