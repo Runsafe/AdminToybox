@@ -33,14 +33,14 @@ public class SpawnCustomMinecart extends PlayerCommand
 		//Create minecart
 		IEntity minecartEntity = PassiveEntity.Minecart.spawn(executor.getLocation());
 		CraftEntity craftEntity = ObjectUnwrapper.convert(minecartEntity);
-		EntityMinecartAbstract ema = (EntityMinecartAbstract) craftEntity.getHandle();
+		EntityMinecartAbstract minecart = (EntityMinecartAbstract) craftEntity.getHandle();
 
 		//Create block in minecart
 		Block minecartBlock = Block.getByName(blockName);
-		ema.setDisplayBlock(minecartBlock.getBlockData());
+		minecart.setDisplayBlock(minecartBlock.getBlockData());
 
 		//Set block offset
-		ema.SetDisplayBlockOffset(blockOffset);
+		minecart.SetDisplayBlockOffset(blockOffset);
 
 		return null;
 	}
