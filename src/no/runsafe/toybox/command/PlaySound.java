@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.DecimalNumber;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -14,8 +15,8 @@ public class PlaySound extends PlayerCommand
 			"Plays a sound",
 			"runsafe.toybox.playsound",
 			new RequiredArgument(SOUND),
-			new RequiredArgument(VOLUME),
-			new RequiredArgument(PITCH)
+			new DecimalNumber(VOLUME).require(),
+			new DecimalNumber(PITCH).withDefault(1.0F)
 		);
 	}
 
@@ -26,8 +27,8 @@ public class PlaySound extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		float volume = Float.valueOf(parameters.get(VOLUME));
-		float pitch = Float.valueOf(parameters.get(PITCH));
+		float volume = parameters.getValue(VOLUME);
+		float pitch = parameters.getValue(PITCH);
 
 		Sound sound = Sound.Get(parameters.get(SOUND));
 		if (sound == null)
