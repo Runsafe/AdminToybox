@@ -14,16 +14,19 @@ public class SpawnMob extends PlayerCommand
 		super("spawnmob",
 			"Spawns a mob",
 			"runsafe.toybox.spawnmob",
-			new EntityType("name").require(),
-			new RequiredArgument("count")
+			new EntityType(NAME).require(),
+			new RequiredArgument(COUNT)
 		);
 	}
+
+	private static final String NAME = "name";
+	private static final String COUNT = "count";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int n = Integer.parseInt(parameters.get("count"));
-		String name = parameters.get("name");
+		int n = Integer.parseInt(parameters.get(COUNT));
+		String name = parameters.get(NAME);
 
 		if (name != null && name.equalsIgnoreCase("horse"))
 			return "&cPlease use /spawnhorse for that.";

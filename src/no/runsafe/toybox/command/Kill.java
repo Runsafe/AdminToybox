@@ -20,10 +20,12 @@ public class Kill extends ExecutableCommand
 		);
 	}
 
+	private static final String PLAYER = "player";
+
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		List<IPlayer> players = parameters.getValue("player");
+		List<IPlayer> players = parameters.getValue(PLAYER);
 		if (players == null)
 			return null;
 		if (executor instanceof IPlayer)

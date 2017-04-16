@@ -14,10 +14,13 @@ public class SpawnCustomMinecart extends PlayerCommand
 		super("spawncustomminecart",
 				"Spawn a custom minecart!",
 				"runsafe.toybox.spawnminecart",
-				new RequiredArgument("blockName"),
-				new WholeNumber("blockOffset").withDefault(8)
+				new RequiredArgument(BLOCK_NAME),
+				new WholeNumber(BLOCK_OFFSET).withDefault(8)
 		);
 	}
+
+	private static final String BLOCK_NAME = "blockName";
+	private static final String BLOCK_OFFSET = "blockOffset";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
@@ -30,10 +33,10 @@ public class SpawnCustomMinecart extends PlayerCommand
 		RunsafeMinecart minecart = (RunsafeMinecart) PassiveEntity.Minecart.spawn(location);
 
 		//Create block in minecart
-		minecart.setDisplayBlock((org.bukkit.Material) parameters.getValue("blockName"));
+		minecart.setDisplayBlock((org.bukkit.Material) parameters.getValue(BLOCK_NAME));
 
 		//Set block offset
-		minecart.setDisplayBlockOffset((Integer) parameters.getValue("blockOffset"));
+		minecart.setDisplayBlockOffset((Integer) parameters.getValue(BLOCK_OFFSET));
 
 		return null;
 	}

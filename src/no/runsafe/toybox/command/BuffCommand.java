@@ -18,26 +18,31 @@ public class BuffCommand extends ExecutableCommand
 		super("buff",
 			"Apply a buff to a target player",
 			"runsafe.toybox.buff",
-			new MapRequired<Buff>("effect", buffs),
-			new WholeNumber("duration").withDefault(36000),
-			new WholeNumber("amplitude").withDefault(5),
+			new MapRequired<Buff>(EFFECT, buffs),
+			new WholeNumber(DURATION).withDefault(36000),
+			new WholeNumber(AMPLITUDE).withDefault(5),
 			new Player().onlineOnly().defaultToExecutor()
 		);
 	}
 
+	private static final String EFFECT = "effect";
+	private static final String DURATION = "duration";
+	private static final String AMPLITUDE = "amplitude";
+	private static final String PLAYER = "player";
+
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		Buff effect = parameters.getValue("effect");
+		Buff effect = parameters.getValue(EFFECT);
 		if (effect == null)
 			return null;
 
-		IPlayer target = parameters.getValue("player");
+		IPlayer target = parameters.getValue(PLAYER);
 		if (target == null)
 			return null;
 
-		Integer amp = parameters.getValue("amplitude");
-		Integer duration = parameters.getValue("duration");
+		Integer amp = parameters.getValue(AMPLITUDE);
+		Integer duration = parameters.getValue(DURATION);
 		assert (amp != null && duration != null);
 		effect.amplification(amp).duration(duration).applyTo(target);
 		return null;

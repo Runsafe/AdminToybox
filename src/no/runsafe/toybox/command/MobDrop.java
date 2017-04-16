@@ -15,19 +15,22 @@ public class MobDrop extends PlayerCommand
 		super("mobdrop",
 			"Drops a block full of mobs",
 			"runsafe.toybox.mobdrop",
-			new EntityType("mobType").require(),
-			new RequiredArgument("amount")
+			new EntityType(MOB_TYPE).require(),
+			new RequiredArgument(AMOUNT)
 		);
 		this.handler = handler;
 	}
+
+	private static final String MOB_TYPE = "mob_type";
+	private static final String AMOUNT = "amount";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		handler.createMobDropper(
 			executor.getLocation(),
-			(RunsafeEntityType) parameters.getValue("mobType"),
-			(Integer) parameters.getValue("amount")
+			(RunsafeEntityType) parameters.getValue(MOB_TYPE),
+			(Integer) parameters.getValue(AMOUNT)
 		);
 		return null;
 	}
