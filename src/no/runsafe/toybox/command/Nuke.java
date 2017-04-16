@@ -12,9 +12,11 @@ public class Nuke extends PlayerCommand
 {
 	public Nuke()
 	{
-		super(
-			"nuke", "Nukes in a certain radius", "runsafe.toybox.nuke",
-			new RequiredArgument("radius"), new RequiredArgument("power")
+		super("nuke",
+			"Nukes in a certain radius",
+			"runsafe.toybox.nuke",
+			new RequiredArgument("radius"),
+			new RequiredArgument("power")
 		);
 	}
 

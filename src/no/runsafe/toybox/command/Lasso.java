@@ -15,7 +15,10 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 {
 	public Lasso()
 	{
-		super("lasso", "Lasso two entities together.", "runsafe.toybox.lasso");
+		super("lasso",
+			"Lasso two entities together.",
+			"runsafe.toybox.lasso"
+		);
 	}
 
 	@Override

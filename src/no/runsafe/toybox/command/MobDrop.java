@@ -12,9 +12,11 @@ public class MobDrop extends PlayerCommand
 {
 	public MobDrop(MobDropHandler handler)
 	{
-		super(
-			"mobdrop", "Drops a block full of mobs", "runsafe.toybox.mobdrop",
-			new EntityType("mobType").require(), new RequiredArgument("amount")
+		super("mobdrop",
+			"Drops a block full of mobs",
+			"runsafe.toybox.mobdrop",
+			new EntityType("mobType").require(),
+			new RequiredArgument("amount")
 		);
 		this.handler = handler;
 	}

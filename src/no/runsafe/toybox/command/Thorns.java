@@ -21,7 +21,10 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 {
 	public Thorns()
 	{
-		super("thorns", "Protect the player with insta-gib thorns", "runsafe.toybox.thorns");
+		super("thorns",
+			"Protect the player with insta-gib thorns",
+			"runsafe.toybox.thorns"
+		);
 	}
 
 	@Override

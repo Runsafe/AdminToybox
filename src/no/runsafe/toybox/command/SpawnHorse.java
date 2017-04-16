@@ -15,9 +15,11 @@ public class SpawnHorse extends PlayerCommand
 {
 	public SpawnHorse(HorseSpawner horseSpawner)
 	{
-		super(
-			"spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob",
-			new RequiredArgument("count"), new RequiredArgument("tame"),
+		super("spawnhorse",
+			"Spawns a horse",
+			"runsafe.toybox.spawnmob",
+			new RequiredArgument("count"),
+			new RequiredArgument("tame"),
 			new Enumeration("type", SpawnableHorseType.values()),
 			new Enumeration("variant", SpawnableHorseVariant.values())
 		);

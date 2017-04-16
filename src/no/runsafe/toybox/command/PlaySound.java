@@ -10,9 +10,12 @@ public class PlaySound extends PlayerCommand
 {
 	public PlaySound()
 	{
-		super(
-			"playsound", "Plays a sound", "runsafe.toybox.playsound",
-			new RequiredArgument("sound"), new RequiredArgument("volume"), new RequiredArgument("pitch")
+		super("playsound",
+			"Plays a sound",
+			"runsafe.toybox.playsound",
+			new RequiredArgument("sound"),
+			new RequiredArgument("volume"),
+			new RequiredArgument("pitch")
 		);
 	}
 

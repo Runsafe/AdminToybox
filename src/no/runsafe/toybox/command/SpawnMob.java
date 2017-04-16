@@ -11,9 +11,11 @@ public class SpawnMob extends PlayerCommand
 {
 	public SpawnMob()
 	{
-		super(
-			"spawnmob", "Spawns a mob", "runsafe.toybox.spawnmob",
-			new EntityType("name").require(), new RequiredArgument("count")
+		super("spawnmob",
+			"Spawns a mob",
+			"runsafe.toybox.spawnmob",
+			new EntityType("name").require(),
+			new RequiredArgument("count")
 		);
 	}
 

@@ -11,8 +11,9 @@ public class CreateHead extends PlayerCommand
 {
 	public CreateHead()
 	{
-		super(
-			"createhead", "Creates the head of a player", "runsafe.toybox.createhead",
+		super("createhead",
+			"Creates the head of a player",
+			"runsafe.toybox.createhead",
 			new Player().defaultToExecutor()
 		);
 	}

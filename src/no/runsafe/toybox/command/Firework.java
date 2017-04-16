@@ -9,7 +9,10 @@ public class Firework extends PlayerCommand
 {
 	public Firework()
 	{
-		super("firework", "Sets off a firework", "runsafe.toybox.firework");
+		super("firework",
+			"Sets off a firework",
+			"runsafe.toybox.firework"
+		);
 	}
 
 	@Override

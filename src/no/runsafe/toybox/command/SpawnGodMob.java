@@ -18,9 +18,11 @@ public class SpawnGodMob extends PlayerCommand
 {
 	public SpawnGodMob()
 	{
-		super(
-			"spawngodmob", "Spawns a god-like mob", "runsafe.toybox.spawngodmob",
-			new EntityType("mobName").require(), new WholeNumber("amount").require()
+		super("spawngodmob",
+			"Spawns a god-like mob",
+			"runsafe.toybox.spawngodmob",
+			new EntityType("mobName").require(),
+			new WholeNumber("amount").require()
 		);
 	}
 
