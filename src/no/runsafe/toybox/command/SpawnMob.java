@@ -3,7 +3,7 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
@@ -15,7 +15,7 @@ public class SpawnMob extends PlayerCommand
 			"Spawns a mob",
 			"runsafe.toybox.spawnmob",
 			new EntityType(NAME).require(),
-			new RequiredArgument(COUNT)
+			new WholeNumber(COUNT).require()
 		);
 	}
 
@@ -25,7 +25,7 @@ public class SpawnMob extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int n = Integer.parseInt(parameters.get(COUNT));
+		int n = parameters.getValue(COUNT);
 		String name = parameters.get(NAME);
 
 		if (name != null && name.equalsIgnoreCase("horse"))
