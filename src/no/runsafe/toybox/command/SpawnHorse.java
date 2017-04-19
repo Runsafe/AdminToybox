@@ -1,8 +1,6 @@
 package no.runsafe.toybox.command;
 
-import no.runsafe.framework.api.command.argument.Enumeration;
-import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.*;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.toybox.horses.HorseSpawner;
@@ -18,8 +16,8 @@ public class SpawnHorse extends PlayerCommand
 		super("spawnhorse",
 			"Spawns a horse",
 			"runsafe.toybox.spawnmob",
-			new RequiredArgument(COUNT),
-			new RequiredArgument(TAME),
+			new WholeNumber(COUNT).require(),
+			new BooleanArgument(TAME).withDefault(true),
 			new Enumeration(TYPE, SpawnableHorseType.values()),
 			new Enumeration(VARIANT, SpawnableHorseVariant.values())
 		);
@@ -43,10 +41,10 @@ public class SpawnHorse extends PlayerCommand
 			if (variant == null)
 				variant = this.getRandomHorseVariant();
 
-			int count = Integer.valueOf(parameters.get(COUNT));
+			int count = parameters.getValue(COUNT);
 
 			for (int i = 0; i < count; ++i)
-				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, parameters.get(TAME).equals("1"));
+				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, (Boolean) parameters.getValue(TAME));
 		}
 		catch (IllegalArgumentException exception)
 		{
