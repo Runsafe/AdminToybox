@@ -9,7 +9,6 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
-import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
 
 public class Bazooka extends PlayerCommand
@@ -19,7 +18,7 @@ public class Bazooka extends PlayerCommand
 		super("bazooka",
 			"Fire an entity and make it explode",
 			"runsafe.toybox.bazooka",
-			new EntityType().require(),
+			new EntityType(ENTITY_TYPE).require(),
 			new WholeNumber(DELAY).require(),
 			new DecimalNumber(STRENGTH).require()
 		);
@@ -38,7 +37,7 @@ public class Bazooka extends PlayerCommand
 			return null;
 		final Integer delay = parameters.getValue(DELAY);
 		final Float strength = parameters.getValue(STRENGTH);
-		final IEntity projectile = executor.Launch((RunsafeEntityType) parameters.getValue(ENTITY_TYPE));
+		final IEntity projectile = executor.Launch(no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(parameters.get(ENTITY_TYPE)));
 		if (projectile != null && delay != null && strength != null)
 		{
 			scheduler.startSyncTask(
