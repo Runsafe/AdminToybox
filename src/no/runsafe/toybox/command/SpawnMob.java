@@ -26,7 +26,7 @@ public class SpawnMob extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		int n = parameters.getValue(COUNT);
-		String name = parameters.getValue(NAME);
+		String name = parameters.get(NAME);
 
 		if (name != null && name.equalsIgnoreCase("horse"))
 			return "&cPlease use /spawnhorse for that.";
