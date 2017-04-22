@@ -27,9 +27,13 @@ public class MobDrop extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
+		String mobName = parameters.get(MOB_TYPE);
+		if(mobName == null)
+			return "Invalid mob.";
+
 		handler.createMobDropper(
 			executor.getLocation(),
-			(RunsafeEntityType) parameters.getValue(MOB_TYPE),
+			no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(mobName),
 			(Integer) parameters.getValue(AMOUNT)
 		);
 		return null;
