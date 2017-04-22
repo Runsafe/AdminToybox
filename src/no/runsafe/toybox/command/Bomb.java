@@ -9,7 +9,10 @@ public class Bomb extends PlayerCommand
 {
 	public Bomb()
 	{
-		super("bomb", "Fires a wither bomb", "runsafe.toybox.bomb");
+		super("bomb",
+			"Fires a wither bomb",
+			"runsafe.toybox.bomb"
+		);
 	}
 
 	@Override

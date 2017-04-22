@@ -9,7 +9,10 @@ public class Fireball extends PlayerCommand
 {
 	public Fireball()
 	{
-		super("fireball", "Fires a fireball", "runsafe.toybox.fireball");
+		super("fireball",
+			"Fires a fireball",
+			"runsafe.toybox.fireball"
+		);
 	}
 
 	@Override

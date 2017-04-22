@@ -13,13 +13,19 @@ public class Kill extends ExecutableCommand
 {
 	public Kill()
 	{
-		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new ListOf<IPlayer>(new Player().onlineOnly()));
+		super("kill",
+			"Kills the targeted player",
+			"runsafe.toybox.kill",
+			new ListOf<IPlayer>(new Player().onlineOnly())
+		);
 	}
+
+	private static final String PLAYER = "player";
 
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		List<IPlayer> players = parameters.getValue("player");
+		List<IPlayer> players = parameters.getValue(PLAYER);
 		if (players == null)
 			return null;
 		if (executor instanceof IPlayer)

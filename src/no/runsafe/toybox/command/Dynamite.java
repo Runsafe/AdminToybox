@@ -9,7 +9,10 @@ public class Dynamite extends PlayerCommand
 {
 	public Dynamite()
 	{
-		super("dynamite", "Fires a primed TNT", "runsafe.toybox.dynamite");
+		super("dynamite",
+			"Fires a primed TNT",
+			"runsafe.toybox.dynamite"
+		);
 	}
 
 	@Override

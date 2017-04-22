@@ -13,20 +13,28 @@ public class Time extends ExecutableCommand
 {
 	public Time(IConsole console, IUniverseManager manager)
 	{
-		super("time", "Change the time in a world", "runsafe.toybox.time", new Enumeration("time", WellKnownTimes.values()).require(), new AutoWorldArgument());
+		super("time",
+			"Change the time in a world",
+			"runsafe.toybox.time",
+			new Enumeration(TIME, WellKnownTimes.values()).require(),
+			new AutoWorldArgument()
+		);
 		this.console = console;
 		this.manager = manager;
 	}
 
+	private static final String TIME = "time";
+	private static final String WORLD = "world";
+
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IWorld target = parameters.getValue("world");
+		IWorld target = parameters.getValue(WORLD);
 
 		if (target == null)
 			return "You must specify a world from the console!";
 
-		WellKnownTimes time = parameters.getValue("time");
+		WellKnownTimes time = parameters.getValue(TIME);
 		if (time == null)
 			return null;
 		target.setTime(time.getTime());

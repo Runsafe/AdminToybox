@@ -8,7 +8,10 @@ public class PlayEffect extends PlayerCommand
 {
 	public PlayEffect()
 	{
-		super("playeffect", "Play a custom effect at your location", "runsafe.toybox.effects");
+		super("playeffect",
+			"Play a custom effect at your location",
+			"runsafe.toybox.effects"
+		);
 	}
 
 	@Override

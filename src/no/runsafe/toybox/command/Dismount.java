@@ -9,7 +9,10 @@ public class Dismount extends PlayerCommand
 {
 	public Dismount()
 	{
-		super("dismount", "Dismounts you", "runsafe.toybox.dismount");
+		super("dismount",
+			"Dismounts you",
+			"runsafe.toybox.dismount"
+		);
 	}
 
 	@Override
