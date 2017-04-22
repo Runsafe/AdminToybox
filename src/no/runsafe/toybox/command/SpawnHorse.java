@@ -34,6 +34,9 @@ public class SpawnHorse extends PlayerCommand
 	{
 		try
 		{
+			Boolean tame = parameters.getValue(TAME);
+			if(tame == null)
+				tame = true;
 			SpawnableHorseType type = parameters.getValue(TYPE);
 			if (type == null)
 				type = this.getRandomHorseType();
@@ -44,7 +47,7 @@ public class SpawnHorse extends PlayerCommand
 			int count = parameters.getValue(COUNT);
 
 			for (int i = 0; i < count; ++i)
-				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, (Boolean) parameters.getValue(TAME));
+				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, tame);
 		}
 		catch (IllegalArgumentException exception)
 		{
