@@ -9,19 +9,25 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
-import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
 
 public class Bazooka extends PlayerCommand
 {
 	public Bazooka(IScheduler scheduler)
 	{
-		super(
-			"bazooka", "Fire an entity and make it explode", "runsafe.toybox.bazooka",
-			new EntityType().require(), new WholeNumber("delay").require(), new DecimalNumber("strength").require()
+		super("bazooka",
+			"Fire an entity and make it explode",
+			"runsafe.toybox.bazooka",
+			new EntityType(ENTITY_TYPE).require(),
+			new WholeNumber(DELAY).require(),
+			new DecimalNumber(STRENGTH).require()
 		);
 		this.scheduler = scheduler;
 	}
+
+	private static final String ENTITY_TYPE = "entityType";
+	private static final String DELAY = "delay";
+	private static final String STRENGTH = "strength";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
@@ -29,9 +35,9 @@ public class Bazooka extends PlayerCommand
 		final IWorld world = executor.getWorld();
 		if (world == null)
 			return null;
-		final Integer delay = parameters.getValue("delay");
-		final Float strength = parameters.getValue("strength");
-		final IEntity projectile = executor.Launch((RunsafeEntityType) parameters.getValue("entityType"));
+		final Integer delay = parameters.getValue(DELAY);
+		final Float strength = parameters.getValue(STRENGTH);
+		final IEntity projectile = executor.Launch(no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(parameters.get(ENTITY_TYPE)));
 		if (projectile != null && delay != null && strength != null)
 		{
 			scheduler.startSyncTask(

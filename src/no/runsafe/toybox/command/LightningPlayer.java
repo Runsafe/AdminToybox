@@ -11,16 +11,19 @@ public class LightningPlayer extends ExecutableCommand implements IBranchingExec
 {
 	public LightningPlayer()
 	{
-		super(
-			"lightning", "Fires lightning at a player", "runsafe.toybox.lightning",
+		super("lightning",
+			"Fires lightning at a player",
+			"runsafe.toybox.lightning",
 			new Player().onlineOnly().require()
 		);
 	}
 
+	private static final String PLAYER = "player";
+
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		IPlayer player = parameters.getValue("player");
+		IPlayer player = parameters.getValue(PLAYER);
 		if (player == null)
 			return "Target player is offline!";
 		player.strikeWithLightning(false);

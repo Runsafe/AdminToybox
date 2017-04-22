@@ -11,8 +11,9 @@ public class Ride extends PlayerCommand
 {
 	public Ride()
 	{
-		super(
-			"ride", "Spawns an entity and mounts you to it", "runsafe.toybox.ride",
+		super("ride",
+			"Spawns an entity and mounts you to it",
+			"runsafe.toybox.ride",
 			new EntityType().require()
 		);
 	}

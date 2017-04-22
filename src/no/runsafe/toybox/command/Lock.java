@@ -15,7 +15,10 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 {
 	public Lock(LockedObjectHandler handler)
 	{
-		super("lock", "Locks an object.", "runsafe.toybox.lock");
+		super("lock",
+			"Locks an object.",
+			"runsafe.toybox.lock"
+		);
 		this.handler = handler;
 	}
 

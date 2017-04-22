@@ -11,7 +11,10 @@ public class Roll extends PlayerCommand
 {
 	public Roll()
 	{
-		super("roll", "Roll to produce a random number!", "runsafe.toybox.roll");
+		super("roll",
+			"Roll to produce a random number!",
+			"runsafe.toybox.roll"
+		);
 	}
 
 	@Override

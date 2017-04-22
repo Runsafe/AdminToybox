@@ -16,7 +16,10 @@ public class LobItem extends PlayerCommand
 {
 	public LobItem()
 	{
-		super("lob", "Throw an item stack from the chest at your feet", "runsafe.toybox.lob");
+		super("lob",
+			"Throw an item stack from the chest at your feet",
+			"runsafe.toybox.lob"
+		);
 	}
 
 	@Override

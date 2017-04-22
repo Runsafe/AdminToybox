@@ -9,7 +9,10 @@ public class CarePackage extends PlayerCommand
 {
 	public CarePackage(CarePackageHandler handler)
 	{
-		super("carepackage", "Creates a drop-package", "runsafe.toybox.carepackage");
+		super("carepackage",
+			"Creates a drop-package",
+			"runsafe.toybox.carepackage"
+		);
 		this.handler = handler;
 	}
 

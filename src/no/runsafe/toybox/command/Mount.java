@@ -9,16 +9,19 @@ public class Mount extends PlayerCommand
 {
 	public Mount()
 	{
-		super(
-			"mount", "Mounts you on the given player or entity ID", "runsafe.toybox.mount",
-			new Player("target").onlineOnly().require()
+		super("mount",
+			"Mounts you on the given player.",
+			"runsafe.toybox.mount",
+			new Player(TARGET).onlineOnly().require()
 		);
 	}
+
+	private static final String TARGET = "target";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		IPlayer target = parameters.getValue("target");
+		IPlayer target = parameters.getValue(TARGET);
 		if (target == null)
 			return "&cUnable to find target..";
 

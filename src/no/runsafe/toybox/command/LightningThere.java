@@ -10,8 +10,9 @@ public class LightningThere extends PlayerCommand implements IBranchingExecution
 {
 	public LightningThere()
 	{
-		super(
-			"lightning", "Fires lightning at the location you are looking", "runsafe.toybox.lightning"
+		super("lightning",
+			"Fires lightning at the location you are looking",
+			"runsafe.toybox.lightning"
 		);
 	}
 
