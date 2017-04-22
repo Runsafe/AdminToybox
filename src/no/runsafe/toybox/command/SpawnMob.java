@@ -15,7 +15,7 @@ public class SpawnMob extends PlayerCommand
 			"Spawns a mob",
 			"runsafe.toybox.spawnmob",
 			new EntityType(NAME).require(),
-			new WholeNumber(COUNT).require()
+			new WholeNumber(COUNT).withDefault(1)
 		);
 	}
 
