@@ -12,19 +12,23 @@ public class PlaySound extends PlayerCommand
 	{
 		super(
 			"playsound", "Plays a sound", "runsafe.toybox.playsound",
-			new RequiredArgument("sound"),
-			new RequiredArgument("volume"),
-			new RequiredArgument("pitch")
+			new RequiredArgument(SOUND),
+			new RequiredArgument(VOLUME),
+			new RequiredArgument(PITCH)
 		);
 	}
+
+	private static final String SOUND = "sound";
+	private static final String VOLUME = "volume";
+	private static final String PITCH = "pitch";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		float volume = Float.valueOf(parameters.get("volume"));
-		float pitch = Float.valueOf(parameters.get("pitch"));
+		float volume = Float.valueOf(parameters.get(VOLUME));
+		float pitch = Float.valueOf(parameters.get(PITCH));
 
-		Sound sound = Sound.Get(parameters.get("sound"));
+		Sound sound = Sound.Get(parameters.get(SOUND));
 		if (sound == null)
 			return "&cThat sound does not exist.";
 

@@ -14,20 +14,23 @@ public class Nuke extends PlayerCommand
 	{
 		super(
 			"nuke", "Nukes in a certain radius", "runsafe.toybox.nuke",
-			new RequiredArgument("radius"),
-			new RequiredArgument("power")
+			new RequiredArgument(RADIUS),
+			new RequiredArgument(POWER)
 		);
 	}
+
+	private static final String RADIUS = "radius";
+	private static final String POWER = "power";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int radius = Integer.valueOf(parameters.get("radius"));
+		int radius = Integer.valueOf(parameters.get(RADIUS));
 
 		if (radius > 15)
 			return "Max radius size: 15";
 
-		int power = Integer.valueOf(parameters.get("power"));
+		int power = Integer.valueOf(parameters.get(POWER));
 		ILocation location = executor.getLocation();
 
 		location.decrementX(radius);

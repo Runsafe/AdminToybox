@@ -13,14 +13,16 @@ public class CreateHead extends PlayerCommand
 	{
 		super(
 			"createhead", "Creates the head of a player", "runsafe.toybox.createhead",
-			new Player().defaultToExecutor()
+			new Player(PLAYER).defaultToExecutor()
 		);
 	}
+
+	private static final String PLAYER = "player";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		IPlayer player = parameters.getValue("player");
+		IPlayer player = parameters.getValue(PLAYER);
 		if (player == null)
 			return null;
 

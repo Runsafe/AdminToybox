@@ -18,11 +18,15 @@ public class SpawnCustomMinecart extends PlayerCommand
 	{
 		super(
 			"spawncustomminecart", "Spawn a custom minecart!", "runsafe.toybox.spawnminecart",
-			new WholeNumber("id"),
-			new ByteValue("data"),
-			new WholeNumber("blockOffset")
+			new WholeNumber(BLOCK_ID),
+			new ByteValue(BLOCK_DATA),
+			new WholeNumber(BLOCK_OFFSET)
 		);
 	}
+
+	private static final String BLOCK_ID = "id";
+	private static final String BLOCK_DATA = "data";
+	private static final String BLOCK_OFFSET = "blockOffset";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
@@ -36,15 +40,15 @@ public class SpawnCustomMinecart extends PlayerCommand
 		if(parameters.getValue("id") == null)
 			return null;
 		MaterialData minecartBlock = new MaterialData(
-				(Integer) parameters.getValue("id"),
-				(Byte) parameters.getValue("data")
+				(Integer) parameters.getValue(BLOCK_ID),
+				(Byte) parameters.getValue(BLOCK_DATA)
 		);
 		ema.setDisplayBlock(minecartBlock);
 
 		//Set block offset
-		if(parameters.getValue("blockOffset") == null)
+		if(parameters.getValue(BLOCK_OFFSET) == null)
 			return null;
-		ema.setDisplayBlockOffset((Integer) parameters.getValue("blockOffset"));
+		ema.setDisplayBlockOffset((Integer) parameters.getValue(BLOCK_OFFSET));
 
 		return null;
 	}

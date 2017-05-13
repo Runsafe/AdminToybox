@@ -17,9 +17,11 @@ public class EnchantItem extends PlayerCommand
 	{
 		super(
 			"enchant", "Enchants an item", "runsafe.toybox.enchant",
-			new ListOf<IEnchant>(new Enchant()).require()
+			new ListOf<IEnchant>(new Enchant(ENCHANT)).require()
 		);
 	}
+
+	private static final String ENCHANT = "enchant";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
@@ -28,7 +30,7 @@ public class EnchantItem extends PlayerCommand
 		if (item == null)
 			return "&cNo item in your hand.";
 		StringBuilder feedback = new StringBuilder();
-		String[] enchants = parameters.get("enchant").split(" ");
+		String[] enchants = parameters.get(ENCHANT).split(" ");
 		for (String param : enchants)
 		{
 			Matcher spec = enchantSpec.matcher(param);

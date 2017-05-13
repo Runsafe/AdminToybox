@@ -13,18 +13,22 @@ public class LightningCoords extends PlayerCommand implements IBranchingExecutio
 	{
 		super(
 			"lightning", "Fires lightning at a coordinate", "runsafe.toybox.lightning",
-			new WholeNumber("x").require(),
-			new WholeNumber("y").require(),
-			new WholeNumber("z").require()
+			new WholeNumber(X).require(),
+			new WholeNumber(Y).require(),
+			new WholeNumber(Z).require()
 		);
 	}
+
+	private static final String X = "x";
+	private static final String Y = "y";
+	private static final String Z = "z";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		Integer x = parameters.getValue("x");
-		Integer y = parameters.getValue("y");
-		Integer z = parameters.getValue("z");
+		Integer x = parameters.getValue(X);
+		Integer y = parameters.getValue(Y);
+		Integer z = parameters.getValue(Z);
 		assert (x != null && y != null && z != null);
 		IWorld world = executor.getWorld();
 		if (world != null)
