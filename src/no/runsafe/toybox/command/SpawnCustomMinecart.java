@@ -17,7 +17,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 		super(
 			"spawncustomminecart", "Spawn a custom minecart!", "runsafe.toybox.spawnminecart",
 			new Enumeration(BLOCK_NAME, org.bukkit.Material.values()).require(),
-			new WholeNumber(BLOCK_OFFSET)
+			new WholeNumber(BLOCK_OFFSET).withDefault(8)
 		);
 	}
 
