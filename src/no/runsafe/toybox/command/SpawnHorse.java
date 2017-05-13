@@ -3,6 +3,7 @@ package no.runsafe.toybox.command;
 import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.toybox.horses.HorseSpawner;
@@ -17,7 +18,7 @@ public class SpawnHorse extends PlayerCommand
 	{
 		super(
 			"spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob",
-			new RequiredArgument(COUNT),
+			new WholeNumber(COUNT).require(),
 			new RequiredArgument(TAME),
 			new Enumeration(TYPE, SpawnableHorseType.values()),
 			new Enumeration(VARIANT, SpawnableHorseVariant.values())

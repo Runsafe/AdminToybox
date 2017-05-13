@@ -2,7 +2,7 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
@@ -15,7 +15,7 @@ public class MobDrop extends PlayerCommand
 		super(
 			"mobdrop", "Drops a block full of mobs", "runsafe.toybox.mobdrop",
 			new EntityType(MOB_TYPE).require(),
-			new RequiredArgument(AMOUNT)
+			new WholeNumber(AMOUNT).require()
 		);
 		this.handler = handler;
 	}
