@@ -14,7 +14,8 @@ public class Nuke extends PlayerCommand
 	{
 		super(
 			"nuke", "Nukes in a certain radius", "runsafe.toybox.nuke",
-			new RequiredArgument("radius"), new RequiredArgument("power")
+			new RequiredArgument("radius"),
+			new RequiredArgument("power")
 		);
 	}
 

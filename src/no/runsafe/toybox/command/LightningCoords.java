@@ -13,7 +13,9 @@ public class LightningCoords extends PlayerCommand implements IBranchingExecutio
 	{
 		super(
 			"lightning", "Fires lightning at a coordinate", "runsafe.toybox.lightning",
-			new WholeNumber("x").require(), new WholeNumber("y").require(), new WholeNumber("z").require()
+			new WholeNumber("x").require(),
+			new WholeNumber("y").require(),
+			new WholeNumber("z").require()
 		);
 	}
 

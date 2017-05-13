@@ -13,7 +13,10 @@ public class Kill extends ExecutableCommand
 {
 	public Kill()
 	{
-		super("kill", "Kills the targeted player", "runsafe.toybox.kill", new ListOf<IPlayer>(new Player().onlineOnly()));
+		super(
+			"kill", "Kills the targeted player", "runsafe.toybox.kill",
+			new ListOf<IPlayer>(new Player().onlineOnly())
+		);
 	}
 
 	@Override

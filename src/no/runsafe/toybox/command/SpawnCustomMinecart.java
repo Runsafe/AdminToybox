@@ -16,12 +16,11 @@ public class SpawnCustomMinecart extends PlayerCommand
 {
 	public SpawnCustomMinecart()
 	{
-		super("spawncustomminecart",
-				"Spawn a custom minecart!",
-				"runsafe.toybox.spawnminecart",
-				new WholeNumber("id"),
-				new ByteValue("data"),
-				new WholeNumber("blockOffset")
+		super(
+			"spawncustomminecart", "Spawn a custom minecart!", "runsafe.toybox.spawnminecart",
+			new WholeNumber("id"),
+			new ByteValue("data"),
+			new WholeNumber("blockOffset")
 		);
 	}
 
