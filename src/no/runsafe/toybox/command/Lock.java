@@ -42,34 +42,34 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 		IPlayer player = event.getPlayer();
 		String playerName = player.getName();
 
-		if (block != null)
+		if (block == null)
+			return;
+
+		if (this.lockingPlayers.contains(playerName))
 		{
-			if (this.lockingPlayers.contains(playerName))
+			if (this.handler.isLockedBlock(block))
 			{
-				if (this.handler.isLockedBlock(block))
+				this.handler.unlockBlock(block);
+				player.sendColouredMessage("&2Object unlocked");
+			}
+			else
+			{
+				if (this.handler.canLockBlock(block))
 				{
-					this.handler.unlockBlock(block);
-					player.sendColouredMessage("&2Object unlocked");
+					this.handler.lockBlock(block);
+					player.sendColouredMessage("&2Object locked.");
 				}
 				else
 				{
-					if (this.handler.canLockBlock(block))
-					{
-						this.handler.lockBlock(block);
-						player.sendColouredMessage("&2Object locked.");
-					}
-					else
-					{
-						player.sendColouredMessage("&cYou cannot lock that object.");
-					}
+					player.sendColouredMessage("&cYou cannot lock that object.");
 				}
-				event.cancel();
 			}
-			else if (this.handler.isLockedBlock(block))
-			{
-				player.sendColouredMessage("&cThat object has been locked by wizards.");
-				event.cancel();
-			}
+			event.cancel();
+		}
+		else if (this.handler.isLockedBlock(block))
+		{
+			player.sendColouredMessage("&cThat object has been locked by wizards.");
+			event.cancel();
 		}
 	}
 
