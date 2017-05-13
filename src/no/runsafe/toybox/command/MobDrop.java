@@ -15,7 +15,7 @@ public class MobDrop extends PlayerCommand
 		super(
 			"mobdrop", "Drops a block full of mobs", "runsafe.toybox.mobdrop",
 			new EntityType(MOB_TYPE).require(),
-			new WholeNumber(AMOUNT).require()
+			new WholeNumber(AMOUNT).withDefault(1)
 		);
 		this.handler = handler;
 	}

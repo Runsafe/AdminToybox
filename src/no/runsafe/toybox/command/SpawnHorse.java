@@ -18,7 +18,7 @@ public class SpawnHorse extends PlayerCommand
 	{
 		super(
 			"spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob",
-			new WholeNumber(COUNT).require(),
+			new WholeNumber(COUNT).withDefault(1),
 			new RequiredArgument(TAME),
 			new Enumeration(TYPE, SpawnableHorseType.values()),
 			new Enumeration(VARIANT, SpawnableHorseVariant.values())
