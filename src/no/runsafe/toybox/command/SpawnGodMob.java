@@ -7,6 +7,7 @@ import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.minecraft.Enchant;
@@ -38,14 +39,14 @@ public class SpawnGodMob extends PlayerCommand
 
 		for (int i = 0; i < n; ++i)
 		{
-			String mobName = parameters.get(MOB_NAME);
-			IEntity entity = world.spawnCreature(executor.getLocation(), mobName);
+			RunsafeEntityType mobType = parameters.getValue(MOB_NAME);
+			IEntity entity = world.spawn(executor.getLocation(), mobType);
 			if (entity instanceof RunsafeLivingEntity)
 			{
 				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
 
 				RunsafeMeta weapon;
-				if (mobName != null && mobName.equalsIgnoreCase("skeleton"))
+				if (mobType != null && mobType.getName().equalsIgnoreCase("skeleton"))
 					weapon = Item.Combat.Bow.enchant(Enchant.All).getItem();
 				else
 					weapon = Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem();

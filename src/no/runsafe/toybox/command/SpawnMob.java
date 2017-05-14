@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
 
 public class SpawnMob extends PlayerCommand
@@ -24,17 +25,17 @@ public class SpawnMob extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int n = Integer.parseInt(parameters.get(COUNT));
-		String name = parameters.get(NAME);
+		int n = parameters.getValue(COUNT);
+		RunsafeEntityType mobType = parameters.getValue(NAME);
 
-		if (name != null && name.equalsIgnoreCase("horse"))
+		if (mobType != null && mobType.getName().equalsIgnoreCase("horse"))
 			return "&cPlease use /spawnhorse for that.";
 
 		for (int i = 0; i < n; ++i)
 		{
 			IWorld world = executor.getWorld();
 			if (world != null)
-				world.spawn(executor.getLocation(), no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(name));
+				world.spawn(executor.getLocation(), mobType);
 		}
 		return null;
 	}

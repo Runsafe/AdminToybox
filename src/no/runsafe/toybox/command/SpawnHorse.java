@@ -43,7 +43,7 @@ public class SpawnHorse extends PlayerCommand
 			if (variant == null)
 				variant = this.getRandomHorseVariant();
 
-			int count = Integer.valueOf(parameters.get(COUNT));
+			int count = parameters.getValue(COUNT);
 
 			for (int i = 0; i < count; ++i)
 				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, (Boolean)  parameters.getValue(TAME));
