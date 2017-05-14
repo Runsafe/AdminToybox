@@ -28,7 +28,7 @@ public class SpawnMob extends PlayerCommand
 		int n = parameters.getValue(COUNT);
 		RunsafeEntityType mobType = parameters.getValue(NAME);
 
-		if (mobType != null && mobType.getName().equalsIgnoreCase("horse"))
+		if (mobType != null && mobType.getName().equalsIgnoreCase("EntityHorse"))
 			return "&cPlease use /spawnhorse for that.";
 
 		for (int i = 0; i < n; ++i)
