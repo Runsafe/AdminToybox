@@ -14,9 +14,11 @@ public class Ride extends PlayerCommand
 	{
 		super(
 			"ride", "Spawns an entity and mounts you to it", "runsafe.toybox.ride",
-			new EntityType().require()
+			new EntityType(ENTITY_TYPE).require()
 		);
 	}
+
+	private static final String ENTITY_TYPE = "entityType";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
@@ -24,7 +26,7 @@ public class Ride extends PlayerCommand
 		IWorld world = executor.getWorld();
 		if (world == null)
 			return null;
-		IEntity entity = executor.getWorld().spawn(executor.getLocation(), (RunsafeEntityType) parameters.getValue("entityType"));
+		IEntity entity = executor.getWorld().spawn(executor.getLocation(), (RunsafeEntityType) parameters.getValue(ENTITY_TYPE));
 		entity.setPassenger(executor);
 		return null;
 	}
