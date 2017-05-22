@@ -22,15 +22,14 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String playerName = executor.getName();
-		if (this.lockingPlayers.contains(playerName))
+		if (this.lockingPlayers.contains(executor))
 		{
-			this.lockingPlayers.remove(playerName);
+			this.lockingPlayers.remove(executor);
 			return "&eLocking disabled.";
 		}
 		else
 		{
-			this.lockingPlayers.add(playerName);
+			this.lockingPlayers.add(executor);
 			return "&2Locking enabled: Right click objects to lock them.";
 		}
 	}
@@ -40,39 +39,38 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 	{
 		IBlock block = event.getBlock();
 		IPlayer player = event.getPlayer();
-		String playerName = player.getName();
 
-		if (block != null)
+		if (block == null)
+			return;
+
+		if (this.lockingPlayers.contains(player))
 		{
-			if (this.lockingPlayers.contains(playerName))
+			if (this.handler.isLockedBlock(block))
 			{
-				if (this.handler.isLockedBlock(block))
+				this.handler.unlockBlock(block);
+				player.sendColouredMessage("&2Object unlocked");
+			}
+			else
+			{
+				if (this.handler.canLockBlock(block))
 				{
-					this.handler.unlockBlock(block);
-					player.sendColouredMessage("&2Object unlocked");
+					this.handler.lockBlock(block);
+					player.sendColouredMessage("&2Object locked.");
 				}
 				else
 				{
-					if (this.handler.canLockBlock(block))
-					{
-						this.handler.lockBlock(block);
-						player.sendColouredMessage("&2Object locked.");
-					}
-					else
-					{
-						player.sendColouredMessage("&cYou cannot lock that object.");
-					}
+					player.sendColouredMessage("&cYou cannot lock that object.");
 				}
-				event.cancel();
 			}
-			else if (this.handler.isLockedBlock(block))
-			{
-				player.sendColouredMessage("&cThat object has been locked by wizards.");
-				event.cancel();
-			}
+			event.cancel();
+		}
+		else if (this.handler.isLockedBlock(block))
+		{
+			player.sendColouredMessage("&cThat object has been locked by wizards.");
+			event.cancel();
 		}
 	}
 
-	private List<String> lockingPlayers = new ArrayList<String>();
+	private List<IPlayer> lockingPlayers = new ArrayList<IPlayer>();
 	private LockedObjectHandler handler;
 }

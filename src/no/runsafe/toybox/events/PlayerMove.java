@@ -13,7 +13,9 @@ public class PlayerMove implements IPlayerMove
 {
 	public PlayerMove()
 	{
-		effect = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.Wool.Red);
+		effectBlood = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.Redstone.Block);
+		effectGuts = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.Netherrack);
+		effectBone = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.Quartz.Normal);
 	}
 
 	@Override
@@ -26,10 +28,16 @@ public class PlayerMove implements IPlayerMove
 			IWorld playerWorld = player.getWorld();
 			ILocation playerLocation = player.getLocation();
 			if (playerLocation != null && playerWorld != null)
-				playerLocation.playEffect(effect, 0.3F, 100, 50);
+			{
+				playerLocation.playEffect(effectBlood, 0.3F, 70, 50);
+				playerLocation.playEffect(effectGuts, 0.3F, 20, 50);
+				playerLocation.playEffect(effectBone, 0.3F, 10, 50);
+			}
 		}
 		return true;
 	}
 
-	private final IWorldEffect effect;
+	private final IWorldEffect effectBlood;
+	private final IWorldEffect effectGuts;
+	private final IWorldEffect effectBone;
 }

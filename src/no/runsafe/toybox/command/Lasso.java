@@ -9,6 +9,7 @@ import no.runsafe.framework.minecraft.entity.RunsafeLivingEntity;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerInteractEntityEvent;
 import no.runsafe.toybox.PendingLasso;
 
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
@@ -21,15 +22,15 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String playerName = executor.getName();
-		if (stages.containsKey(playerName))
+		UUID playerID = executor.getUniqueId();
+		if (stages.containsKey(playerID))
 		{
-			stages.remove(playerName);
+			stages.remove(playerID);
 			return "&cLasso disabled.";
 		}
 		else
 		{
-			stages.put(playerName, new PendingLasso());
+			stages.put(playerID, new PendingLasso());
 			return "&aLasso enabled: Right click the entity that will hold the leash.";
 		}
 	}
@@ -42,22 +43,22 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 			return;
 
 		IPlayer player = event.getPlayer();
-		String playerName = player.getName();
+		UUID playerID = player.getUniqueId();
 
-		if (stages.containsKey(playerName))
+		if (stages.containsKey(playerID))
 		{
-			PendingLasso pending = stages.get(playerName);
+			PendingLasso pending = stages.get(playerID);
 			if (!pending.hasEntity())
 			{
-				stages.get(playerName).setEntity(entity);
+				stages.get(playerID).setEntity(entity);
 				player.sendColouredMessage("&aAttached. Now right click something for the leash to lasso.");
 			}
 			else
 			{
 				if (entity instanceof RunsafeLivingEntity)
 				{
-					((RunsafeLivingEntity) entity).setLeashHolder(stages.get(playerName).getEntity());
-					stages.remove(playerName);
+					((RunsafeLivingEntity) entity).setLeashHolder(stages.get(playerID).getEntity());
+					stages.remove(playerID);
 					player.sendColouredMessage("&aLasso complete.");
 				}
 				else
@@ -68,5 +69,5 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 		}
 	}
 
-	private ConcurrentHashMap<String, PendingLasso> stages = new ConcurrentHashMap<String, PendingLasso>(0);
+	private ConcurrentHashMap<UUID, PendingLasso> stages = new ConcurrentHashMap<UUID, PendingLasso>(0);
 }

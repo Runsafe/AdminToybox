@@ -5,6 +5,7 @@ import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
 
 public class Ride extends PlayerCommand
@@ -13,9 +14,11 @@ public class Ride extends PlayerCommand
 	{
 		super(
 			"ride", "Spawns an entity and mounts you to it", "runsafe.toybox.ride",
-			new EntityType().require()
+			new EntityType(ENTITY_TYPE).require()
 		);
 	}
+
+	private static final String ENTITY_TYPE = "entityType";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
@@ -23,7 +26,7 @@ public class Ride extends PlayerCommand
 		IWorld world = executor.getWorld();
 		if (world == null)
 			return null;
-		IEntity entity = executor.getWorld().spawnCreature(executor.getLocation(), parameters.get("entityType"));
+		IEntity entity = executor.getWorld().spawn(executor.getLocation(), (RunsafeEntityType) parameters.getValue(ENTITY_TYPE));
 		entity.setPassenger(executor);
 		return null;
 	}

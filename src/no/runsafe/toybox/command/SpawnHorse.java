@@ -1,8 +1,9 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.command.argument.BooleanArgument;
 import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.toybox.horses.HorseSpawner;
@@ -17,29 +18,35 @@ public class SpawnHorse extends PlayerCommand
 	{
 		super(
 			"spawnhorse", "Spawns a horse", "runsafe.toybox.spawnmob",
-			new RequiredArgument("count"), new RequiredArgument("tame"),
-			new Enumeration("type", SpawnableHorseType.values()),
-			new Enumeration("variant", SpawnableHorseVariant.values())
+			new WholeNumber(COUNT).withDefault(1),
+			new BooleanArgument(TAME).withDefault(true),
+			new Enumeration(TYPE, SpawnableHorseType.values()),
+			new Enumeration(VARIANT, SpawnableHorseVariant.values())
 		);
 		this.horseSpawner = horseSpawner;
 	}
+
+	private static final String COUNT = "count";
+	private static final String TAME = "tame";
+	private static final String TYPE = "type";
+	private static final String VARIANT = "variant";
 
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		try
 		{
-			SpawnableHorseType type = parameters.getValue("type");
+			SpawnableHorseType type = parameters.getValue(TYPE);
 			if (type == null)
 				type = this.getRandomHorseType();
-			SpawnableHorseVariant variant = parameters.getValue("variant");
+			SpawnableHorseVariant variant = parameters.getValue(VARIANT);
 			if (variant == null)
 				variant = this.getRandomHorseVariant();
 
-			int count = Integer.valueOf(parameters.get("count"));
+			int count = parameters.getValue(COUNT);
 
 			for (int i = 0; i < count; ++i)
-				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, parameters.get("tame").equals("1"));
+				this.horseSpawner.spawnHorse(executor.getLocation(), type, variant, (Boolean)  parameters.getValue(TAME));
 		}
 		catch (IllegalArgumentException exception)
 		{
