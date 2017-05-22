@@ -25,7 +25,7 @@ public class SpawnMob extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int n = parameters.getValue(COUNT);
+		int n = (Integer) parameters.getValue(COUNT);
 		RunsafeEntityType mobType = parameters.getValue(NAME);
 
 		if (mobType != null && mobType.getName().equalsIgnoreCase("EntityHorse"))
