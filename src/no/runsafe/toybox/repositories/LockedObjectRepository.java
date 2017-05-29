@@ -3,11 +3,13 @@ package no.runsafe.toybox.repositories;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.database.*;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LockedObjectRepository extends Repository
 {
+	@Nonnull
 	@Override
 	public String getTableName()
 	{
@@ -40,6 +42,7 @@ public class LockedObjectRepository extends Repository
 		return locations;
 	}
 
+	@Nonnull
 	@Override
 	public ISchemaUpdate getSchemaUpdateQueries()
 	{
