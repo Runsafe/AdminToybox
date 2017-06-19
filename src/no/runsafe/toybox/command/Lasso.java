@@ -69,5 +69,5 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 		}
 	}
 
-	private ConcurrentHashMap<UUID, PendingLasso> stages = new ConcurrentHashMap<UUID, PendingLasso>(0);
+	private ConcurrentHashMap<UUID, PendingLasso> stages = new ConcurrentHashMap<>(0);
 }

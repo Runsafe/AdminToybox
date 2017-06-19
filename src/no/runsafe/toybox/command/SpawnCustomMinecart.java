@@ -38,7 +38,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 		minecart.setDisplayBlock((Material) parameters.getValue(BLOCK_NAME));
 
 		//Set block offset
-		minecart.setDisplayBlockOffset((Integer) parameters.getValue(BLOCK_OFFSET));
+		minecart.setDisplayBlockOffset(parameters.getValue(BLOCK_OFFSET));
 
 		return null;
 	}

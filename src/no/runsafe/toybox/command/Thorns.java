@@ -72,5 +72,5 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 	}
 
 	private final WorldBlockEffect effect = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.Wood.Jungle);
-	private final List<String> protectedPlayers = new ArrayList<String>();
+	private final List<String> protectedPlayers = new ArrayList<>();
 }

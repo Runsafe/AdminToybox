@@ -28,8 +28,8 @@ public class MobDrop extends PlayerCommand
 	{
 		handler.createMobDropper(
 			executor.getLocation(),
-			(RunsafeEntityType) parameters.getValue(MOB_TYPE),
-			(Integer) parameters.getValue(AMOUNT)
+			parameters.getValue(MOB_TYPE),
+			parameters.getValue(AMOUNT)
 		);
 		return null;
 	}

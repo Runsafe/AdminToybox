@@ -12,7 +12,7 @@ public class MobDropHandler
 {
 	public MobDropHandler()
 	{
-		this.fallingMobDrops = new HashMap<Integer, MobDropData>();
+		this.fallingMobDrops = new HashMap<>();
 	}
 
 	public void createMobDropper(ILocation location, RunsafeEntityType entityName, Integer amount)

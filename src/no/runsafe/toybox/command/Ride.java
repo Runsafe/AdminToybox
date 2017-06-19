@@ -26,7 +26,7 @@ public class Ride extends PlayerCommand
 		IWorld world = executor.getWorld();
 		if (world == null)
 			return null;
-		IEntity entity = executor.getWorld().spawn(executor.getLocation(), (RunsafeEntityType) parameters.getValue(ENTITY_TYPE));
+		IEntity entity = executor.getWorld().spawn(executor.getLocation(), parameters.getValue(ENTITY_TYPE));
 		entity.setPassenger(executor);
 		return null;
 	}
