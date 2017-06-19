@@ -31,6 +31,10 @@ public class Nuke extends PlayerCommand
 			return "Max radius size: 15";
 
 		int power = parameters.getValue(POWER);
+
+		if (power > 255)
+			return "&cMax power: 255";
+
 		ILocation location = executor.getLocation();
 
 		location.decrementX(radius);

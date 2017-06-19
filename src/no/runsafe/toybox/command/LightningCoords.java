@@ -30,6 +30,10 @@ public class LightningCoords extends PlayerCommand implements IBranchingExecutio
 		Integer y = parameters.getValue(Y);
 		Integer z = parameters.getValue(Z);
 		assert (x != null && y != null && z != null);
+
+		if (x >= 30000000 || y > 255 || z >= 30000000)
+			return "&cOutside the world boundaries.";
+
 		IWorld world = executor.getWorld();
 		if (world != null)
 			world.strikeLightning(world.getLocation(x + 0.5, y + 0.5, z + 0.5));
