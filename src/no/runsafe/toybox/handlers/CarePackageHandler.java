@@ -20,8 +20,8 @@ public class CarePackageHandler
 	public CarePackageHandler(IServer server)
 	{
 		this.server = server;
-		this.awaitingDrops = new HashMap<UUID, RunsafeInventory>();
-		this.fallingDrops = new HashMap<Integer, RunsafeInventory>();
+		this.awaitingDrops = new HashMap<>();
+		this.fallingDrops = new HashMap<>();
 	}
 
 	public void CreateCarePackage(IPlayer player)

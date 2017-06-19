@@ -17,7 +17,7 @@ public class BuffCommand extends ExecutableCommand
 	{
 		super(
 			"buff", "Apply a buff to a target player", "runsafe.toybox.buff",
-			new MapRequired<Buff>(EFFECT, buffs),
+			new MapRequired<>(EFFECT, buffs),
 			new WholeNumber(DURATION).withDefault(36000),
 			new WholeNumber(AMPLITUDE).withDefault(5),
 			new Player(PLAYER).onlineOnly().defaultToExecutor()
@@ -47,7 +47,7 @@ public class BuffCommand extends ExecutableCommand
 		return null;
 	}
 
-	private static final HashMap<String, Buff> buffs = new HashMap<String, Buff>();
+	private static final HashMap<String, Buff> buffs = new HashMap<>();
 
 	static
 	{

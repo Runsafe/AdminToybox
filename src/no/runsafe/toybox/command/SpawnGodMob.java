@@ -36,6 +36,9 @@ public class SpawnGodMob extends PlayerCommand
 		if (world == null || n == null)
 			return null;
 
+		if (n > 255)
+			return "&cMaximum amount: 255";
+
 		for (int i = 0; i < n; ++i)
 		{
 			RunsafeEntityType mobType = parameters.getValue(MOB_NAME);

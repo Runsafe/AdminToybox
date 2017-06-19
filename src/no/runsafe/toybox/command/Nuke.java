@@ -25,12 +25,16 @@ public class Nuke extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int radius = (Integer) parameters.getValue(RADIUS);
+		int radius = parameters.getValue(RADIUS);
 
 		if (radius > 15)
 			return "Max radius size: 15";
 
-		int power = (Integer) parameters.getValue(POWER);
+		int power = parameters.getValue(POWER);
+
+		if (power > 255)
+			return "&cMax power: 255";
+
 		ILocation location = executor.getLocation();
 
 		location.decrementX(radius);

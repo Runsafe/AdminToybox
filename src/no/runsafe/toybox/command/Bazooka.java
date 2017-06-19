@@ -37,19 +37,18 @@ public class Bazooka extends PlayerCommand
 			return null;
 		final Integer delay = parameters.getValue(DELAY);
 		final Float strength = parameters.getValue(STRENGTH);
-		final IEntity projectile = executor.Launch((RunsafeEntityType) parameters.getValue(ENTITY_TYPE));
-		if (projectile != null && delay != null && strength != null)
+		if (strength == null)
+			return "&cInvalid strength.";
+		if (strength > 255)
+			return "&cMax strength: 255";
+		final IEntity projectile = executor.Launch(parameters.getValue(ENTITY_TYPE));
+		if (projectile != null && delay != null)
 		{
-			scheduler.startSyncTask(
-				new Runnable()
+			scheduler.startSyncTask(() ->
 				{
-					@Override
-					public void run()
-					{
-						ILocation location = projectile.getLocation();
-						world.createExplosion(location, strength, false);
-						projectile.remove();
-					}
+					ILocation location = projectile.getLocation();
+					world.createExplosion(location, strength, false);
+					projectile.remove();
 				},
 				delay
 			);

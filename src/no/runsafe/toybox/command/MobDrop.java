@@ -26,10 +26,14 @@ public class MobDrop extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
+		int amount = parameters.getValue(AMOUNT);
+		if (amount > 255)
+			return "&cMaximum amount: 255";
+
 		handler.createMobDropper(
 			executor.getLocation(),
-			(RunsafeEntityType) parameters.getValue(MOB_TYPE),
-			(Integer) parameters.getValue(AMOUNT)
+			parameters.getValue(MOB_TYPE),
+			amount
 		);
 		return null;
 	}

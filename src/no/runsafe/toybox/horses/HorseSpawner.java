@@ -24,6 +24,6 @@ public class HorseSpawner
 		tags.setBoolean("Tame", tamed);
 		horse.a(tags);
 
-		horse.teleportTo((Location) ObjectUnwrapper.convert(location), false);
+		horse.teleportTo(ObjectUnwrapper.convert(location), false);
 	}
 }

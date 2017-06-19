@@ -15,7 +15,7 @@ public class Kill extends ExecutableCommand
 	{
 		super(
 			"kill", "Kills the targeted player", "runsafe.toybox.kill",
-			new ListOf<IPlayer>(new Player(PLAYER).onlineOnly())
+			new ListOf<>(new Player(PLAYER).onlineOnly())
 		);
 	}
 

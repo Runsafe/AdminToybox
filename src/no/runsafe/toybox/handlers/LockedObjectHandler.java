@@ -63,7 +63,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 			this.repository.storeLockedObject(location);
 			if (!this.lockedObjects.containsKey(worldName))
-				this.lockedObjects.put(worldName, new ArrayList<ILocation>());
+				this.lockedObjects.put(worldName, new ArrayList<>());
 
 			this.lockedObjects.get(worldName).add(location);
 		}
@@ -78,7 +78,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 			if (lockedObjects.containsKey(worldName))
 			{
-				List<ILocation> locations = new ArrayList<ILocation>(lockedObjects.get(worldName).size());
+				List<ILocation> locations = new ArrayList<>(lockedObjects.get(worldName).size());
 				for (ILocation checkLocation : lockedObjects.get(worldName))
 					if (checkLocation.distance(location) >= 1)
 						locations.add(checkLocation);
@@ -130,7 +130,7 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	{
 		String worldName = world.getName();
 		if (!lockedObjects.containsKey(worldName))
-			lockedObjects.put(worldName, new ArrayList<ILocation>());
+			lockedObjects.put(worldName, new ArrayList<>());
 		List<ILocation> locations = repository.getLockedObjects(worldName);
 		if (locations.isEmpty())
 			return;
@@ -158,11 +158,11 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 			lockedObjects.remove(world.getName());
 	}
 
-	private Map<String, List<ILocation>> lockedObjects = new ConcurrentHashMap<String, List<ILocation>>();
+	private Map<String, List<ILocation>> lockedObjects = new ConcurrentHashMap<>();
 	private LockedObjectRepository repository;
 	private IConsole output;
 	private final IServer server;
-	private static List<Item> lockableItems = new ArrayList<Item>();
+	private static List<Item> lockableItems = new ArrayList<>();
 
 	static
 	{

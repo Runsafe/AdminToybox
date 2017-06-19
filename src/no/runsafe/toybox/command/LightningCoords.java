@@ -7,6 +7,8 @@ import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
+import static java.lang.Math.abs;
+
 public class LightningCoords extends PlayerCommand implements IBranchingExecution
 {
 	public LightningCoords()
@@ -30,6 +32,10 @@ public class LightningCoords extends PlayerCommand implements IBranchingExecutio
 		Integer y = parameters.getValue(Y);
 		Integer z = parameters.getValue(Z);
 		assert (x != null && y != null && z != null);
+
+		if (abs(x) >= 30000000 || y > 255 || y < 0 || abs(z) >= 30000000)
+			return "&cOutside the world boundaries.";
+
 		IWorld world = executor.getWorld();
 		if (world != null)
 			world.strikeLightning(world.getLocation(x + 0.5, y + 0.5, z + 0.5));
