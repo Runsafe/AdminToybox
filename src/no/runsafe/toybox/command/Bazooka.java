@@ -40,16 +40,11 @@ public class Bazooka extends PlayerCommand
 		final IEntity projectile = executor.Launch(parameters.getValue(ENTITY_TYPE));
 		if (projectile != null && delay != null && strength != null)
 		{
-			scheduler.startSyncTask(
-				new Runnable()
+			scheduler.startSyncTask(() ->
 				{
-					@Override
-					public void run()
-					{
-						ILocation location = projectile.getLocation();
-						world.createExplosion(location, strength, false);
-						projectile.remove();
-					}
+					ILocation location = projectile.getLocation();
+					world.createExplosion(location, strength, false);
+					projectile.remove();
 				},
 				delay
 			);
