@@ -1,29 +1,31 @@
 package no.runsafe.toybox.horses;
 
-import net.minecraft.server.v1_8_R3.EntityHorse;
-import net.minecraft.server.v1_8_R3.EntityTypes;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.World;
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
-import org.bukkit.Location;
+import no.runsafe.framework.api.entity.animals.horses.INormalHorse;
+import no.runsafe.framework.api.minecraft.RunsafeEntityType;
+import no.runsafe.framework.minecraft.entity.EntityType;
+import no.runsafe.framework.minecraft.entity.animals.horses.HorseColour;
+import no.runsafe.framework.minecraft.entity.animals.horses.HorseStyle;
+import no.runsafe.framework.minecraft.entity.animals.horses.RunsafeNormalHorse;
 
 public class HorseSpawner
 {
-	public void spawnHorse(ILocation location, SpawnableHorseType type, SpawnableHorseVariant variant, boolean tamed)
+	public void spawnHorse(ILocation location, SpawnableHorseType type, HorseColour colour, HorseStyle style, boolean tamed)
 	{
-		World world = ObjectUnwrapper.getMinecraft(location.getWorld());
-		EntityHorse horse = (EntityHorse) EntityTypes.createEntityByName("EntityHorse", world);
-		horse.setType(type.ordinal());
+		INormalHorse horse = (RunsafeNormalHorse) EntityType.Get(type.getName());
 
-		if (type == SpawnableHorseType.NORMAL)
-			horse.setVariant(variant.getNbtValue());
+		horse.setTamed(tamed);
 
-		NBTTagCompound tags = new NBTTagCompound();
-		horse.b(tags);
-		tags.setBoolean("Tame", tamed);
-		horse.a(tags);
+		if (colour == null)
+			horse.setRandomColour();
+		else
+			horse.setColour(colour);
 
-		horse.teleportTo(ObjectUnwrapper.convert(location), false);
+		if (style == null)
+			horse.setRandomStyle();
+		else
+			horse.setStyle(style);
+
+		location.getWorld().spawn(location, (RunsafeEntityType) horse);
 	}
 }
