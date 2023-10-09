@@ -51,18 +51,32 @@ public class BuffCommand extends ExecutableCommand
 
 	static
 	{
-		buffs.put("speed", Buff.Utility.Movement.IncreaseSpeed);
-		buffs.put("slow", Buff.Utility.Movement.DecreaseSpeed);
-		buffs.put("jump", Buff.Utility.Movement.JumpHeight);
-		buffs.put("nightvision", Buff.Utility.NightVision);
+		buffs.put("confusion", Buff.Combat.Confusion);
+		buffs.put("blindness", Buff.Combat.Blindness);
+		buffs.put("glowing", Buff.Combat.Glowing);
+		buffs.put("increaseDamage", Buff.Combat.Damage.Increase);
+		buffs.put("decreaseDamage", Buff.Combat.Damage.Decrease);
+		buffs.put("instantDamage", Buff.Combat.Damage.Instant);
+		buffs.put("poison", Buff.Combat.Damage.Poison);
+		buffs.put("wither", Buff.Combat.Damage.Wither);
+		buffs.put("instantHealth", Buff.Healing.Instant);
+		buffs.put("regeneration", Buff.Healing.Regeneration);
+		buffs.put("moreRedHearts", Buff.Healing.HealthBoost);
+		buffs.put("moreYellowHearts", Buff.Healing.Absorption);
+		buffs.put("damageResistance", Buff.Resistance.Damage);
+		buffs.put("fireResistance", Buff.Resistance.Fire);
 		buffs.put("invisibility", Buff.Utility.Invisibility);
-		buffs.put("waterbreathing", Buff.Utility.WaterBreathing);
-		buffs.put("digspeed", Buff.Utility.DigSpeed.Increase);
-		buffs.put("digslow", Buff.Utility.DigSpeed.Decrease);
-		buffs.put("fireresist", Buff.Resistance.Fire);
-		buffs.put("resist", Buff.Resistance.Damage);
+		buffs.put("nightVision", Buff.Utility.NightVision);
+		buffs.put("waterBreathing", Buff.Utility.WaterBreathing);
+		buffs.put("goodLuck", Buff.Utility.Luck);
+		buffs.put("badLuck", Buff.Utility.Unluck);
+		buffs.put("increaseSpeed", Buff.Utility.Movement.IncreaseSpeed);
+		buffs.put("decreaseSpeed", Buff.Utility.Movement.DecreaseSpeed);
+		buffs.put("jump", Buff.Utility.Movement.JumpHeight);
+		buffs.put("levitation", Buff.Utility.Movement.Levitation);
+		buffs.put("digFast", Buff.Utility.DigSpeed.Increase);
+		buffs.put("digSlow", Buff.Utility.DigSpeed.Decrease);
 		buffs.put("hunger", Buff.Disease.Hunger);
-		buffs.put("heal", Buff.Healing.Instant);
-		buffs.put("regen", Buff.Healing.Regeneration);
+		buffs.put("hungerSaturation", Buff.Disease.Saturation);
 	}
 }
