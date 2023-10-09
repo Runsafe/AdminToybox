@@ -10,9 +10,9 @@ import no.runsafe.framework.minecraft.entity.animals.horses.RunsafeNormalHorse;
 
 public class HorseSpawner
 {
-	public void spawnHorse(ILocation location, SpawnableHorseType type, HorseColour colour, HorseStyle style, boolean tamed)
+	public void spawnHorse(ILocation location, HorseColour colour, HorseStyle style, boolean tamed)
 	{
-		INormalHorse horse = (RunsafeNormalHorse) EntityType.Get(type.getName());
+		INormalHorse horse = (RunsafeNormalHorse) EntityType.Get("horse");
 
 		horse.setTamed(tamed);
 
