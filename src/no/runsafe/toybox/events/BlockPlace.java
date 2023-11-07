@@ -7,6 +7,7 @@ import no.runsafe.framework.api.block.ISign;
 import no.runsafe.framework.api.event.block.IBlockPlace;
 import no.runsafe.framework.api.minecraft.IInventoryHolder;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
@@ -32,8 +33,12 @@ public class BlockPlace implements IBlockPlace
 				if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
 				{
 					RunsafeMeta item = player.getItemInMainHand();
-					if (item != null)
+					if (item != null && (item.is(Item.Redstone.Device.Dispenser) || item.is(Item.Redstone.Device.Dropper)))
 						item.setDisplayName("§MInfinite.§R");
+					item = player.getItemInOffHand();
+					if (item != null && (item.is(Item.Redstone.Device.Dispenser) || item.is(Item.Redstone.Device.Dropper)))
+						item.setDisplayName("§MInfinite.§R");
+
 					player.sendColouredMessage(String.format("&cI'm sorry %s, I'm afraid I can't let you do that", player.getName()));
 					return false;
 				}

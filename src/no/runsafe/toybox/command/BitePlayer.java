@@ -2,17 +2,18 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 
+import no.runsafe.framework.api.command.IBranchingExecution;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.Player;
 import no.runsafe.framework.api.player.IPlayer;
 
-public class BitePlayer extends ExecutableCommand
+public class BitePlayer extends ExecutableCommand implements IBranchingExecution
 {
 	public BitePlayer()
 	{
 		super(
-			"bite", "Bites a lpayer", "runsafe.toybox.bite",
+			"bite", "Bites a player", "runsafe.toybox.bite",
 			new Player(PLAYER).onlineOnly()
 		);
 	}
