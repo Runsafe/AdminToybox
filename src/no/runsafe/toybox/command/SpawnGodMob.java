@@ -31,9 +31,9 @@ public class SpawnGodMob extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		Integer n = parameters.getValue(AMOUNT);
+		int n = parameters.getRequired(AMOUNT);
 		IWorld world = executor.getWorld();
-		if (world == null || n == null)
+		if (world == null)
 			return null;
 
 		if (n > 255)

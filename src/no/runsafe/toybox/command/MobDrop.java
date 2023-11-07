@@ -26,8 +26,8 @@ public class MobDrop extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		Integer amount = parameters.getValue(AMOUNT);
-		if (amount == null || amount > 255)
+		int amount = parameters.getRequired(AMOUNT);
+		if (amount > 255)
 			return "&cMaximum amount: 255";
 
 		ILocation location = executor.getLocation();

@@ -25,8 +25,8 @@ public class SpawnMob extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		Integer n = parameters.getValue(COUNT);
-		if (n == null || n > 255)
+		int n = parameters.getRequired(COUNT);
+		if (n > 255)
 			return "&cMaximum amount of mobs: 255";
 
 		RunsafeEntityType mobType = parameters.getValue(NAME);
