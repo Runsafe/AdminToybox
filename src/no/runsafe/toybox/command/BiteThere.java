@@ -21,7 +21,7 @@ public class BiteThere extends PlayerCommand
 		if (target == null)
 			return "&cNo block in sight";
 
-		target.getWorld().spawnCreature(target.getLocation(), "EvokerFangs");
+		target.getWorld().spawnCreature(target.getLocation(), "evoker_fangs");
 		return null;
 	}
 }
