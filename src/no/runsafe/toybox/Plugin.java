@@ -34,6 +34,8 @@ public class Plugin extends RunsafePlugin
 
 		// Commands
 		addComponent(Bazooka.class);
+		addComponent(BitePlayer.class);
+		addComponent(BiteThere.class);
 		addComponent(Bomb.class);
 		addComponent(Dismount.class);
 		addComponent(Dynamite.class);
