@@ -44,9 +44,11 @@ public class Time extends ExecutableCommand
 	public enum WellKnownTimes
 	{
 		Dawn(22000),
+		Day(22000),
 		Morning(0),
 		Noon(6000),
 		Dusk(13000),
+		Night(13000),
 		Midnight(18000);
 
 		public int getTime()
