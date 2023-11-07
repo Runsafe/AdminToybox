@@ -2,11 +2,12 @@ package no.runsafe.toybox.command;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.command.IBranchingExecution;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
-public class BiteThere extends PlayerCommand
+public class BiteThere extends PlayerCommand implements IBranchingExecution
 {
 	public BiteThere()
 	{
