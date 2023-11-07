@@ -26,7 +26,7 @@ public class EnchantItem extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		RunsafeItemStack item = executor.getItemInHand();
+		RunsafeItemStack item = executor.getItemInMainHand();
 		if (item == null)
 			return "&cNo item in your hand.";
 		StringBuilder feedback = new StringBuilder();

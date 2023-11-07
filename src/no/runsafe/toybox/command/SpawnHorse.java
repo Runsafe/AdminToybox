@@ -35,15 +35,15 @@ public class SpawnHorse extends PlayerCommand
 		HorseColour colour = parameters.getValue(COLOUR);
 		HorseStyle style = parameters.getValue(STYLE);
 
-		int count = parameters.getValue(COUNT);
+		int count = parameters.getRequired(COUNT);
 		if (count > 255)
 			return "&cMaximum amount: 255";
 
 		for (int i = 0; i < count; ++i)
-			this.horseSpawner.spawnHorse(executor.getLocation(), colour, style, parameters.getValue(TAME));
+			this.horseSpawner.spawnHorse(executor.getLocation(), colour, style, parameters.getRequired(TAME));
 
 		return null;
 	}
 
-	private HorseSpawner horseSpawner;
+	private final HorseSpawner horseSpawner;
 }

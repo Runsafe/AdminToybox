@@ -26,8 +26,8 @@ public class PlaySound extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		float volume = parameters.getValue(VOLUME);
-		float pitch = parameters.getValue(PITCH);
+		float volume = parameters.getRequired(VOLUME);
+		float pitch = parameters.getRequired(PITCH);
 
 		Sound sound = Sound.Get(parameters.get(SOUND));
 		if (sound == null)

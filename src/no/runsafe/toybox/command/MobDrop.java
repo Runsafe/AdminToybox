@@ -1,10 +1,10 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.command.argument.EntityType;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
-import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.toybox.handlers.MobDropHandler;
 
@@ -26,9 +26,13 @@ public class MobDrop extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		int amount = parameters.getValue(AMOUNT);
+		int amount = parameters.getRequired(AMOUNT);
 		if (amount > 255)
 			return "&cMaximum amount: 255";
+
+		ILocation location = executor.getLocation();
+		if (location == null)
+			return "&cInvalid location.";
 
 		handler.createMobDropper(
 			executor.getLocation(),
