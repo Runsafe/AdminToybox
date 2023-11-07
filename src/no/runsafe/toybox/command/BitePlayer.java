@@ -25,7 +25,7 @@ public class BitePlayer extends ExecutableCommand
 		IPlayer player = parameters.getValue(PLAYER);
 		if (player == null || player.getWorld() == null)
 			return "&cTarget player is offline!";
-		player.getWorld().spawnCreature(player.getLocation(), "EvokerFangs");
+		player.getWorld().spawnCreature(player.getLocation(), "evoker_fangs");
 		return "&aThy will be bit.";
 	}
 }
