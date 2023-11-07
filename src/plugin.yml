@@ -8,6 +8,8 @@ commands:
     description: Launches and detonates some entity
   bomb:
     description: Fires a wither bomb
+  bite:
+    description: Nom :3
   dismount:
     description: Ejects you from your vehicle
   dynamite:
