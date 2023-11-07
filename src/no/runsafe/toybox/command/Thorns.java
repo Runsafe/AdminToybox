@@ -45,7 +45,7 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 		RunsafeEntity entity = event.getEntity();
 		RunsafeEntity attackingEntity = event.getDamageActor();
 
-		if (entity != null && attackingEntity != null && entity instanceof IPlayer)
+		if (attackingEntity != null && entity instanceof IPlayer)
 		{
 			ILivingEntity killTarget = null;
 

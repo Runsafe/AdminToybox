@@ -154,15 +154,14 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 	@Override
 	public void OnWorldUnload(IWorld world)
 	{
-		if (lockedObjects.containsKey(world.getName()))
-			lockedObjects.remove(world.getName());
+		lockedObjects.remove(world.getName());
 	}
 
-	private Map<String, List<ILocation>> lockedObjects = new ConcurrentHashMap<>();
-	private LockedObjectRepository repository;
-	private IConsole output;
+	private final Map<String, List<ILocation>> lockedObjects = new ConcurrentHashMap<>();
+	private final LockedObjectRepository repository;
+	private final IConsole output;
 	private final IServer server;
-	private static List<Item> lockableItems = new ArrayList<>();
+	private static final List<Item> lockableItems = new ArrayList<>();
 
 	static
 	{

@@ -31,7 +31,7 @@ public class BlockPlace implements IBlockPlace
 			if (inventory != null && inventory.getTitle().equalsIgnoreCase("Infinite"))
 				if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
 				{
-					RunsafeMeta item = player.getItemInHand();
+					RunsafeMeta item = player.getItemInMainHand();
 					if (item != null)
 						item.setDisplayName("§MInfinite.§R");
 					player.sendColouredMessage(String.format("&cI'm sorry %s, I'm afraid I can't let you do that", player.getName()));

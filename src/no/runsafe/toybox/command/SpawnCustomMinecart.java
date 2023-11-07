@@ -29,7 +29,11 @@ public class SpawnCustomMinecart extends PlayerCommand
 	{
 		ILocation location = executor.getLocation();
 		if (location == null)
-			return "Invalid location.";
+			return "&cInvalid location.";
+
+		Integer blockOffset = parameters.getValue(BLOCK_OFFSET);
+		if (blockOffset == null)
+			return "&cInvalid block offset.";
 
 		//Create minecart
 		RunsafeMinecart minecart = (RunsafeMinecart) PassiveEntity.Minecart.spawn(location);
@@ -38,7 +42,7 @@ public class SpawnCustomMinecart extends PlayerCommand
 		minecart.setDisplayBlock((Material) parameters.getValue(BLOCK_NAME));
 
 		//Set block offset
-		minecart.setDisplayBlockOffset(parameters.getValue(BLOCK_OFFSET));
+		minecart.setDisplayBlockOffset(blockOffset);
 
 		return null;
 	}

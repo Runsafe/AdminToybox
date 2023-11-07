@@ -71,6 +71,6 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 		}
 	}
 
-	private List<IPlayer> lockingPlayers = new ArrayList<>();
-	private LockedObjectHandler handler;
+	private final List<IPlayer> lockingPlayers = new ArrayList<>();
+	private final LockedObjectHandler handler;
 }
