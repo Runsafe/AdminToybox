@@ -66,7 +66,7 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 		}
 		else if (this.handler.isLockedBlock(block))
 		{
-			player.sendColouredMessage("&cThat object has been locked by wizards.");
+			player.sendColouredMessage("&cThis object has been locked with magic.");
 			event.cancel();
 		}
 	}
