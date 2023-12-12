@@ -54,7 +54,7 @@ public class Kill extends ExecutableCommand
 	private String killPlayer(IPlayer victim)
 	{
 		victim.explode(0, false, false);
-		victim.damage(500.0D);
+		victim.setHealth(0);
 		return "&fWell, if you insist.";
 	}
 }
