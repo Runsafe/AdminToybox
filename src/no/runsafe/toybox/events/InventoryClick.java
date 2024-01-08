@@ -11,21 +11,21 @@ public class InventoryClick implements IInventoryClick
 	public void OnInventoryClickEvent(RunsafeInventoryClickEvent event)
 	{
 		RunsafeMeta item = event.getCurrentItem();
-		if (item != null)
-		{
-			String name = item.getDisplayName();
-			if (name != null)
-			{
-				if (name.equalsIgnoreCase("Infinite"))
-				{
-					IPlayer player = event.getWhoClicked();
-					if (!player.hasPermission("runsafe.toybox.infinitedispensers"))
-					{
-						player.sendColouredMessage("&cYou do not have permission to make those.");
-						event.cancel();
-					}
-				}
-			}
-		}
+		if (item == null)
+			return;
+
+		String name = item.getDisplayName();
+		if (name == null)
+			return;
+
+		if (!name.equalsIgnoreCase("Infinite"))
+			return;
+
+		IPlayer player = event.getWhoClicked();
+		if (player.hasPermission("runsafe.toybox.infinitedispensers"))
+			return;
+
+		player.sendColouredMessage("&cYou do not have permission to make those.");
+		event.cancel();
 	}
 }

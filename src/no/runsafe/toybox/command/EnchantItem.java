@@ -53,7 +53,7 @@ public class EnchantItem extends PlayerCommand
 				feedback.append(String.format("Applied enchant %s at power %d to item.\n", enchant.getName(), enchant.power()));
 			}
 		}
-		return "&2Your item has been enchanted:\n" + feedback.toString();
+		return "&2Your item has been enchanted:\n" + feedback;
 	}
 
 	static final Pattern enchantSpec = Pattern.compile("(.*):(\\d+)");

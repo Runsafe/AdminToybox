@@ -32,11 +32,8 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 			protectedPlayers.remove(playerName);
 			return "&aThorns disabled.";
 		}
-		else
-		{
-			protectedPlayers.add(playerName);
-			return "&aThorns enabled.";
-		}
+		protectedPlayers.add(playerName);
+		return "&aThorns enabled.";
 	}
 
 	@Override
@@ -45,30 +42,30 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 		RunsafeEntity entity = event.getEntity();
 		RunsafeEntity attackingEntity = event.getDamageActor();
 
-		if (attackingEntity != null && entity instanceof IPlayer)
-		{
-			ILivingEntity killTarget = null;
+		if (attackingEntity == null || !(entity instanceof IPlayer))
+			return;
 
-			if (attackingEntity instanceof ILivingEntity)
-				killTarget = (ILivingEntity) attackingEntity;
-			else if (attackingEntity instanceof RunsafeProjectile)
-				killTarget = ((RunsafeProjectile) attackingEntity).getShootingEntity();
+		ILivingEntity killTarget = null;
 
-			// Check we have an entity to kill and that we're protecting a player.
-			if (killTarget != null && protectedPlayers.contains(((IPlayer) entity).getName()))
-			{
-				// Play an effect at the targets location.
-				ILocation killTargetLocation = killTarget.getLocation();
-				if (killTargetLocation != null) killTargetLocation.playEffect(effect, 0.2F, 100, 50D);
+		if (attackingEntity instanceof ILivingEntity)
+			killTarget = (ILivingEntity) attackingEntity;
+		else if (attackingEntity instanceof RunsafeProjectile)
+			killTarget = ((RunsafeProjectile) attackingEntity).getShootingEntity();
 
-				// Play an effect at the killers location.
-				ILocation entityLocation = entity.getLocation();
-				if (entityLocation != null) entityLocation.playEffect(effect, 0.2F, 100, 50D);
+		// Check we have an entity to kill and that we're protecting a player.
+		if (killTarget == null || !protectedPlayers.contains(((IPlayer) entity).getName()))
+			return;
 
-				killTarget.damage(50D); // This is more than enough to kill the entity.
-				event.cancel(); // Cancel the event so we don't take damage.
-			}
-		}
+		// Play an effect at the targets location.
+		ILocation killTargetLocation = killTarget.getLocation();
+		if (killTargetLocation != null) killTargetLocation.playEffect(effect, 0.2F, 100, 50D);
+
+		// Play an effect at the killers location.
+		ILocation entityLocation = entity.getLocation();
+		if (entityLocation != null) entityLocation.playEffect(effect, 0.2F, 100, 50D);
+
+		killTarget.damage(50D); // This is more than enough to kill the entity.
+		event.cancel(); // Cancel the event so we don't take damage.
 	}
 
 	private final WorldBlockEffect effect = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.Wood.Jungle);
