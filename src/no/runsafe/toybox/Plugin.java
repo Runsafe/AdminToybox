@@ -54,6 +54,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(SpawnGodMob.class);
 		addComponent(EnchantItem.class);
 		addComponent(Kill.class);
+		addComponent(KillBoss.class);
 		addComponent(BuffCommand.class);
 		addComponent(PlaySound.class);
 		addComponent(Lock.class);

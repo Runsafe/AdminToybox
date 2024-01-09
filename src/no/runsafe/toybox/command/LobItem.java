@@ -23,21 +23,21 @@ public class LobItem extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		ILocation location = executor.getLocation();
-		if (location != null)
-		{
-			RunsafeInventory inventory = executor.getInventory();
-			List<RunsafeMeta> items = inventory.getContents();
+		if (location == null)
+			return null;
 
-			if (!items.isEmpty())
-			{
-				RunsafeMeta dropItem = items.get(0);
-				inventory.remove(dropItem);
-				RunsafeItem item = location.getWorld().dropItem(location, dropItem);
-				RunsafeEntity entity = executor.Fire(ProjectileEntity.Snowball);
+		RunsafeInventory inventory = executor.getInventory();
+		List<RunsafeMeta> items = inventory.getContents();
 
-				entity.setPassenger(item);
-			}
-		}
+		if (items.isEmpty())
+			return null;
+
+		RunsafeMeta dropItem = items.get(0);
+		inventory.remove(dropItem);
+		RunsafeItem item = location.getWorld().dropItem(location, dropItem);
+		RunsafeEntity entity = executor.Fire(ProjectileEntity.Snowball);
+
+		entity.setPassenger(item);
 		return null;
 	}
 }

@@ -35,13 +35,13 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		ILocation blockLocation = block.getLocation();
 		String worldName = blockLocation.getWorld().getName();
 
-		if (this.lockedObjects.containsKey(worldName))
-		{
-			List<ILocation> locations = this.lockedObjects.get(worldName);
-			for (ILocation location : locations)
-				if (location.distance(blockLocation) < 1)
-					return true;
-		}
+		if (!this.lockedObjects.containsKey(worldName))
+			return false;
+
+		List<ILocation> locations = this.lockedObjects.get(worldName);
+		for (ILocation location : locations)
+			if (location.distance(blockLocation) < 1)
+				return true;
 		return false;
 	}
 
@@ -56,52 +56,51 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 
 	public void lockBlock(IBlock block)
 	{
-		if (!this.isLockedBlock(block))
-		{
-			ILocation location = block.getLocation();
-			String worldName = location.getWorld().getName();
+		if (this.isLockedBlock(block))
+			return;
 
-			this.repository.storeLockedObject(location);
-			if (!this.lockedObjects.containsKey(worldName))
-				this.lockedObjects.put(worldName, new ArrayList<>());
+		ILocation location = block.getLocation();
+		String worldName = location.getWorld().getName();
 
-			this.lockedObjects.get(worldName).add(location);
-		}
+		this.repository.storeLockedObject(location);
+		if (!this.lockedObjects.containsKey(worldName))
+			this.lockedObjects.put(worldName, new ArrayList<>());
+
+		this.lockedObjects.get(worldName).add(location);
 	}
 
 	public void unlockBlock(IBlock block)
 	{
-		if (isLockedBlock(block))
-		{
-			ILocation location = block.getLocation();
-			String worldName = location.getWorld().getName();
+		if (!isLockedBlock(block))
+			return;
 
-			if (lockedObjects.containsKey(worldName))
-			{
-				List<ILocation> locations = new ArrayList<>(lockedObjects.get(worldName).size());
-				for (ILocation checkLocation : lockedObjects.get(worldName))
-					if (checkLocation.distance(location) >= 1)
-						locations.add(checkLocation);
-				lockedObjects.put(worldName, locations);
-			}
-			repository.removeLockedObject(location);
+		ILocation location = block.getLocation();
+		String worldName = location.getWorld().getName();
+
+		if (lockedObjects.containsKey(worldName))
+		{
+			List<ILocation> locations = new ArrayList<>(lockedObjects.get(worldName).size());
+			for (ILocation checkLocation : lockedObjects.get(worldName))
+				if (checkLocation.distance(location) >= 1)
+					locations.add(checkLocation);
+			lockedObjects.put(worldName, locations);
 		}
+		repository.removeLockedObject(location);
 	}
 
 	@Override
 	public boolean OnBlockBreak(IPlayer player, IBlock block)
 	{
-		if (block != null)
-		{
-			if (this.isLockedBlock(block))
-			{
-				if (player != null)
-					player.sendColouredMessage("&cThe block is impenetrable to your attempts.");
+		if (block == null)
+			return true;
 
-				return false;
-			}
-		}
-		return true;
+		if (!this.isLockedBlock(block))
+			return true;
+
+		if (player != null)
+			player.sendColouredMessage("&cThe block is impenetrable to your attempts.");
+
+		return false;
 	}
 
 	@Override

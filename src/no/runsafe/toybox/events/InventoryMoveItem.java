@@ -10,10 +10,10 @@ public class InventoryMoveItem implements IInventoryMoveItem
 	{
 		String sourceTitle = event.getSource().getTitle();
 
-		if (sourceTitle.equalsIgnoreCase("Infinite"))
-		{
-			event.getDestination().addItems(event.getItem().clone());
-			event.cancel();
-		}
+		if (!sourceTitle.equalsIgnoreCase("Infinite"))
+			return;
+
+		event.getDestination().addItems(event.getItem().clone());
+		event.cancel();
 	}
 }

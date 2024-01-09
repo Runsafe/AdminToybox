@@ -77,14 +77,14 @@ public class CarePackageHandler
 		List<RunsafeMeta> items = this.GetFallingInventory(entityID).getContents();
 		this.RemoveFallingInventory(entityID);
 
-		if (block instanceof IChest)
-		{
-			IChest chest = (IChest) block;
-			RunsafeInventory chestInventory = chest.getInventory();
+		if (!(block instanceof IChest))
+			return;
 
-			for (RunsafeMeta item : items)
-				chestInventory.addItems(item);
-		}
+		IChest chest = (IChest) block;
+		RunsafeInventory chestInventory = chest.getInventory();
+
+		for (RunsafeMeta item : items)
+			chestInventory.addItems(item);
 	}
 
 	private final HashMap<UUID, RunsafeInventory> awaitingDrops;

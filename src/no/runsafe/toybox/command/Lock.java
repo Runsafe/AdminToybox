@@ -27,11 +27,9 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 			this.lockingPlayers.remove(executor);
 			return "&eLocking disabled.";
 		}
-		else
-		{
-			this.lockingPlayers.add(executor);
-			return "&2Locking enabled: Right click objects to lock them.";
-		}
+
+		this.lockingPlayers.add(executor);
+		return "&2Locking enabled: Right click objects to lock them.";
 	}
 
 	@Override
@@ -43,32 +41,34 @@ public class Lock extends PlayerCommand implements IPlayerInteractEvent
 		if (block == null)
 			return;
 
-		if (this.lockingPlayers.contains(player))
+		if (!this.lockingPlayers.contains(player))
 		{
-			if (this.handler.isLockedBlock(block))
-			{
-				this.handler.unlockBlock(block);
-				player.sendColouredMessage("&2Object unlocked");
-			}
-			else
-			{
-				if (this.handler.canLockBlock(block))
-				{
-					this.handler.lockBlock(block);
-					player.sendColouredMessage("&2Object locked.");
-				}
-				else
-				{
-					player.sendColouredMessage("&cYou cannot lock that object.");
-				}
-			}
-			event.cancel();
-		}
-		else if (this.handler.isLockedBlock(block))
-		{
+			if (!this.handler.isLockedBlock(block))
+				return;
+
 			player.sendColouredMessage("&cThis object has been locked with magic.");
 			event.cancel();
+			return;
 		}
+
+		if (this.handler.isLockedBlock(block))
+		{
+			this.handler.unlockBlock(block);
+			player.sendColouredMessage("&2Object unlocked");
+			event.cancel();
+			return;
+		}
+
+		if (this.handler.canLockBlock(block))
+		{
+			this.handler.lockBlock(block);
+			player.sendColouredMessage("&2Object locked.");
+		}
+		else
+		{
+			player.sendColouredMessage("&cYou cannot lock that object.");
+		}
+		event.cancel();
 	}
 
 	private final List<IPlayer> lockingPlayers = new ArrayList<>();

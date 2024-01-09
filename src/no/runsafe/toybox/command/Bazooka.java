@@ -41,17 +41,17 @@ public class Bazooka extends PlayerCommand
 		if (strength > 255)
 			return "&cMax strength: 255";
 		final IEntity projectile = executor.Launch(parameters.getValue(ENTITY_TYPE));
-		if (projectile != null && delay != null)
-		{
-			scheduler.startSyncTask(() ->
-				{
-					ILocation location = projectile.getLocation();
-					world.createExplosion(location, strength, false);
-					projectile.remove();
-				},
-				delay
-			);
-		}
+		if (projectile == null || delay == null)
+			return null;
+
+		scheduler.startSyncTask(() ->
+			{
+				ILocation location = projectile.getLocation();
+				world.createExplosion(location, strength, false);
+				projectile.remove();
+			},
+			delay
+		);
 		return null;
 	}
 

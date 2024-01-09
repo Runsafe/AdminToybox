@@ -43,27 +43,27 @@ public class SpawnGodMob extends PlayerCommand
 		{
 			RunsafeEntityType mobType = parameters.getValue(MOB_NAME);
 			IEntity entity = world.spawn(executor.getLocation(), mobType);
-			if (entity instanceof RunsafeLivingEntity)
-			{
-				RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
+			if (!(entity instanceof RunsafeLivingEntity))
+				continue;
 
-				RunsafeMeta weapon;
-				if (mobType != null && mobType.getName().equalsIgnoreCase("skeleton"))
-					weapon = Item.Combat.Bow.enchant(Enchant.All).getItem();
-				else
-					weapon = Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem();
+			RunsafeLivingEntity livingEntity = (RunsafeLivingEntity) entity;
 
-				livingEntity.getEquipment()
-					.setBoots(Item.Combat.Boots.Diamond.enchant(Enchant.All).getItem())
-					.setChestplate(Item.Combat.Chestplate.Diamond.enchant(Enchant.All).getItem())
-					.setHelmet(Item.Combat.Helmet.Diamond.enchant(Enchant.All).getItem())
-					.setLeggings(Item.Combat.Leggings.Diamond.enchant(Enchant.All).getItem())
-					.setItemInHand(weapon);
+			RunsafeMeta weapon;
+			if (mobType != null && mobType.getName().equalsIgnoreCase("skeleton"))
+				weapon = Item.Combat.Bow.enchant(Enchant.All).getItem();
+			else
+				weapon = Item.Combat.Sword.Diamond.enchant(Enchant.All).getItem();
 
-				Buff.Combat.Damage.Increase.duration(1200).amplification(5).applyTo(livingEntity);
-				Buff.Resistance.Fire.duration(1200).amplification(5).applyTo(livingEntity);
-				Buff.Resistance.Damage.duration(1200).amplification(5).applyTo(livingEntity);
-			}
+			livingEntity.getEquipment()
+				.setBoots(Item.Combat.Boots.Diamond.enchant(Enchant.All).getItem())
+				.setChestplate(Item.Combat.Chestplate.Diamond.enchant(Enchant.All).getItem())
+				.setHelmet(Item.Combat.Helmet.Diamond.enchant(Enchant.All).getItem())
+				.setLeggings(Item.Combat.Leggings.Diamond.enchant(Enchant.All).getItem())
+				.setItemInHand(weapon);
+
+			Buff.Combat.Damage.Increase.duration(1200).amplification(5).applyTo(livingEntity);
+			Buff.Resistance.Fire.duration(1200).amplification(5).applyTo(livingEntity);
+			Buff.Resistance.Damage.duration(1200).amplification(5).applyTo(livingEntity);
 		}
 
 		return null;

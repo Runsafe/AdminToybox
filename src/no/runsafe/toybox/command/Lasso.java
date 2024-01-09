@@ -28,11 +28,9 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 			stages.remove(playerID);
 			return "&cLasso disabled.";
 		}
-		else
-		{
-			stages.put(playerID, new PendingLasso());
-			return "&aLasso enabled: Right click the entity that will hold the leash.";
-		}
+
+		stages.put(playerID, new PendingLasso());
+		return "&aLasso enabled: Right click the entity that will hold the leash.";
 	}
 
 	@Override
@@ -45,28 +43,26 @@ public class Lasso extends PlayerCommand implements IPlayerInteractEntityEvent
 		IPlayer player = event.getPlayer();
 		UUID playerID = player.getUniqueId();
 
-		if (stages.containsKey(playerID))
+		if (!stages.containsKey(playerID))
+			return;
+
+		PendingLasso pending = stages.get(playerID);
+		if (!pending.hasEntity())
 		{
-			PendingLasso pending = stages.get(playerID);
-			if (!pending.hasEntity())
-			{
-				stages.get(playerID).setEntity(entity);
-				player.sendColouredMessage("&aAttached. Now right click something for the leash to lasso.");
-			}
-			else
-			{
-				if (entity instanceof RunsafeLivingEntity)
-				{
-					((RunsafeLivingEntity) entity).setLeashHolder(stages.get(playerID).getEntity());
-					stages.remove(playerID);
-					player.sendColouredMessage("&aLasso complete.");
-				}
-				else
-				{
-					player.sendColouredMessage("&cA leash can only have something living on that end.");
-				}
-			}
+			stages.get(playerID).setEntity(entity);
+			player.sendColouredMessage("&aAttached. Now right click something for the leash to lasso.");
+			return;
 		}
+
+		if (entity instanceof RunsafeLivingEntity)
+		{
+			((RunsafeLivingEntity) entity).setLeashHolder(stages.get(playerID).getEntity());
+			stages.remove(playerID);
+			player.sendColouredMessage("&aLasso complete.");
+			return;
+		}
+
+		player.sendColouredMessage("&cA leash can only have something living on that end.");
 	}
 
 	private final ConcurrentHashMap<UUID, PendingLasso> stages = new ConcurrentHashMap<>(0);

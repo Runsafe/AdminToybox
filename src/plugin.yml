@@ -43,6 +43,8 @@ commands:
     description: Enchants an item.
   kill:
     description: Kills a specific player or yourself
+  killboss:
+    description: Kills boss mobs around the player
   buff:
     description: Apply a buff to a player with the desired duration and amplification
     aliases: [effect, potion]
