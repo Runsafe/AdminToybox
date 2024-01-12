@@ -6,7 +6,7 @@ import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.entity.IEnderDragon;
 import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.entity.ILivingEntity;
-import no.runsafe.framework.api.entity.IWitherBoss;
+import no.runsafe.framework.api.entity.monsters.IWitherBoss;
 import no.runsafe.framework.api.player.IPlayer;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class KillBoss extends PlayerCommand
 			if (!(entity instanceof ILivingEntity) || entity instanceof IPlayer)
 				continue;
 
-			if (!(entity instanceof IEnderDragon) && (!(entity instanceof IWitherBoss)))
+			if (!(entity instanceof IEnderDragon) && !(entity instanceof IWitherBoss))
 				continue;
 
 			if (playerLocation.distance(entity.getLocation()) > 300)
