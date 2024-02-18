@@ -35,9 +35,15 @@ public class LockedObjectRepository extends Repository
 		List<ILocation> locations = new ArrayList<>();
 		ISet data = database.query("SELECT world, x, y, z FROM toybox_locked_objects WHERE world=?", worldName);
 
-		for (IRow node : data)
-			locations.add(node.Location());
-
+		try
+		{
+			for (IRow node : data)
+				locations.add(node.Location());
+		}
+		catch (Exception e)
+		{
+			// ignored
+		}
 		return locations;
 	}
 

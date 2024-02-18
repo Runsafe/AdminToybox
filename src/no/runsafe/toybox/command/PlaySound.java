@@ -1,5 +1,6 @@
 package no.runsafe.toybox.command;
 
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.command.argument.DecimalNumber;
 import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
@@ -26,14 +27,15 @@ public class PlaySound extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
+		Sound sound = parameters.getRequired(SOUND);
 		float volume = parameters.getRequired(VOLUME);
 		float pitch = parameters.getRequired(PITCH);
-
-		Sound sound = Sound.Get(parameters.get(SOUND));
-		if (sound == null)
-			return "&cThat sound does not exist.";
-
-		executor.getWorld().playSound(executor.getLocation(), sound, volume, pitch);
+		ILocation location = executor.getLocation();
+		if (location == null)
+		{
+			return "&4Location not found";
+		}
+		location.playSound(sound, volume, pitch);
 		return "&2Sound played.";
 	}
 }
