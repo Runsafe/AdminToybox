@@ -8,6 +8,7 @@ import no.runsafe.framework.api.minecraft.IEnchant;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.item.RunsafeItemStack;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +31,7 @@ public class EnchantItem extends PlayerCommand
 		if (item == null)
 			return "&cNo item in your hand.";
 		StringBuilder feedback = new StringBuilder();
-		String[] enchants = parameters.get(ENCHANT).split(" ");
+		String[] enchants = Objects.requireNonNull(parameters.get(ENCHANT)).split(" ");
 		for (String param : enchants)
 		{
 			Matcher spec = enchantSpec.matcher(param);
