@@ -41,7 +41,7 @@ public class Plugin extends RunsafePlugin
 		addComponent(Dynamite.class);
 		addComponent(Fireball.class);
 		addComponent(Firework.class);
-		addComponent(LightningCoords.class);
+		addComponent(LightningCoordinates.class);
 		addComponent(LightningPlayer.class);
 		addComponent(LightningThere.class);
 		addComponent(Mount.class);

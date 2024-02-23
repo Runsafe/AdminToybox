@@ -9,9 +9,9 @@ import no.runsafe.framework.api.player.IPlayer;
 
 import static java.lang.Math.abs;
 
-public class LightningCoords extends PlayerCommand implements IBranchingExecution
+public class LightningCoordinates extends PlayerCommand implements IBranchingExecution
 {
-	public LightningCoords()
+	public LightningCoordinates()
 	{
 		super(
 			"lightning", "Fires lightning at a coordinate", "runsafe.toybox.lightning",

@@ -56,11 +56,11 @@ public class Thorns extends PlayerCommand implements IEntityDamageByEntityEvent
 		if (killTarget == null || !protectedPlayers.contains(((IPlayer) entity).getName()))
 			return;
 
-		// Play an effect at the targets location.
+		// Play an effect at the targets' location.
 		ILocation killTargetLocation = killTarget.getLocation();
 		if (killTargetLocation != null) killTargetLocation.playEffect(effect, 0.2F, 100, 50D);
 
-		// Play an effect at the killers location.
+		// Play an effect at the killers' location.
 		ILocation entityLocation = entity.getLocation();
 		if (entityLocation != null) entityLocation.playEffect(effect, 0.2F, 100, 50D);
 
