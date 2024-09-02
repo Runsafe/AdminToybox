@@ -180,5 +180,8 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		lockableItems.add(Item.Decoration.Anvil.Any);
 		lockableItems.add(Item.Redstone.Lamp.Off);
 		lockableItems.add(Item.Redstone.Lamp.On);
+		lockableItems.add(Item.Redstone.Door.Trap);
+		lockableItems.add(Item.Redstone.Door.IronTrap);
+		lockableItems.add(Item.Special.DragonEgg);
 	}
 }
