@@ -181,7 +181,18 @@ public class LockedObjectHandler implements IPluginEnabled, IPluginDisabled, IBl
 		lockableItems.add(Item.Redstone.Lamp.Off);
 		lockableItems.add(Item.Redstone.Lamp.On);
 		lockableItems.add(Item.Redstone.Door.Trap);
-		lockableItems.add(Item.Redstone.Door.IronTrap);
+		lockableItems.add(Item.Redstone.Door.Wood);
+		lockableItems.add(Item.Redstone.Door.SpruceDoor);
+		lockableItems.add(Item.Redstone.Door.BirchDoor);
+		lockableItems.add(Item.Redstone.Door.JungleDoor);
+		lockableItems.add(Item.Redstone.Door.AcaciaDoor);
+		lockableItems.add(Item.Redstone.Door.DarkOakDoor);
+		lockableItems.add(Item.Redstone.Door.Gate);
+		lockableItems.add(Item.Redstone.Door.SpruceGate);
+		lockableItems.add(Item.Redstone.Door.BirchGate);
+		lockableItems.add(Item.Redstone.Door.JungleGate);
+		lockableItems.add(Item.Redstone.Door.DarkOakGate);
+		lockableItems.add(Item.Redstone.Door.AcaciaGate);
 		lockableItems.add(Item.Special.DragonEgg);
 	}
 }
