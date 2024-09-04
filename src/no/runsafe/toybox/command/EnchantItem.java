@@ -36,7 +36,7 @@ public class EnchantItem extends PlayerCommand
 		else if (enchantLevel < 1)
 			enchantLevel = 1;
 
-		enchant.power(enchantLevel).applyTo(item);
+		enchant.power(enchantLevel).applyUnsafeTo(item);
 		return String.format("&aApplied enchant %s at power %d to item in main hand.", enchant.getName(), enchant.power());
 	}
 }
